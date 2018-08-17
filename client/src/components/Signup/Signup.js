@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import AuthService from './AuthService';
-import API from '../utils/API';
+import AuthService from '../Auth/AuthService';
+import API from '../../utils/API';
 
 class Signup extends Component {
   constructor() {
