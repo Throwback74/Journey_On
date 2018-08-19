@@ -8,9 +8,9 @@ import { Route, BrowserRouter as Router } from 'react-router-dom';
 import axios from "axios";
 
 // Our Components
-import Login from './components/Login';
-import Profile from './components/Profile';
-import Signup from './components/Signup';
+import Login from './components/Landing/Login';
+import Profile from './components/Hub/Profile';
+import Signup from './components/Signup/Signup';
 
 if(localStorage.getItem("id_token")) {
   axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('id_token')}`;

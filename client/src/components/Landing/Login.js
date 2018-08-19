@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import AuthService from './AuthService';
+import AuthService from '../Auth/AuthService';
 import {Link} from 'react-router-dom';
 
 class Login extends Component {
@@ -44,20 +44,20 @@ class Login extends Component {
           <div className="form-group">
             <label htmlFor="email">Email address:</label>
             <input className="form-control"
-                   placeholder="Email goes here..."
-                   name="email"
-                   type="email"
-                   id="email"
-                   onChange={this.handleChange}/>
+                    placeholder="Email goes here..."
+                    name="email"
+                    type="email"
+                    id="email"
+                    onChange={this.handleChange}/>
           </div>
           <div className="form-group">
             <label htmlFor="pwd">Password:</label>
             <input className="form-control"
-                   placeholder="Password goes here..."
-                   name="password"
-                   type="password"
-                   id="pwd"
-                   onChange={this.handleChange}/>
+                    placeholder="Password goes here..."
+                    name="password"
+                    type="password"
+                    id="pwd"
+                    onChange={this.handleChange}/>
           </div>
           <button type="submit" className="btn btn-primary">Submit</button>
         </form>
