@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 
+
 import registerServiceWorker from './registerServiceWorker';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 import axios from "axios";
@@ -11,6 +12,7 @@ import axios from "axios";
 import Login from './components/Landing/Login';
 import Profile from './components/Hub/Profile';
 import Signup from './components/Signup/Signup';
+import Goal from "./components/NewGoal/newGoal.js"
 
 if(localStorage.getItem("id_token")) {
   axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('id_token')}`;
@@ -22,6 +24,7 @@ ReactDOM.render(
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/profile/:id" component={Profile} />
+            <Route exact path="/buildjourney" component={Goal} />
         </div>
     </Router>
     , document.getElementById('root')
