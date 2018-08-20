@@ -12,11 +12,8 @@ import axios from "axios";
 import Login from './components/Landing/Login';
 import Profile from './components/Hub/Profile';
 import Signup from './components/Signup/Signup';
-<<<<<<< HEAD
 import Goal from "./components/NewGoal/newGoal.js"
-=======
 import Home from './components/Hub/Home';
->>>>>>> 19e175779664f6486dcd1f9df2474cf5f3a0a945
 
 if(localStorage.getItem("id_token")) {
   axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('id_token')}`;
