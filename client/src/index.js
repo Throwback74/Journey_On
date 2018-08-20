@@ -12,7 +12,11 @@ import axios from "axios";
 import Login from './components/Landing/Login';
 import Profile from './components/Hub/Profile';
 import Signup from './components/Signup/Signup';
+<<<<<<< HEAD
 import Goal from "./components/NewGoal/newGoal.js"
+=======
+import Goal from "./components/NewGoal/newGoal.js";
+>>>>>>> 0b29b44c9cb3d241df3e829271a563330abc3dd7
 import Home from './components/Hub/Home';
 
 if(localStorage.getItem("id_token")) {
