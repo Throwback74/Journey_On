@@ -16,7 +16,7 @@ import Goal from "./components/NewGoal/newGoal.js";
 import Home from './components/Hub/Home';
 
 if(localStorage.getItem("id_token")) {
-  axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('id_token')}`;
+axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('id_token')}`;
 }
 ReactDOM.render(
     <Router>
