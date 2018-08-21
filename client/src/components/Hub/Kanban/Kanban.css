@@ -1,0 +1,16 @@
+.Kanban-header {
+  background-color: #222;
+  height: 50px;
+  padding: 10px;
+  color: white;
+}
+
+.Kanban-intro {
+  font-size: small;
+  margin: 0;
+}
+
+@keyframes Kanban-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
