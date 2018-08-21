@@ -41,7 +41,7 @@ const Landing = props => (
       <div className="col s6">
       <a href="https://placeholder.com"><img src="https://via.placeholder.com/414x396"/></a>
       </div>
-      <div className="col s6">
+      <div className="col s6 get started">
       <h1>Get Started</h1>
       Link your journey account by connecting an existing or new social media account.
       <ul>
@@ -51,7 +51,7 @@ const Landing = props => (
       </div>
     </div>
   <div className="row">
-      <div className="col s6">
+      <div className="col s6 fresh start">
       <h1>Fresh Start</h1>
       Whether you collect client payments, or sell digital services online,Wirize has you covered.
       <ul>
@@ -67,7 +67,7 @@ const Landing = props => (
       <div className="col s6">
       <a href="https://placeholder.com"><img src="https://via.placeholder.com/414x396"/></a>
       </div>
-      <div className="col s6">
+      <div className="col s6 progress">
       <h1>Completed Goal</h1>
       Whether you collect client payments, or sell digital services online,Wirize has you covered.
       <ul>

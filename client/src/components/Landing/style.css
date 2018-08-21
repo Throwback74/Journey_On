@@ -2,15 +2,15 @@ header {
     position: relative;
     height: 600px;
     width: 100%;
-    background-image: linear-gradient(55deg,#30303d 25%,#2f3e8b);
-    
+    background-image: linear-gradient(55deg,#488192 25%,#b3d2d8);   
 }
 
 h1 {
     padding: 10px;
     font: 44px "Arial";
-    margin-left: 70px;
+    margin-left: -90px;
     font-family: cursive
+    
 }
 
 section h2 {
@@ -26,7 +26,7 @@ header h1 {
 .paragraph {
     color: white;
     text-align: center;
-    padding: 65px;
+    padding: 90px;
     font-family: sans-serif;
 }
 
@@ -57,9 +57,11 @@ svg {
 
 .foot {
     text-align: center;
-    background-image: linear-gradient(55deg,#30303d 25%,#2f3e8b);
-    height: 100px;
+    background-image: linear-gradient(55deg,#488192 25%,#b3d2d8);
+    height: 125px;
     width: 100%;
+    padding-top: 30px;
+    margin-top: 30px;
 }
 
 h3 {
@@ -71,4 +73,20 @@ h3 {
     left: 0px;
     top: 0px;
     z-index: 10;
+    padding: 70px;
+    height: 550px;
+    border: 2px solid rgb(112, 110, 110);
+    border-radius: 5px;
+}
+
+.col s6 progress {
+    padding-top: 10px;
+}
+
+.col s6 get started {
+    margin-bottom: 20px;
+}
+
+.col s6 fresh start {
+    margin-bottom: 20px;
 }
