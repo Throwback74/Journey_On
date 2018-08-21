@@ -18,6 +18,7 @@ class Goal extends Component {
         });
     };
 
+
     
 
     handleFormSubmit = event => {
@@ -28,7 +29,7 @@ class Goal extends Component {
                 // once the user has signed up
                 // send them to the login page
                 alert("Goal Added!");
-                this.props.history.replace('/buildjourney');
+                this.refs.form.reset();
             })
             .catch(err => alert(err));
     };
@@ -38,7 +39,7 @@ class Goal extends Component {
         return (
             <div className="container">
                 <h1>Add a Goal!</h1>
-                <form onSubmit={this.handleFormSubmit}>
+                <form onSubmit={this.handleFormSubmit} ref='form'>
                     <div className="form-group">
                         <label htmlFor="Goal">Goal:</label>
                         <input className="form-control"
@@ -69,7 +70,7 @@ class Goal extends Component {
                     <div className="form-group">
                         <label htmlFor="thirdStep">Third step (optional):</label>
                         <input className="form-control"
-                            placeholder="First step toward achieving your goal..."
+                            placeholder="Third step toward achieving your goal..."
                             name="thirdStep"
                             type="text"
                             id="thirdStep"
