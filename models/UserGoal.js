@@ -19,24 +19,31 @@ let UserGoal = new Schema({
     required: false,
     unique: true,
     trim: true,
+    sparse: true
   },
   thirdStep: {
     type: String,
     required: false,
     unique: true,
     trim: true,
+    sparse: true
+
   },
   fourthStep: {
     type: String,
     required: false,
     unique: true,
     trim: true,
+    sparse: true
+
   },
   fifthStep: {
     type: String,
     required: false,
     unique: true,
     trim: true,
+    sparse: true
+
   },
   createdAt: {
     type: Date,
@@ -44,7 +51,8 @@ let UserGoal = new Schema({
   },
   completeBy: {
       type: Date,
-      default: Date.now
+      default: Date.now,
+      required: true
   },
 
 });
