@@ -93,6 +93,19 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
+app.get("/api/users", function(req, res) {
+  // Using our Library model, "find" every library in our db
+  db.User.find()
+    .then(function(dbUser) {
+      // If any Libraries are found, send them to the client
+      res.json(dbUser);
+    })
+    .catch(function(err) {
+      // If an error occurs, send it back to the client
+      res.json(err);
+    });
+});
+
 
 app.get('/', isAuthenticated /* Using the express jwt MW here */, (req, res) => {
   res.send('You are authenticated'); //Sending some response when authenticated
