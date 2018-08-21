@@ -50,7 +50,7 @@ let UserGoal = new Schema({
 });
 
 // Execute before each user.save() call
-UserSchema.pre('save', function(callback) {
+UserGoal.pre('save', function(callback) {
   let user = this;
 
   // Break out if the password hasn't changed
@@ -68,11 +68,11 @@ UserSchema.pre('save', function(callback) {
   });
 });
 
-UserSchema.methods.verifyPassword = function(password, cb) {
+UserGoal.methods.verifyPassword = function(password, cb) {
   bcrypt.compare(password, this.password, function(err, isMatch) {
     if (err) return cb(err);
     cb(null, isMatch);
   });
 };
 
-module.exports = mongoose.model('Goal', UserGoal);
+module.exports = mongoose.model('UserGoal', UserGoal);

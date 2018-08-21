@@ -34,11 +34,11 @@ class Goal extends Component {
 
     render() {
         return (
-            <div className="GoalAddContainer">
+            <div className="Container">
                 <h1>Add a Goal!</h1>
                 <form onSubmit={this.handleFormSubmit}>
                     <div className="form-group">
-                        <label htmlFor="username">Goal:</label>
+                        <label htmlFor="Goal">Goal:</label>
                         <input className="form-control"
                             placeholder="Goal"
                             name="goal"
@@ -47,7 +47,7 @@ class Goal extends Component {
                             onChange={this.handleChange} />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="email">First step (required):</label>
+                        <label htmlFor="firstStep">First step (required):</label>
                         <input className="form-control"
                             placeholder="First step toward achieving your goal..."
                             name="firstStep"
@@ -56,7 +56,7 @@ class Goal extends Component {
                             onChange={this.handleChange} />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="pwd">Complete By:</label>
+                        <label htmlFor="completeBy">Complete By:</label>
                         <input className="form-control"
                             placeholder="When would you like to achieve this by?"
                             name="completeBy"
