@@ -1,22 +1,16 @@
-import React, { Component } from 'react';
-import './css';
-import './css/style.css';
-class App extends Component {
-    render() {
-        return (
-            <div className="App">
-                <p>Finally got this Damn thing working!!!</p>
-                <header>
-                    <h1>Header Content</h1>
-                    <img src="http://erikdkennedy.com/r-r-r-random/divider-triangle.png" className="divider" />
-                </header>
+import React from "react";
+import {Link} from "react-router-dom";
 
-                <section>
-                    <h1>Section Content</h1>
-                </section>
-            </div>
-        );
-    }
-}
 
-export default App;
+const Landing = props => (
+  <section className="hero is-info is-medium is-bold">
+        <Link to="/signup">
+          <button type="button" className="btn btn-primary">Signup</button>
+        </Link>
+        <Link to="/login">
+          <button type="button" className="btn btn-danger" >Login</button>
+        </Link>
+    </section>
+);
+
+export default Landing;
