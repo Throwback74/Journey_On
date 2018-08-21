@@ -22,7 +22,7 @@ class Signup extends Component {
         console.log(res.data);
         // once the user has signed up
         // send them to the login page
-        this.props.history.replace('/login');
+        this.props.history.replace('/buildjourney');
       })
       .catch(err => alert(err));
   };
