@@ -1,8 +1,16 @@
+.Kanban {
+  width: 75%;
+  margin: 10px auto;
+  /* margin-top: 10px; */
+}
+
 .Kanban-header {
   background-color: #222;
+  width: 75%;
   height: 50px;
   padding: 10px;
   color: white;
+  margin: 0 auto;
 }
 
 .Kanban-intro {

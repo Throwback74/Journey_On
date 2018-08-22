@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './Kanban.css';
-import {Board} from 'react-trello';
+import { Board } from 'react-trello';
 
 const data = require('./kanban_demo.json')
 
@@ -18,15 +18,15 @@ const handleDragEnd = (cardId, sourceLaneId, targetLaneId) => {
 }
 
 class Kanban extends Component {
-    state = {boardData: {lanes: []}}
+    state = { boardData: { lanes: [] } }
 
     setEventBus = eventBus => {
-        this.setState({eventBus})
+        this.setState({ eventBus })
     }
 
     async componentWillMount() {
         const response = await this.getBoard()
-        this.setState({boardData: response})
+        this.setState({ boardData: response })
     }
 
     getBoard() {
@@ -39,16 +39,16 @@ class Kanban extends Component {
         this.state.eventBus.publish({
             type: 'ADD_CARD',
             laneId: 'COMPLETED',
-            card: {id: 'Milk', title: 'Buy Milk', label: '15 mins', description: 'Use Headspace app'}
+            card: { id: 'Milk', title: 'Buy Milk', label: '15 mins', description: 'Use Headspace app' }
         })
-        this.state.eventBus.publish({type: 'REMOVE_CARD', laneId: 'PLANNED', cardId: 'Milk'})
+        this.state.eventBus.publish({ type: 'REMOVE_CARD', laneId: 'PLANNED', cardId: 'Milk' })
     }
 
     addCard = () => {
         this.state.eventBus.publish({
             type: 'ADD_CARD',
             laneId: 'BLOCKED',
-            card: {id: 'Ec2Error', title: 'EC2 Instance Down', label: '30 mins', description: 'Main EC2 instance down'}
+            card: { id: 'Ec2Error', title: 'EC2 Instance Down', label: '30 mins', description: 'Main EC2 instance down' }
         })
     }
 
@@ -57,27 +57,24 @@ class Kanban extends Component {
         console.log(nextData)
     }
 
-	handleCardAdd = (card, laneId) => {
-		console.log(`New card added to lane ${laneId}`)
-		console.dir(card)
-	}
+    handleCardAdd = (card, laneId) => {
+        console.log(`New card added to lane ${laneId}`)
+        console.dir(card)
+    }
 
     render() {
         return (
-            <div className="Kanban">
-                <div className="Kanban-header">
-                    <h3>React Trello Demo</h3>
+            <div className="Kanban-board">
+                <div className="Kanban-header text-center">
+                    <h1><b>Journey Name Goes Here</b></h1>
+                </div>
+                <div className="Kanban-header text-center">
+                    <h3>Organization Board</h3>
                 </div>
                 <div className="Kanban-intro">
-                    <button onClick={this.completeCard} style={{margin: 5}}>
-                        Complete Buy Milk
-                    </button>
-                    <button onClick={this.addCard} style={{margin: 5}}>
-                        Add Blocked
-                    </button>
-                    <Board
+                    <Board className="Kanban"
                         editable
-												onCardAdd={this.handleCardAdd}
+                        onCardAdd={this.handleCardAdd}
                         data={this.state.boardData}
                         draggable
                         onDataChange={this.shouldReceiveNewData}
