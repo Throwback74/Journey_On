@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 // import './App.css';
 // import AuthService from './components/Auth/AuthService';
 // import withAuth from './components/Auth/withAuth';
-import Landing from './components/Landing/Landing';
+import Landing from './components/Landing';
 // const Auth = new AuthService();
 
 class App extends Component {
