@@ -8,7 +8,7 @@ const Landing = props => {
   if(props.tokenID){
     return(
   <div>
-    <header>
+    <header className="landingHeader">
       <div className="container">
       <Link to="/home">
         <button type="button" className="btn btn-primary">Home</button>
@@ -91,7 +91,7 @@ const Landing = props => {
   }else {
   return(
     <div>
-    <header>
+    <header className="landingHeader">
       <div className="container">
       <Link to="/signup">
         <button type="button" className="btn btn-primary">Signup</button>
