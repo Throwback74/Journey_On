@@ -79,42 +79,18 @@ app.post('/api/signup', (req, res) => {
 });
 
 // ADD GOAL ROUTE
-<<<<<<< HEAD
 // app.post('/api/addgoal', (req, res) => {
 //   db.UserGoal.create(req.body)
 //     .then(data => res.json(data))
 //     .catch(err => res.status(400).json(err));
 // });
-=======
-app.post('/api/addgoal', (req, res) => {
-  db.UserGoal.create(req.body)
-    .then(function(dbGoals) {
-      // If a Book was created successfully, find one library (there's only one) and push the new Book's _id to the Library's `books` array
-      // { new: true } tells the query that we want it to return the updated Library -- it returns the original by default
-      // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
-      return db.User.findOneAndUpdate({_id: req.body.UserId}, { $push: { goals: dbGoals._id } }, { new: true });
-    })
-    .then(function(dbUser) {
-      // If the Library was updated successfully, send it back to the client
-      res.json(dbUser);
-    })
-    .catch(function(err) {
-      // If an error occurs, send it back to the client
-      res.json(err);
-    });
-});
->>>>>>> 9f9781adc97e99699eb5c274f22119e206949d39
 
 // Any route with isAuthenticated is protected and you need a valid token
 // to access
 app.get('/api/user/:id', isAuthenticated, (req, res) => {
-<<<<<<< HEAD
-  db.UserGoal.findById(req.params.id).then(data => {
-=======
   db.User.findById(req.params.id)
   .populate("goals")
   .then(data => {
->>>>>>> 9f9781adc97e99699eb5c274f22119e206949d39
     if(data) {
       res.json(data);
     } else {
