@@ -1,13 +1,29 @@
+.whole-board {
+  width: 75%;
+  margin: 10px auto;
+}
+
 .Kanban-header {
   background-color: #222;
-  height: 50px;
   padding: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px; 
   color: white;
+  margin: 0 auto;
 }
 
 .Kanban-intro {
   font-size: small;
   margin: 0;
+}
+
+.Kanban-taskboard {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px; 
+}
+
+.cBXKgf {
+  background-color: #8db5bf;
 }
 
 @keyframes Kanban-logo-spin {
