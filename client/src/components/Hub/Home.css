@@ -54,6 +54,7 @@
 .welcome{
   text-align: center;
   position: relative;
+  top:-75px;
 }
 
 .nav{
