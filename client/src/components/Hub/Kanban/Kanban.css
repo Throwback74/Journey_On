@@ -22,11 +22,11 @@
   border-bottom-right-radius: 10px; 
 }
 
+.cBXKgf {
+  background-color: #8db5bf;
+}
+
 @keyframes Kanban-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
-}
-
-.wrapper{
-  color: black;
 }

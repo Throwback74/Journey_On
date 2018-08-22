@@ -11,4 +11,11 @@ export default {
   addGoal: (goal, firstStep, secondStep, thirdStep, fourthStep, fifthStep, completeBy) => {
     return axios.post('api/addgoal', {goal: goal, firstStep: firstStep, secondStep: secondStep, thirdStep: thirdStep, fourthStep: fourthStep, fifthStep: fifthStep, completeBy: completeBy});
   }
+
+  // getCards: (userId) {
+  //   return axios.get('api/getcards').then()
+  // }
+
 };
+
+//
