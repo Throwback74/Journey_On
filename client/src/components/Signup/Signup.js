@@ -24,7 +24,9 @@ class Signup extends Component {
         // send them to the login page
         this.props.history.replace('/buildjourney');
       })
-      .catch(err => alert(err));
+      .catch(err => {
+        console.log(err.response);
+        alert(err.response.data.message)});
   };
 
   handleChange = event => {

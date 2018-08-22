@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -7,7 +8,10 @@ const mongoose = require('mongoose');
 const morgan = require('morgan'); // used to see requests
 const app = express();
 const db = require('./models');
+const nodemailer = require('nodemailer');
+
 const PORT = process.env.PORT || 3001;
+console.log(process.env.USER)
 
 // Setting CORS so that any website can
 // Access our API
@@ -52,7 +56,7 @@ app.post('/api/login', (req, res) => {
 app.post('/api/signup', (req, res) => {
   db.User.create(req.body)
     .then(data => res.json(data))
-    .catch(err => res.status(400).json(err));
+    .catch(err => res.status(400).json({success: false, message: "Username or Email Already in Use", error: err}));
 });
 
 // ADD GOAL ROUTE
@@ -72,6 +76,39 @@ app.get('/api/user/:id', isAuthenticated, (req, res) => {
       res.status(404).send({success: false, message: 'No user found'});
     }
   }).catch(err => res.status(400).send(err));
+});
+
+app.post('/api/send/email', (req, res)=>{
+  var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: process.env.USER,
+      pass: process.env.PASS
+    }
+  });
+  
+  var mailOptions = {
+    from: 'no_reply@journey_on-admin.com',
+    to: 'corey.slade@gmail.com',
+    subject: 'Sending Email using Node.js',
+    html: `<h1>${req.body.message}</h1>`
+  };
+  
+  // HTML version of Mail Options
+  // var mailOptions = {
+  //   from: 'youremail@gmail.com',
+  //   to: 'myfriend@yahoo.com',
+  //   subject: 'Sending Email using Node.js',
+  //   html: '<h1>Welcome</h1><p>That was easy!</p>'
+  // }
+  
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      res.send(error);
+    } else {
+      res.send('Email sent: ' + info.response);
+    }
+  });
 });
 
 // Serve up static assets (usually on heroku)
