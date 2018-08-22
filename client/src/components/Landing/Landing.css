@@ -1,132 +1,87 @@
 .landingHeader {
-    position: relative;
-    height: 600px;
-    width: 100%;
-    background-image: linear-gradient(55deg,#488192 25%,#b3d2d8);   
+  position: relative;
+  height: 600px;
+  width: 100%;
+  background-image: linear-gradient(55deg,#488192 25%,#b3d2d8);   
 }
 
 .title {
-    padding: 10px;
-    font: 50px "Arial";
-    margin-left: -90px;
-    font-family: 'Indie Flower', cursive;
+  padding: 10px;
+  font: 44px "Arial";
+  margin-left: -90px;
 }
 
+/* section h2 {
+  padding: 100px 0;
+  font: 44px "Arial";
+  text-align: center;
+} */
+
 .landingHeader h1 {
-    color: white;
+  color: white;
 }
 
 .paragraph {
-    color: white;
-    text-align: center;
-    padding: 90px;
-    font-family: 'Merienda', cursive;
-    font-size: 20px;
-}
-
-.author {
-    color: white;
-    margin-top: 40px;
+  color: white;
+  text-align: center;
+  padding: 90px;
+  font-family: sans-serif;
 }
 
 svg {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 10vw;
-    /* set height to pixels if you want angle to change with screen width */
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 10vw;
+  /* set height to pixels if you want angle to change with screen width */
 }
 
 .btn-primary {
-    float: right;
-    margin-right: 20px;
-    padding-bottom: 10px;
-    background-color: rgb(187, 185, 189) !important;
-    border: 1px solid #b3d2d8;
+  float: right;
+  margin-right: 20px;
+  padding-bottom: 10px;
 }
 
 .btn-danger {
-    float: right;
-    margin-right: 20px;
-    padding-bottom: 10px;
-    background-color: rgb(187, 185, 189) !important;
-    border: 1px solid #b3d2d8;
+  float: right;
+  margin-right: 20px;
+  padding-bottom: 10px;
 }
 
 .left-column {
-    padding: 15px 15px 0 15px;
-    background: rgb(150, 98, 98);
+  padding: 15px 15px 0 15px;
+  background: rgb(150, 98, 98);
 }
 
 .foot {
-    text-align: center;
-    background-image: linear-gradient(55deg,#488192 25%,#b3d2d8);
-    height: 125px;
-    width: 100%;
-    padding-top: 30px;
-    margin-top: 30px;
+  text-align: center;
+  background-image: linear-gradient(55deg,#488192 25%,#b3d2d8);
+  height: 125px;
+  width: 100%;
+  padding-top: 30px;
+  margin-top: 30px;
 }
 
 .picture {
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    z-index: 10;
-    padding: 70px;
-    height: 550px;
-    border: 2px solid rgb(112, 110, 110);
-    border-radius: 5px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 10;
+  padding: 70px;
+  height: 550px;
+  border: 2px solid rgb(112, 110, 110);
+  border-radius: 5px;
 }
 
-@keyframes example {
-    0%   {background-color:rgb(112, 110, 110); left:0px; top:0px;}
-    25%  {background-color:#488192; left:200px; top:0px;}
-    50%  {background-color:#b3d2d8; left:200px; top:200px;}
-    75%  {background-color:#b3d2d8; left:0px; top:200px;}
-    100% {background-color:#488192; left:0px; top:0px;}
-}
-
-/* The element to apply the animation to */
-.picture {
-    width: 414px;
-    height: 450px;
-    position: relative;
-    animation-name: example;
-    animation-duration: 2s;
-}
-
-.Breakdown {
-    margin-top: 70px;
-    font-family: 'Indie Flower', cursive;
-    font: 28px;
+.col s6 Breakdown {
+  padding-top: 20px;
 } 
 
-.getStarted {
-    margin-top: 70px;
-    font-family: 'Indie Flower', cursive;
-    font: 28px;
+.col s6 get started {
+  margin-bottom: 20px;
 }
 
-.freshStart {
-    margin-top: 70px;
-    font-family: 'Indie Flower', cursive;
-    font: 28px;
+.col s6 fresh start {
+  margin-bottom: 20px;
 }
 
-.rows {
-    margin-top: 50px;
-}
-
-.middleRow {
-    margin-top: 40px;
-    margin-bottom: 40px;
-}
-
-img {
-    width: 414px;
-    height: 396px;
-}
-
-@import url('https://fonts.googleapis.com/css?family=Indie+Flower');
-
-@import url('https://fonts.googleapis.com/css?family=Merienda');
