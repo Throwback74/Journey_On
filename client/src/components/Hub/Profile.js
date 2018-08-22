@@ -42,7 +42,8 @@ class Profile extends Component {
           </div>
           <div className="col-md-2">
             <h1 className="journeyOn">Journey On!</h1>
-            <Link to="/">Go home</Link>
+            <Link to="/">Go home</Link> ||
+            <Link to="/buildjourney"> Add a Journey</Link>
           </div>
         </div>
         <div className="Profile">

@@ -3,48 +3,15 @@ const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt-nodejs');
 
 let UserGoal = new Schema({
-  goal: {
+  journeyName: {
     type: String,
     required: true,
     trim: true
   },
-  firstStep: {
+  journeySummary: {
     type: String,
     required: true,
-    unique: true,
-    trim: true,
-  },
-  secondStep: {
-    type: String,
-    required: false,
-    unique: true,
-    trim: true,
-    sparse: true
-
-  },
-  thirdStep: {
-    type: String,
-    required: false,
-    unique: true,
-    trim: true,
-    sparse: true
-
-  },
-  fourthStep: {
-    type: String,
-    required: false,
-    unique: true,
-    trim: true,
-    sparse: true
-
-  },
-  fifthStep: {
-    type: String,
-    required: false,
-    unique: true,
-    trim: true,
-    sparse: true
-
+    trim: true
   },
   createdAt: {
     type: Date,
@@ -52,7 +19,8 @@ let UserGoal = new Schema({
   },
   completeBy: {
       type: Date,
-      default: Date.now
+      default: Date.now,
+      required: true
   },
 
 });

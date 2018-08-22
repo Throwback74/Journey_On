@@ -42,7 +42,7 @@ class Goal extends Component {
     handleFormSubmit = event => {
         event.preventDefault();
         console.log(this.state.id);
-        API.addGoal(this.state.goal, this.state.firstStep, this.state.secondStep, this.state.thirdStep, this.state.fourthStep, this.state.fifthStep, this.state.completeBy, this.props.user.email)
+        API.addGoal(this.state.journeyName, this.state.journeySummary, this.state.completeBy, this.props.user.email)
             .then(res => {
                 console.log(res.data);
                 // once the user has signed up
@@ -60,57 +60,12 @@ class Goal extends Component {
                 <h1>Add a Goal!</h1>
                 <form onSubmit={this.handleFormSubmit} ref='form'>
                     <div className="form-group">
-                        <label htmlFor="Goal">Goal:</label>
+                        <label htmlFor="firstStep">Journey Name:</label>
                         <input className="form-control"
-                            placeholder="Goal"
-                            name="goal"
+                            placeholder="Journey Name"
+                            name="journeyName"
                             type="text"
-                            id="goal"
-                            onChange={this.handleChange} />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="firstStep">First step (required):</label>
-                        <input className="form-control"
-                            placeholder="First step toward achieving your goal..."
-                            name="firstStep"
-                            type="text"
-                            id="firstStep"
-                            onChange={this.handleChange} />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="secondStep">Second Step (optional):</label>
-                        <input className="form-control"
-                            placeholder="Second step toward achieving your goal..."
-                            name="secondStep"
-                            type="text"
-                            id="secondStep"
-                            onChange={this.handleChange} />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="thirdStep">Third step (optional):</label>
-                        <input className="form-control"
-                            placeholder="Third step toward achieving your goal..."
-                            name="thirdStep"
-                            type="text"
-                            id="thirdStep"
-                            onChange={this.handleChange} />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="fourthStep">Fourth step (optional):</label>
-                        <input className="form-control"
-                            placeholder="Fourth step toward achieving your goal..."
-                            name="fourthStep"
-                            type="text"
-                            id="fourthStep"
-                            onChange={this.handleChange} />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="fifthStep">Fifth step (optional):</label>
-                        <input className="form-control"
-                            placeholder="Fifth step toward achieving your goal..."
-                            name="fifthStep"
-                            type="text"
-                            id="fifthStep"
+                            id="journeyName"
                             onChange={this.handleChange} />
                     </div>
                     <div className="form-group">
@@ -120,6 +75,15 @@ class Goal extends Component {
                             name="completeBy"
                             type="date"
                             id="completeBy"
+                            onChange={this.handleChange} />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="journeySummary">Journey Summary:</label>
+                        <textarea className="form-control"
+                            placeholder="Journey Summary"
+                            name="journeySummary"
+                            type="text"
+                            id="journeySummary"
                             onChange={this.handleChange} />
                     </div>
                     <button type="submit" className="btn btn-primary">Submit</button>
