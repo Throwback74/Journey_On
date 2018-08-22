@@ -1,6 +1,9 @@
 'use strict';
 const nodemailer = require('nodemailer');
-const creds = require('../config/config');
+// const creds = require('../config/config');
+const creds = require('../../../keys');
+
+console.log(creds);
 
 var transporter = nodemailer.createTransport({
   service: 'gmail',

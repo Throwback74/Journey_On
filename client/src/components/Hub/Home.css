@@ -22,3 +22,46 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.body{
+  background-image: url("../../images/bailey-zindel-396398-unsplash.jpg");
+  background-size:cover;
+  height: 899px;
+  width: 100%;
+  background-repeat: no-repeat;
+  font-family: cursive;
+}
+
+.Profile{
+  text-align: center;
+}
+
+.progress {
+  border: 1px solid black;
+  position: fixed;
+  height: 200px;
+  top:600px;
+  left:400px;
+  background-color:rgba(193, 193, 193, 0.2);
+}
+
+.bar{
+  position:relative;
+  text-align:center;
+  color:black;
+}
+
+.welcome{
+  text-align: center;
+  position: relative;
+}
+
+.nav{
+  height:200px;
+  position: relative;
+  font-size: 20px;
+}
+
+.journeyOn{
+  font-size:40px;
+}
