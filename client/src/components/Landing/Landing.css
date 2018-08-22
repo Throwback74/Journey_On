@@ -1,4 +1,4 @@
-header {
+.landingHeader {
   position: relative;
   height: 600px;
   width: 100%;
@@ -11,13 +11,13 @@ header {
   margin-left: -90px;
 }
 
-section h2 {
+/* section h2 {
   padding: 100px 0;
   font: 44px "Arial";
   text-align: center;
-}
+} */
 
-header h1 {
+.landingHeader h1 {
   color: white;
 }
 
@@ -62,10 +62,6 @@ svg {
   margin-top: 30px;
 }
 
-h3 {
-  color: white;
-}
-
 .picture {
   position: absolute;
   left: 0px;
@@ -88,3 +84,4 @@ h3 {
 .col s6 fresh start {
   margin-bottom: 20px;
 }
+
