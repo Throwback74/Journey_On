@@ -1,5 +1,5 @@
 import React from "react";
-import './style.css';
+import './Landing.css';
 import {Link} from "react-router-dom";
 
 
@@ -8,7 +8,7 @@ const Landing = props => {
   if(props.tokenID){
     return(
   <div>
-    <header>
+    <header className="landingHeader">
       <div className="container">
       <Link to="/home">
         <button type="button" className="btn btn-primary">Home</button>
@@ -17,7 +17,7 @@ const Landing = props => {
         <button type="button" className="btn btn-danger" >Logout</button>
       </Link>
 
-        <h1>JOURNEY ON</h1>
+        <h1 className="title">JOURNEY ON</h1>
         <div className="row">
           <div className="col s8">
             <p className="paragraph">"Believe in yourself. You are braver than you think, more talented than you know, and capable of more than you imagine"</p>
@@ -33,18 +33,16 @@ const Landing = props => {
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
         <polygon fill="white" points="0,100 100,0 100,100" />
       </svg>
-
     </header>
 
     <section>
       <div className="container">
-        <h2>Section Content</h2>
         <div className="row">
           <div className="col s6">
             <a href="https://placeholder.com"><img src="https://via.placeholder.com/414x396" alt="placeholder"/></a>
           </div>
           <div className="col s6 get started">
-            <h1>Get Started</h1>
+            <h1 className="get started">Get Started</h1>
             Creating your goals and building your journey.
       <ul>
               <li>Brainstorming</li>
@@ -54,7 +52,7 @@ const Landing = props => {
         </div>
         <div className="row">
           <div className="col s6 fresh start">
-            <h1>Fresh Start</h1>
+            <h1 className="fresh start">Fresh Start</h1>
             The hub for tracking your journey and process until completed.
       <ul>
               <li>Tracking your Progress Bar</li>
@@ -71,8 +69,8 @@ const Landing = props => {
             <a href="https://placeholder.com">
             <img src="https://via.placeholder.com/414x396" alt="placeholder"/></a>
           </div>
-          <div className="col s6 progress">
-            <h1>Breakdown</h1>
+          <div className="col s6 Breakdown">
+            <h1 className="Breakdown">Breakdown</h1>
             Greater picture for tracking your journey.
       <ul>
               <li>Daily Motivational Quotes</li>
@@ -93,7 +91,7 @@ const Landing = props => {
   }else {
   return(
     <div>
-    <header>
+    <header className="landingHeader">
       <div className="container">
       <Link to="/signup">
         <button type="button" className="btn btn-primary">Signup</button>
@@ -101,7 +99,7 @@ const Landing = props => {
       <Link to="/login">
         <button type="button" className="btn btn-danger">Login</button>
       </Link>
-      <h1>JOURNEY ON</h1>
+      <h1 className="title">JOURNEY ON</h1>
         <div className="row">
           <div className="col s8">
             <p className="paragraph">"Believe in yourself. You are braver than you think, more talented than you know, and capable of more than you imagine"</p>
@@ -128,7 +126,7 @@ const Landing = props => {
             <a href="https://placeholder.com"><img src="https://via.placeholder.com/414x396" alt="placeholder"/></a>
           </div>
           <div className="col s6 get started">
-            <h1>Get Started</h1>
+            <h1 className="get start">Get Started</h1>
             Creating your goals and building your journey.
       <ul>
               <li>Brainstorming</li>
@@ -138,7 +136,7 @@ const Landing = props => {
         </div>
         <div className="row">
           <div className="col s6 fresh start">
-            <h1>Fresh Start</h1>
+            <h1 className="fresh start">Fresh Start</h1>
             The hub for tracking your journey and process until completed.
       <ul>
               <li>Tracking your Progress Bar</li>
@@ -155,8 +153,8 @@ const Landing = props => {
             <a href="https://placeholder.com">
             <img src="https://via.placeholder.com/414x396" alt="placeholder"/></a>
           </div>
-          <div className="col s6 progress">
-            <h1>Breakdown</h1>
+          <div className="col s6 Breakdown">
+            <h1 className="Breakdown">Breakdown</h1>
             Greater picture for tracking your journey.
       <ul>
               <li>Daily Motivational Quotes</li>

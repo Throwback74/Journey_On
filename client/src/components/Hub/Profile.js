@@ -28,7 +28,7 @@ class Profile extends Component {
           </div>
           <div className="col-md-2">
             <h1 className="journeyOn">Journey On!</h1>
-            <Link to="/home">Go home</Link>
+            <Link to="/">Go home</Link>
           </div>
         </div>
         <div className="Profile">
@@ -37,23 +37,23 @@ class Profile extends Component {
             <p>Time to get shit done!</p>
           </div>
           <div className="container">
-          <div className="middle row">
-            <div className="icon1 col-md-4">
-            <button className="button button1"></button>
+            <div className="middle row">
+              <div className="icon1 col-md-4">
+                <button className="button button1"></button>
+              </div>
+              <div className="icon2 col-md-4">
+                <button className="button button2"></button>
+              </div>
+              <div className="icon3 col-md-4">
+                <button className="button button3"></button>
+              </div>
+            </div>
           </div>
-            <div className="icon2 col-md-4">
-            <button className="button button2"></button>
+          <div className="container progress">
+            <h1 className="container bar">Progress Bar</h1>
           </div>
-            <div className="icon3 col-md-4">
-            <button className="button button3"></button>
-          </div>
-          </div>
-        </div>
-        <div className="container progress">
-          <h1 className="container bar">Progress Bar</h1>
         </div>
       </div>
-    </div>
     )
   }
 }
