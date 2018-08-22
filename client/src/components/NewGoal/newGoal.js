@@ -20,6 +20,7 @@ class Goal extends Component {
         });
     };
 
+<<<<<<< HEAD
     state = {
         id: ""
     };
@@ -33,6 +34,10 @@ class Goal extends Component {
         })
 
     }
+=======
+
+    
+>>>>>>> 9f9781adc97e99699eb5c274f22119e206949d39
 
     handleFormSubmit = event => {
         event.preventDefault();
@@ -43,7 +48,7 @@ class Goal extends Component {
                 // once the user has signed up
                 // send them to the login page
                 alert("Goal Added!");
-                this.location.reload();
+                this.refs.form.reset();
             })
             .catch(err => alert(err));
     };
