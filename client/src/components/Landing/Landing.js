@@ -36,7 +36,7 @@ const Landing = props => (
 
     <section>
       <div className="container">
-        <h2>Section Content</h2>
+        {/* <h2>Section Content</h2> */}
         <div className="row">
           <div className="col s6">
             <a href="https://placeholder.com"><img src="https://via.placeholder.com/414x396" /></a>

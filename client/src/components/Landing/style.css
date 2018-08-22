@@ -9,8 +9,6 @@ h1 {
     padding: 10px;
     font: 44px "Arial";
     margin-left: -90px;
-    font-family: cursive
-    
 }
 
 section h2 {
@@ -80,8 +78,8 @@ h3 {
 }
 
 .col s6 progress {
-    padding-top: 10px;
-}
+    padding-top: 20px;
+} 
 
 .col s6 get started {
     margin-bottom: 20px;
@@ -90,3 +88,4 @@ h3 {
 .col s6 fresh start {
     margin-bottom: 20px;
 }
+
