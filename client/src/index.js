@@ -12,11 +12,13 @@ import axios from "axios";
 import Login from './components/Landing/Login';
 import Profile from './components/Hub/Profile';
 import Signup from './components/Signup/Signup';
-import Goal from "./components/NewGoal/newGoal.js";
+import Goal from './components/NewGoal/newGoal';
 import Home from './components/Hub/Home';
+import Kanban from './components/Hub/Kanban/Kanban';
+import Logout from './components/Auth/Logout';
 
 if(localStorage.getItem("id_token")) {
-  axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('id_token')}`;
+    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('id_token')}`;
 }
 ReactDOM.render(
     <Router>
@@ -27,6 +29,8 @@ ReactDOM.render(
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/profile/:id" component={Profile} />
             <Route exact path="/buildjourney" component={Goal} />
+            <Route exact path="/board" component={Kanban} />
+            <Route exact path="/logout" component={Logout} />
         </div>
     </Router>
     , document.getElementById('root')
