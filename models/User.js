@@ -25,7 +25,13 @@ let UserSchema = new Schema({
   createdAt: {
     type: Date,
     default: Date.now
-  }
+  },
+  goals: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "UserGoal"
+    }
+  ]
 });
 
 // Execute before each user.save() call
