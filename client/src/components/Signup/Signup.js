@@ -22,6 +22,7 @@ class Signup extends Component {
         console.log(res.data);
         // once the user has signed up
         // send them to the login page
+        API.loginUser(this.state.email, this.state.password);
         this.props.history.replace('/buildjourney');
       })
       .catch(err => {
