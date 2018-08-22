@@ -1,4 +1,4 @@
-header {
+.landingHeader {
     position: relative;
     height: 600px;
     width: 100%;
@@ -11,13 +11,7 @@ header {
     margin-left: -90px;
 }
 
-/* section h2 {
-    padding: 100px 0;
-    font: 44px "Arial";
-    text-align: center;
-} */
-
-.header h1 {
+.landingHeader h1 {
     color: white;
 }
 
@@ -73,15 +67,45 @@ svg {
     border-radius: 5px;
 }
 
-.col s6 Breakdown {
-    padding-top: 20px;
+@keyframes example {
+    0%   {background-color:rgb(112, 110, 110); left:0px; top:0px;}
+    25%  {background-color:#488192; left:200px; top:0px;}
+    50%  {background-color:#b3d2d8; left:200px; top:200px;}
+    75%  {background-color:#b3d2d8; left:0px; top:200px;}
+    100% {background-color:#488192; left:0px; top:0px;}
+}
+
+/* The element to apply the animation to */
+.picture {
+    width: 414px;
+    height: 450px;
+    position: relative;
+    animation-name: example;
+    animation-duration: 2s;
+}
+
+.Breakdown {
+    margin-top: 70px;
 } 
 
-.col s6 get started {
-    margin-bottom: 20px;
+.getStarted {
+    margin-top: 70px;
 }
 
-.col s6 fresh start {
-    margin-bottom: 20px;
+.freshStart {
+    margin-top: 70px;
 }
 
+.rows {
+    margin-top: 50px;
+}
+
+.middleRow {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+img {
+    width: 414px;
+    height: 396px;
+}

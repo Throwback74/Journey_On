@@ -8,7 +8,7 @@ const Landing = props => {
   if(props.tokenID){
     return(
   <div>
-    <header>
+    <header className="landingHeader">
       <div className="container">
       <Link to="/home">
         <button type="button" className="btn btn-primary">Home</button>
@@ -91,7 +91,7 @@ const Landing = props => {
   }else {
   return(
     <div>
-    <header>
+    <header className="landingHeader">
       <div className="container">
       <Link to="/signup">
         <button type="button" className="btn btn-primary">Signup</button>
@@ -120,12 +120,11 @@ const Landing = props => {
 
     <section>
       <div className="container">
-        <h2>Section Content</h2>
-        <div className="row">
+        <div className="row rows">
           <div className="col s6">
-            <a href="https://placeholder.com"><img src="https://via.placeholder.com/414x396" alt="placeholder"/></a>
+            <a href="https://placeholder.com"><img src="http://11web.com/wp-content/uploads/creativefeature-image-1024x683-450x300.jpg" alt="placeholder"/></a>
           </div>
-          <div className="col s6 get started">
+          <div className="col s6 getStarted">
             <h1 className="get start">Get Started</h1>
             Creating your goals and building your journey.
       <ul>
@@ -134,9 +133,9 @@ const Landing = props => {
             </ul>
           </div>
         </div>
-        <div className="row">
+        <div className="row middleRow" >
           <div className="col s6 fresh start">
-            <h1 className="fresh start">Fresh Start</h1>
+            <h1 className="freshStart">Fresh Start</h1>
             The hub for tracking your journey and process until completed.
       <ul>
               <li>Tracking your Progress Bar</li>
@@ -145,13 +144,13 @@ const Landing = props => {
           </div>
           <div className="col s6">
             <a href="https://placeholder.com">
-            <img src="https://via.placeholder.com/414x396" alt="placeholder"/></a>
+            <img src="https://4.bp.blogspot.com/-Y9H0bKwreSo/VXfG6OOVNUI/AAAAAAAAQ_4/ZDhHwuB8W5c/s1600/monthly%2Bcalendar%2Bpreview%2Bstripes_700.png" alt="placeholder"/></a>
           </div>
         </div>
         <div className="row">
           <div className="col s6">
             <a href="https://placeholder.com">
-            <img src="https://via.placeholder.com/414x396" alt="placeholder"/></a>
+            <img src="https://mk0ryrobg0ysk5t06n.kinstacdn.com/wp-content/uploads/2017/09/Hustle-Quotes-Motivation_Be-not-afraid-of-going.jpg" alt="placeholder"/></a>
           </div>
           <div className="col s6 Breakdown">
             <h1 className="Breakdown">Breakdown</h1>
