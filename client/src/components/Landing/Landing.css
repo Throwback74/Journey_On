@@ -7,8 +7,9 @@
 
 .title {
     padding: 10px;
-    font: 44px "Arial";
+    font: 50px "Arial";
     margin-left: -90px;
+    font-family: 'Indie Flower', cursive;
 }
 
 .landingHeader h1 {
@@ -19,7 +20,13 @@
     color: white;
     text-align: center;
     padding: 90px;
-    font-family: sans-serif;
+    font-family: 'Merienda', cursive;
+    font-size: 20px;
+}
+
+.author {
+    color: white;
+    margin-top: 40px;
 }
 
 svg {
@@ -34,12 +41,16 @@ svg {
     float: right;
     margin-right: 20px;
     padding-bottom: 10px;
+    background-color: rgb(187, 185, 189) !important;
+    border: 1px solid #b3d2d8;
 }
 
 .btn-danger {
     float: right;
     margin-right: 20px;
     padding-bottom: 10px;
+    background-color: rgb(187, 185, 189) !important;
+    border: 1px solid #b3d2d8;
 }
 
 .left-column {
@@ -86,14 +97,20 @@ svg {
 
 .Breakdown {
     margin-top: 70px;
+    font-family: 'Indie Flower', cursive;
+    font: 28px;
 } 
 
 .getStarted {
     margin-top: 70px;
+    font-family: 'Indie Flower', cursive;
+    font: 28px;
 }
 
 .freshStart {
     margin-top: 70px;
+    font-family: 'Indie Flower', cursive;
+    font: 28px;
 }
 
 .rows {
@@ -109,3 +126,7 @@ img {
     width: 414px;
     height: 396px;
 }
+
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower');
+
+@import url('https://fonts.googleapis.com/css?family=Merienda');
