@@ -1,5 +1,6 @@
 import React from "react";
 import './Landing.css';
+import './Animate.css';
 import {Link} from "react-router-dom";
 
 
@@ -99,15 +100,15 @@ const Landing = props => {
       <Link to="/login">
         <button type="button" className="btn btn-danger">Login</button>
       </Link>
-      <h1 className="title">JOURNEY ON</h1>
+      <h1 className="title animated fadeInLeftBig">JOURNEY ON</h1>
         <div className="row">
           <div className="col s8">
-            <p className="paragraph">"Believe in yourself. You are braver than you think, more talented than you know, and capable of more than you imagine"</p>
-            - Roy T. Bennett -
+            <p className="paragraph animated fadeInUp">"Believe in yourself. You are braver than you think, more talented than you know, and capable of more than you imagine"</p> 
+            <p className="author">- Roy T. Bennett -</p>
       </div>
           <div className="col s4">
             <div>
-              <img className="picture" src="https://via.placeholder.com/414x396" alt="placeholder" />
+              <img className="picture" src="https://www.bestbeachimage.info/wp-content/uploads/2018/03/mac-wallpaper-tumblr-beach-8362.jpeg" alt="placeholder" />
             </div>
           </div>
         </div>
@@ -120,12 +121,11 @@ const Landing = props => {
 
     <section>
       <div className="container">
-        <h2>Section Content</h2>
-        <div className="row">
+        <div className="row rows animated fadeInLeft">
           <div className="col s6">
-            <a href="https://placeholder.com"><img src="https://via.placeholder.com/414x396" alt="placeholder"/></a>
+            <a href="https://placeholder.com"><img src="http://11web.com/wp-content/uploads/creativefeature-image-1024x683-450x300.jpg" alt="placeholder"/></a>
           </div>
-          <div className="col s6 get started">
+          <div className="col s6 getStarted">
             <h1 className="get start">Get Started</h1>
             Creating your goals and building your journey.
       <ul>
@@ -134,9 +134,9 @@ const Landing = props => {
             </ul>
           </div>
         </div>
-        <div className="row">
-          <div className="col s6 fresh start">
-            <h1 className="fresh start">Fresh Start</h1>
+        <div className="row middleRow animated fadeInRight">
+          <div className="col s6 freshStart">
+            <h1 className="freshStart">Fresh Start</h1>
             The hub for tracking your journey and process until completed.
       <ul>
               <li>Tracking your Progress Bar</li>
@@ -145,13 +145,13 @@ const Landing = props => {
           </div>
           <div className="col s6">
             <a href="https://placeholder.com">
-            <img src="https://via.placeholder.com/414x396" alt="placeholder"/></a>
+            <img src="https://4.bp.blogspot.com/-Y9H0bKwreSo/VXfG6OOVNUI/AAAAAAAAQ_4/ZDhHwuB8W5c/s1600/monthly%2Bcalendar%2Bpreview%2Bstripes_700.png" alt="placeholder"/></a>
           </div>
         </div>
-        <div className="row">
+        <div className="row animated fadeInLeft">
           <div className="col s6">
             <a href="https://placeholder.com">
-            <img src="https://via.placeholder.com/414x396" alt="placeholder"/></a>
+            <img src="https://mk0ryrobg0ysk5t06n.kinstacdn.com/wp-content/uploads/2017/09/Hustle-Quotes-Motivation_Be-not-afraid-of-going.jpg" alt="placeholder"/></a>
           </div>
           <div className="col s6 Breakdown">
             <h1 className="Breakdown">Breakdown</h1>
