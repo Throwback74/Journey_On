@@ -1,5 +1,5 @@
 import React from 'react';
-import withAuth from '../../Auth/withAuth';
+// import withAuth from '../../Auth/withAuth';
 import "../Resources/Resources.css";
 
 const resourceBtn = "Resources";
