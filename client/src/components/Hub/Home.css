@@ -22,3 +22,81 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.body{
+  background-image: url("../../images/bailey-zindel-396398-unsplash.jpg");
+  background-size:cover;
+  height: 899px;
+  width: 100%;
+  background-repeat: no-repeat;
+  font-family: cursive;
+}
+
+.Profile{
+  text-align: center;
+}
+
+.progress {
+  border: 1px solid black;
+  position: fixed;
+  height: 200px;
+  top:600px;
+  left:400px;
+  background-color:rgba(193, 193, 193, 0.2);
+}
+
+.bar{
+  position:relative;
+  text-align:center;
+  color:black;
+}
+
+.welcome{
+  text-align: center;
+  position: relative;
+  top:-75px;
+}
+
+.nav{
+  height:200px;
+  position: relative;
+  font-size: 20px;
+}
+
+.journeyOn{
+  font-size:40px;
+}
+
+.middle{
+  height:275px;
+}
+
+.button {
+  background-size:contain;
+  border: black;
+  color: white;
+  height:150px;
+  width:150px;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 50%;
+}
+
+.button1{
+  background:url("../../images/download.png");
+  background-size:contain;
+}
+
+.button2{
+  background:url("../../images/800px_COLOURBOX14837835.jpg");
+  background-size:contain;
+}
+
+.button3{
+  background:url("../../images/Brain-Games-grey.png");
+  background-size:contain;
+}
