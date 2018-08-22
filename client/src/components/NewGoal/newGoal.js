@@ -34,6 +34,11 @@ class Goal extends Component {
 
     }
 
+    handleGoToProfile = event => {
+        event.preventDefault()
+        this.props.history.replace(`/profile/${this.props.user.id}`);
+    }
+
     handleFormSubmit = event => {
         event.preventDefault();
         console.log(this.state.id);
@@ -119,6 +124,7 @@ class Goal extends Component {
                     </div>
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
+                <button className="btn btn-primary" onClick={this.handleGoToProfile}>Go to profile</button>
             </div>
         )
     }
