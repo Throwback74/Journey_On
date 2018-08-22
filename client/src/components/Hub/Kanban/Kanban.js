@@ -35,22 +35,22 @@ class Kanban extends Component {
         })
     }
 
-    completeCard = () => {
-        this.state.eventBus.publish({
-            type: 'ADD_CARD',
-            laneId: 'COMPLETED',
-            card: { id: 'Milk', title: 'Buy Milk', label: '15 mins', description: 'Use Headspace app' }
-        })
-        this.state.eventBus.publish({ type: 'REMOVE_CARD', laneId: 'PLANNED', cardId: 'Milk' })
-    }
+    // completeCard = () => {
+    //     this.state.eventBus.publish({
+    //         type: 'ADD_CARD',
+    //         laneId: 'COMPLETED',
+    //         card: { id: 'Milk', title: 'Buy Milk', label: '15 mins', description: 'Use Headspace app' }
+    //     })
+    //     this.state.eventBus.publish({ type: 'REMOVE_CARD', laneId: 'PLANNED', cardId: 'Milk' })
+    // }
 
-    addCard = () => {
-        this.state.eventBus.publish({
-            type: 'ADD_CARD',
-            laneId: 'BLOCKED',
-            card: { id: 'Ec2Error', title: 'EC2 Instance Down', label: '30 mins', description: 'Main EC2 instance down' }
-        })
-    }
+    // addCard = () => {
+    //     this.state.eventBus.publish({
+    //         type: 'ADD_CARD',
+    //         laneId: 'BLOCKED',
+    //         card: { id: 'Ec2Error', title: 'EC2 Instance Down', label: '30 mins', description: 'Main EC2 instance down' }
+    //     })
+    // }
 
     shouldReceiveNewData = nextData => {
         console.log('New card has been added')
@@ -64,15 +64,14 @@ class Kanban extends Component {
 
     render() {
         return (
-            <div className="Kanban-board">
+            <div className="whole-board">
                 <div className="Kanban-header text-center">
                     <h1><b>Journey Name Goes Here</b></h1>
-                </div>
-                <div className="Kanban-header text-center">
                     <h3>Organization Board</h3>
+                    <button>Back to Hub</button>
                 </div>
                 <div className="Kanban-intro">
-                    <Board className="Kanban"
+                    <Board className="Kanban-taskboard"
                         editable
                         onCardAdd={this.handleCardAdd}
                         data={this.state.boardData}
