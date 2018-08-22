@@ -9,7 +9,7 @@ export default {
   signUpUser: (username, email, password) => {
     return axios.post('api/signup', {username: username, email: email, password: password});
   },
-  addGoal: (goal, firstStep, secondStep, thirdStep, fourthStep, fifthStep, completeBy, email) => {
-    return axios.post('api/addgoal', {goal: goal, firstStep: firstStep, secondStep: secondStep, thirdStep: thirdStep, fourthStep: fourthStep, fifthStep: fifthStep, completeBy: completeBy, email: email});
+  addGoal: (journeyName, journeySummary, completeBy, email) => {
+    return axios.post('api/addgoal', {journeyName: journeyName, journeySummary: journeySummary, completeBy: completeBy, email: email});
   }
 };
