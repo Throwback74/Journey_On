@@ -1477,7 +1477,7 @@
   animation-name: fadeInLeft;
 }
 
-@-webkit-keyframes fadeInLeftBig {
+/* @-webkit-keyframes fadeInLeftBig {
   from {
     opacity: 0;
     -webkit-transform: translate3d(-2000px, 0, 0);
@@ -1508,7 +1508,7 @@
 .fadeInLeftBig {
   -webkit-animation-name: fadeInLeftBig;
   animation-name: fadeInLeftBig;
-}
+} */
 
 @-webkit-keyframes fadeInRight {
   from {
