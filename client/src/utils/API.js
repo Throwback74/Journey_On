@@ -22,6 +22,10 @@ export default {
   loginUser: (email, password) => {
     return axios.post('api/login', {email: email, password: password});
   },
+
+  deleteGoal: (email) => {
+    return axios.post('api/deletejourney', {email: email})
+  }
 };
 
 //
