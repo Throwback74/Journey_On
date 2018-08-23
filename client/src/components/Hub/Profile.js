@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import withAuth from '../Auth/withAuth';
 import API from '../../utils/API';
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import "./Home.css";
 import Buttons from "./Buttons/Buttons";
 import Resources from "./Resources/Resources";
@@ -33,17 +33,12 @@ class Profile extends Component {
   renderButton = (newComponent) => {
     this.setState({
       component: newComponent,
-      progress: "hide"
+      progress: "show"
     })
   };
 
-  renderProgress = (data) => {
-    this.setState({
-      progress: data
-    })
-  }
-
   render() {
+    console.log(window.location.pathname)
     return (
       <div className="body">
         <div className="nav">
@@ -59,30 +54,42 @@ class Profile extends Component {
           <div className="welcome container">
             <h1>Welcome... {this.props.user.email}</h1>
             <p>Time to get shit done!</p>
-            <button type="button" class="btn-primary add" onClick={() => this.renderButton("Button")}>Hub</button>
+            <Link to={`/profile/${this.props.user.id}`}><button type="button" class="btn-primary add">Hub</button></Link>
+          </div>
+          <div className="container">
+            {/* {(() => {
+              switch (this.state.component) {
+                case "Button": return <Buttons renderButton={this.renderButton} userId={this.props.user.id} />;
+                case "Calendar": return "#00FF00";
+                case "Board": return "#0000FF";
+                case "Resources": return <Resources renderButton={this.renderButton}  />;
+                default: return <Buttons renderButton={this.renderButton} userId={this.props.user.id} />;
+              }
+            })()} */}
+            { 
+              (!window.location.pathname.includes("item")) ?
+              <Buttons renderButton={this.renderButton} userId={this.props.user.id} />
+              :
+              ""
+            }
+            <Route exact path={`/profile/${this.props.user.id}/item/resources`} component={Resources} />
+            {/* <Route exact path={`/profile/${this.props.user.id}/item/calendar`} component={Calendar} />
+            <Route exact path={`/profile/${this.props.user.id}/item/board`} component={Board} /> */}
+          
           </div>
           <div className="container">
             {(() => {
-              switch (this.state.component) {
-                case "Button": return <Buttons renderButton={this.renderButton} />;
-                case "Calendar": return "#00FF00";
-                case "Board": return "#0000FF";
-                case "Resources": return <Resources renderButton={this.renderButton} />;
-                default: return <Buttons renderButton={this.renderButton} />;
-              }
-            })()}
-
-
-          </div>
-          <div>
-            {(() => {
               switch (this.state.progress) {
-                case "show": return <Progress/>
+                case "show": return <Progress renderButton={this.renderButton}/>
                 case "hide": return ""
                 default: return <Progress/>
               }
             })}
           </div>
+          
+
+          
+
         </div>
 
         <footer>
