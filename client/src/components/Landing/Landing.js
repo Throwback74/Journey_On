@@ -88,7 +88,30 @@ class Landing extends Component {
       </div>
       <footer>
         <div className="foot">
-          <h3>Footer</h3>
+        <div className="container">
+            <div className="row">
+              <div className="col l6 s12">
+                <p className="grey-text">Press</p>
+                <p className="grey-text">Contact</p>
+                <p className="grey-text">Folow us</p>
+              </div>
+              <div className="col l4 offset-l2 s12">
+                <h5 className="white-text">Newsletter</h5>
+                <p className="signup email">Sign up to our newsletter and stay up to date.</p>
+                <ul className="dotts">
+                  <li><a className="grey-text text-lighten-3" href="https://www.facebook.com">Facebook</a></li>
+                  <li><a className="grey-text text-lighten-3" href="https://www.twitter.com">Twitter</a></li>
+                  <li><a className="grey-text text-lighten-3" href="https://www.instagram.com">Instagram</a></li>
+                  <li><a className="grey-text text-lighten-3" href="https://www.snapchat.com">Snapchat</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            © 2014 Copyright Journey
+            </div>
+          </div>
         </div>
       </footer>
     </section>
