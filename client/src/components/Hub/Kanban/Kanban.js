@@ -4,8 +4,10 @@ import './PromptModal'
 import { Board } from 'react-trello';
 import PromptModal from './PromptModal';
 import API from '../../../utils/API';
+import AuthService from '../../Auth/AuthService';
+import withAuth from '../../Auth/withAuth';
 
-const data = require('./kanban_demo.json')
+const data = require('./kanban_demo.json') // require DB collection instead
 
 const handleDragStart = (cardId, laneId) => {
     console.log('drag started')
@@ -13,23 +15,30 @@ const handleDragStart = (cardId, laneId) => {
     console.log(`laneId: ${laneId}`)
 }
 
-const handleDragEnd = (cardId, sourceLaneId, targetLaneId) => {
-    console.log('drag ended')
-    console.log(`cardId: ${cardId}`)
-    console.log(`sourceLaneId: ${sourceLaneId}`)
-    console.log(`targetLaneId: ${targetLaneId}`)
-}
+const handleDragEnd = (card, cardId, sourceLaneId, targetLaneId) => {
+    console.log('drag ended');
+    console.log(`cardId: ${cardId}`);
+    console.log(`sourceLaneId: ${sourceLaneId}`);
+    console.log(`targetLaneId: ${targetLaneId}`);
+    // set card.id to targetLaneId
+    // update in database
+};
 
 class Kanban extends Component {
-    state = { boardData: { lanes: [] } }
+
+    constructor() {
+        super();
+        this.state = { boardData: { lanes: [] } }
+        this.Auth = new AuthService();
+    };
 
     setEventBus = eventBus => {
         this.setState({ eventBus })
-    }
+    };
 
     async componentWillMount() {
-        const response = await this.getBoard()
-        this.setState({ boardData: response })
+        const response = await this.getBoard();
+        this.setState({ boardData: response });
 
         // API.getCards().then(function (res) {
         //     res.data.map(card => {
@@ -38,13 +47,13 @@ class Kanban extends Component {
         //     this.setState({ boardData: lanes })
         // })
 
-    }
+    };
 
     getBoard() {
         return new Promise(resolve => {
-            resolve(data)
-        })
-    }
+            resolve(data);
+        });
+    };
 
     // completeCard = () => {
     //     this.state.eventBus.publish({
@@ -64,24 +73,22 @@ class Kanban extends Component {
     // }
 
     shouldReceiveNewData = nextData => {
-        console.log('New card has been added')
-        console.log(nextData)
-    }
+        console.log('New card has been added');
+        console.log(nextData);
+    };
 
     handleCardAdd = (card, laneId) => {
-        console.log(`New card added to lane ${laneId}`)
+        console.log(`New card added to lane ${laneId}`);
         card.id = laneId;
         console.dir(card);
-        API.addTask(this.state.taskTitle, this.state.taskDescription, this.state.taskLabel, this.props.user.email)
+        // When new card is added on trello board, add card to database
+        API.addTask(card.title, card.description, card.id, this.props.user.email)
             .then(res => {
-                console.log(res.data);
-                // once the user has signed up
-                // send them to the login page
-                alert("Task Added!");
-                // this.refs.form.reset();
+                console.log(res.data); // delete this later?
+                alert("Task Added!"); // delete alert later?
             })
             .catch(err => alert(err));
-    }
+    };
 
     render() {
         return (
@@ -91,7 +98,6 @@ class Kanban extends Component {
                     <div className="Kanban-header text-center">
                         <h1><b>Journey Name Goes Here</b></h1>
                         <h3>Organization Board</h3>
-                        <button id="back-hub-btn">Back to Hub</button>
                     </div>
                     <div className="Kanban-intro">
                         <Board className="Kanban-taskboard"
@@ -107,12 +113,11 @@ class Kanban extends Component {
                     </div>
                 </div>
             </div>
-        )
-    }
-}
+        );
+    };
+};
 
-export default Kanban;
+export default withAuth(Kanban);
 
-// Set identifier to columns
 // Create query to obtain data
-// Update db when cards are moved / update identifier
+// Update db when cards are moved
