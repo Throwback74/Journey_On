@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './react-cal.css';
 import './Cal.css';
 import AuthService from '../../Auth/AuthService';
 import withAuth from '../../Auth/withAuth';
@@ -6,7 +7,8 @@ import InfiniteCalendar, {
   Calendar,
   withRange,
 } from 'react-infinite-calendar';
-import 'react-infinite-calendar/styles.css';
+// import 'react-infinite-calendar/styles.css';
+
 
 const CalendarWithRange = withRange(Calendar);
 const Auth = new AuthService();
@@ -41,10 +43,24 @@ class Cal extends Component {
           <button type="button" className="btn btn-danger" onClick={this.handleLogout}>Logout</button>
         </p>
         </div>
-        <div className="container-fluid">
+        <div className="container-fluid cal-container">
+        {/* <InfiniteCalendar
+            width={400}
+            height={600}
+            selected={today}
+            disabledDays={[0,6]}
+            minDate={lastWeek}
+          /> */}
+
         <InfiniteCalendar
-            width={600}
-            height={900}
+            className="chain"
+            displayOptions={{
+              layout: 'landscape',
+              showOverlay: false,
+              shouldHeaderAnimate: true
+            }}
+            width={1200}
+            height={600}
             minDate={lastWeek}
             Component={CalendarWithRange}
             selected={{

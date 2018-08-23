@@ -1,0 +1,26 @@
+.cal-container{
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 150px;
+  padding-top: 15px;
+}
+
+.Cal__Header__date {
+  white-space: pre-wrap !important;
+}
+
+.Cal__Header__root.Cal__Header__landscape {
+  min-width: 250px !important;
+}
+
+.Cal__Today__root .Cal__Today__chevron {
+  height: 50px;
+  margin-top: 10px;
+  transform: rotate(0deg);
+}
+
+/* Middle of range effect - Cal__Day__root Cal__Day__selected Cal__Day__enabled Cal__Day__range Cal__Day__betweenRange */
+
+/* End of range effect -  Cal__Day__root Cal__Day__selected Cal__Day__enabled Cal__Day__range Cal__Day__end*/
+
+/* No effects - Cal__Day__root Cal__Day__enabled */
