@@ -9,19 +9,13 @@ import Resources from "./Resources/Resources";
 class Profile extends Component {
 
   state = {
-    // userId: this.props.user.id,
-    // username: this.props.user.username,
-    // email: this.props.user.email,
     username: "",
     email: "",
     component: "Button"
   };
 
   componentDidMount() {
-    console.log(this.props.user);
-    // API.getUserName(this.state.userId).then(res => {
     API.getUserName(this.props.user.id).then(res => {
-      console.log(res.data);
       this.setState({
         username: res.data.username,
         email: res.data.email
@@ -79,5 +73,4 @@ class Profile extends Component {
   }
 }
 
-// export default Profile;
 export default withAuth(Profile);
