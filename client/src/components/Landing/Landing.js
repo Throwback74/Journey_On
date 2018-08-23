@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import './Landing.css';
 import './Animate.css';
-import { Link } from "react-router-dom";
+// eslint-disable-next-line
+import {Link} from "react-router-dom";
 import LandingBtns from "./LandingBtns";
 
 
@@ -9,6 +10,7 @@ class Landing extends Component {
 
   componentDidMount() {
     var btnTrigger = localStorage.getItem('id_token');
+    console.log(btnTrigger);
     return btnTrigger;
   }
 
