@@ -3,7 +3,7 @@ import './Kanban.css';
 import './PromptModal'
 import { Board } from 'react-trello';
 import PromptModal from './PromptModal';
-// import PromptModal from './PromptModal';
+import API from '../../../utils/API';
 
 const data = require('./kanban_demo.json')
 
@@ -70,7 +70,17 @@ class Kanban extends Component {
 
     handleCardAdd = (card, laneId) => {
         console.log(`New card added to lane ${laneId}`)
-        console.dir(card)
+        card.id = laneId;
+        console.dir(card);
+        API.addTask(this.state.taskTitle, this.state.taskDescription, this.state.taskLabel, this.props.user.email)
+            .then(res => {
+                console.log(res.data);
+                // once the user has signed up
+                // send them to the login page
+                alert("Task Added!");
+                // this.refs.form.reset();
+            })
+            .catch(err => alert(err));
     }
 
     render() {
