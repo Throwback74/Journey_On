@@ -29,6 +29,8 @@
     "mongoose": "^5.1.0",
     "morgan": "^1.9.0",
     "nodemailer": "^4.6.8",
+    "react-addons-css-transition-group": "^15.6.2",
+    "react-infinite-calendar": "^2.3.1",
     "react-modal": "^3.5.1",
     "react-trello": "^1.32.2"
   }
