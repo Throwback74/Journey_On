@@ -54,6 +54,24 @@ app.post('/api/addgoal', (req, res) => {
     });
 });
 
+app.post('/api/addtask', (req, res) => {
+  db.userTasks.create(req.body)
+    .then(function(dbTasks) {
+      // If a Book was created successfully, find one library (there's only one) and push the new Book's _id to the Library's `books` array
+      // { new: true } tells the query that we want it to return the updated Library -- it returns the original by default
+      // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
+      return db.User.findOneAndUpdate({email: req.body.email}, { $push: { tasks: dbTasks._id } }, { new: true });
+    })
+    .then(function(dbUser) {
+      // If the Library was updated successfully, send it back to the client
+      res.json(dbUser);
+    })
+    .catch(function(err) {
+      // If an error occurs, send it back to the client
+      res.json(err);
+    });
+});
+
 
 // LOGIN ROUTE
 app.post('/api/login', (req, res) => {
