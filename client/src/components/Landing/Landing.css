@@ -70,7 +70,7 @@ svg {
 .foot {
     text-align: center;
     background-image: linear-gradient(55deg,#488192 25%,#b3d2d8);
-    height: 245px;
+    height: cover;
     width: 100%;
     padding-top: 30px;
     margin-top: 30px;
@@ -78,7 +78,19 @@ svg {
 
 .white-text {
     color: white;
+    margin-right: 550px;
+}
 
+.dotts {
+    list-style-type: none;
+}
+
+.about {
+    padding-top: 65px;
+}
+
+.signupEmail {
+    margin-right: 40px;
 }
 
 .picture {
@@ -106,7 +118,7 @@ svg {
     height: 450px;
     position: relative;
     animation-name: example;
-    animation-duration: 2s;
+    animation-duration: 1.7s;
 }
 
 .Breakdown {
