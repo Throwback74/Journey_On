@@ -28,7 +28,7 @@ mongod
 Start by installing front and backend dependencies. While in the root directory, run the following command:
 
 ```
-yarn installDeps
+yarn install
 ```
 
 After all installations complete, run the following command in your terminal:
