@@ -6,6 +6,8 @@ import withAuth from '../../Auth/withAuth';
 import InfiniteCalendar, {
   Calendar,
   withRange,
+  withMultipleDates,
+  defaultMultipleDateInterpolation
 } from 'react-infinite-calendar';
 // import 'react-infinite-calendar/styles.css';
 
@@ -62,14 +64,16 @@ class Cal extends Component {
             width={1200}
             height={600}
             minDate={lastWeek}
-            Component={CalendarWithRange}
-            selected={{
-              start: new Date(2018, 8, 10),
-              end: new Date(2018, 9, 18),
-            }}
+            Component={withMultipleDates(Calendar)}
+            selected={[
+              new Date(2018, 8, 16),
+              new Date(),
+              new Date(2018, 9, 2)
+            ]}
             locale={{
               headerFormat: 'MMM Do',
             }}
+            interpolateSelection={defaultMultipleDateInterpolation}
           />
         </div>
       </div>

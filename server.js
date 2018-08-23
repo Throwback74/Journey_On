@@ -99,6 +99,20 @@ app.get('/api/user/:id', isAuthenticated, (req, res) => {
   }).catch(err => res.status(400).send(err));
 });
 
+
+app.get('/api/username/:id', isAuthenticated, (req, res) => {
+  db.User.findById(req.params.id).then(data => {
+    if(data) {
+      res.json(data);
+    } else {
+      res.status(404).send({success: false, message: 'No user found'});
+    }
+  }).catch(err => res.status(400).send(err));
+});
+
+
+
+
 app.post('/api/send/email', (req, res)=>{
   var transporter = nodemailer.createTransport({
     service: 'gmail',
