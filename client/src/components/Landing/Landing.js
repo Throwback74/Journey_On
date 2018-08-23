@@ -27,12 +27,11 @@ class Landing extends Component {
             </div>
             <div className="row">
               <div className="col s8">
-                <p className="paragraph animated fadeInUp">"Believe in yourself. You are braver than you think, more talented than you know, and capable of more than you imagine"</p>
-                <p className="author">- Roy T. Bennett -</p>
+                <p className="paragraph animated fadeInUp">"Believe in yourself. You are braver than you think, more talented than you know, and capable of more than you imagine" <br/><br/>- Roy T. Bennett -</p>  
               </div>
-              <div className="col s4">
+              <div  id="pic" className="col s4">
                 <div>
-                  <img className="picture" src="https://www.bestbeachimage.info/wp-content/uploads/2018/03/mac-wallpaper-tumblr-beach-8362.jpeg" alt="placeholder" />
+                  <img id="picture" src="https://www.bestbeachimage.info/wp-content/uploads/2018/03/mac-wallpaper-tumblr-beach-8362.jpeg" alt="placeholder" />
                 </div>
               </div>
             </div>
@@ -108,6 +107,7 @@ class Landing extends Component {
                     </ul>
                   </div>
                 </div>
+                <h1 className="footerTitle">Journey</h1>
               </div>
               <div class="footer-copyright">
                 <div class="container">

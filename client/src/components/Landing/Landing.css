@@ -76,6 +76,13 @@ svg {
     margin-top: 30px;
 }
 
+.footerTitle {
+    font-family: 'Indie Flower', cursive;
+    position: relative;
+    bottom: 75px;
+    right: 50px;
+}
+
 .white-text {
     color: white;
     margin-right: 550px;
@@ -93,7 +100,7 @@ svg {
     margin-right: 40px;
 }
 
-.picture {
+#picture {
     position: absolute;
     left: 0px;
     top: 0px;
@@ -107,18 +114,15 @@ svg {
 @keyframes example {
     0%   {background-color:rgb(112, 110, 110); left:0px; top:0px;}
     25%  {background-color:#488192; left:200px; top:0px;}
-    50%  {background-color:#b3d2d8; left:200px; top:200px;}
-    75%  {background-color:#b3d2d8; left:0px; top:200px;}
-    100% {background-color:#488192; left:0px; top:0px;}
 }
 
 /* The element to apply the animation to */
-.picture {
+#picture {
     width: 414px;
     height: 450px;
     position: relative;
     animation-name: example;
-    animation-duration: 1.7s;
+    animation-duration: 1s;
 }
 
 .Breakdown {
@@ -189,32 +193,35 @@ img {
   animation-name: fadeInLeftBig;
 }
 
-
-
 @import url('https://fonts.googleapis.com/css?family=Indie+Flower');
 
 @import url('https://fonts.googleapis.com/css?family=Merienda');
 
+
 @media only screen and (max-width: 618px) {
-    .card-image {
-        margin-top: 25%;
+    .title {
+        font-size: 40px;
+        margin-left: 10px;
+    } .footerTitle{
+        top: 4px;
+        left: 5px;
+    } 
+}
+
+@media only screen and (max-width: 1000px) {
+    div#pic {
+        display: none;
     }
-    .search-bar {
-        max-width: 150px ;
+
+}
+
+@media only screen and (max-width: 375px) {
+    .paragraph {
+        width: 100%;
+        padding: 0px;
+    } .title {
+        margin-left: 10px;
+        font-size: 20px;
     }
 }
 
-@media only screen and (max-width: 500px) {
-  .title{
-      font-size: 14px;
-  }
-  h4 {
-      font-size: 20px;
-  }
-}
-
-@media only screen and (max-width: 425px) {
-  .h4 {
-      margin-top: 55px;
-  }
-}
