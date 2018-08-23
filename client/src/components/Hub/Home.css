@@ -30,6 +30,7 @@
   width: 100%;
   background-repeat: no-repeat;
   font-family: cursive;
+  overflow-y: auto;
 }
 
 .Profile{
@@ -40,7 +41,7 @@
   border: 1px solid black;
   position: fixed;
   height: 200px;
-  top:600px;
+  top:500px;
   margin-left: 20%;
   margin-right: 25%;
   background-color:rgba(193, 193, 193, 0.2);
@@ -100,4 +101,14 @@
 .button3{
   background:url("../../images/Brain-Games-grey.png");
   background-size:contain;
+}
+
+.foot2 {
+  text-align: center;
+  background-color:rgba(193, 193, 193, 0.3);
+  height: cover;
+  width: 100%;
+  position:relative;
+  float:bottom;
+  top:200px;
 }

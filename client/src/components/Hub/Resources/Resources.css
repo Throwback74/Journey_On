@@ -1,5 +1,5 @@
 .Vlinks{
-    height: 600px;
+    height: 400px;
     width: 730px;
     overflow-y: auto;
     background-color:rgba(193, 193, 193, 0.2);
@@ -8,7 +8,7 @@
 }
 
 .Olinks{
-    height: 600px;
+    height: 400px;
     width: 730px;
     overflow-y: auto;
     background-color:rgba(193, 193, 193, 0.2);
@@ -16,7 +16,7 @@
 }
 
 .Alinks{
-    height: 600px;
+    height: 400px;
     width:350px;
     overflow-y: auto;
     background-color:rgba(193, 193, 193, 0.2);
