@@ -15,7 +15,7 @@ class Profile extends Component {
   };
 
   componentDidMount() {
-    API.getUser(this.props.user.id).then(res => {
+    API.getUserName(this.props.user.id).then(res => {
       this.setState({
         username: res.data.username,
         email: res.data.email
@@ -72,6 +72,5 @@ class Profile extends Component {
     )
   }
 }
-
 
 export default withAuth(Profile);

@@ -194,3 +194,27 @@ img {
 @import url('https://fonts.googleapis.com/css?family=Indie+Flower');
 
 @import url('https://fonts.googleapis.com/css?family=Merienda');
+
+@media only screen and (max-width: 618px) {
+    .card-image {
+        margin-top: 25%;
+    }
+    .search-bar {
+        max-width: 150px ;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+  .title{
+      font-size: 14px;
+  }
+  h4 {
+      font-size: 20px;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .h4 {
+      margin-top: 55px;
+  }
+}
