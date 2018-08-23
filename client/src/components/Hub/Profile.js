@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import "./Home.css";
 import Buttons from "./Buttons/Buttons";
 import Resources from "./Resources/Resources";
+import Progress from "./Progress/Progress";
 
 class Profile extends Component {
 
@@ -14,7 +15,8 @@ class Profile extends Component {
     // email: this.props.user.email,
     username: "",
     email: "",
-    component: "Button"
+    component: "Button",
+    progress: "show",
   };
 
   componentDidMount() {
@@ -36,9 +38,16 @@ class Profile extends Component {
 
   renderButton = (newComponent) => {
     this.setState({
-      component: newComponent
+      component: newComponent,
+      progress: "hide"
     })
   };
+
+  renderProgress = (data) => {
+    this.setState({
+      progress: data
+    })
+  }
 
   render() {
     return (
@@ -71,8 +80,14 @@ class Profile extends Component {
 
 
           </div>
-          <div className="container progress">
-            <p className="container bar">Progress Bar</p>
+          <div>
+            {(() => {
+              switch (this.state.progress) {
+                case "show": return <Progress/>
+                case "hide": return ""
+                default: return <Progress/>
+              }
+            })}
           </div>
         </div>
 

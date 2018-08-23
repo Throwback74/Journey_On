@@ -26,11 +26,10 @@
 .body{
   background-image: url("../../images/bailey-zindel-396398-unsplash.jpg");
   background-size:cover;
-  height: 1000px;
+  height: 1050px;
   width: 100%;
   background-repeat: no-repeat;
   font-family: cursive;
-  overflow-y: auto;
 }
 
 .Profile{
@@ -110,5 +109,5 @@
   width: 100%;
   position:relative;
   float:bottom;
-  top:200px;
+  top:230px;
 }
