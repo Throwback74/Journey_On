@@ -6,6 +6,7 @@ import "./Home.css";
 import Buttons from "./Buttons/Buttons";
 import Resources from "./Resources/Resources";
 import Progress from "./Progress/Progress";
+import Kanban from "./Kanban/Kanban";
 
 class Profile extends Component {
 
@@ -73,8 +74,8 @@ class Profile extends Component {
               ""
             }
             <Route exact path={`/profile/${this.props.user.id}/item/resources`} component={Resources} />
-            {/* <Route exact path={`/profile/${this.props.user.id}/item/calendar`} component={Calendar} />
-            <Route exact path={`/profile/${this.props.user.id}/item/board`} component={Board} /> */}
+            {/* <Route exact path={`/profile/${this.props.user.id}/item/calendar`} component={Calendar} /> */}
+            <Route exact path={`/profile/${this.props.user.id}/item/board`} component={Kanban} />
           
           </div>
           <div className="container">
