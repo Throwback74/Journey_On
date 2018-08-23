@@ -1,0 +1,23 @@
+.Vlinks{
+    height: 400px;
+    width: 730px;
+    overflow-y: auto;
+    background-color:rgba(193, 193, 193, 0.2);
+    margin-left: -110%;
+
+}
+
+.Olinks{
+    height: 400px;
+    width: 730px;
+    overflow-y: auto;
+    background-color:rgba(193, 193, 193, 0.2);
+    margin-right:-110%;  
+}
+
+.Alinks{
+    height: 400px;
+    width:350px;
+    overflow-y: auto;
+    background-color:rgba(193, 193, 193, 0.2);
+}

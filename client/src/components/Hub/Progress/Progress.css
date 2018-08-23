@@ -1,0 +1,9 @@
+.progress {
+    border: 1px solid black;
+    position: fixed;
+    height: 200px;
+    top:500px;
+    margin-left: 20%;
+    margin-right: 25%;
+    background-color:rgba(193, 193, 193, 0.2);
+  }
