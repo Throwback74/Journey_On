@@ -48,7 +48,7 @@ class Profile extends Component {
         </div>
         <div className="Profile">
           <div className="welcome container">
-            <h1>Welcome... {this.props.user.email}</h1>
+            <h1>Welcome... {this.state.username}</h1>
             <p>Time to get shit done!</p>
           </div>
           <div className="container">
