@@ -26,7 +26,7 @@
 .body{
   background-image: url("../../images/bailey-zindel-396398-unsplash.jpg");
   background-size:cover;
-  height: 1100px;
+  height: 1200px;
   width: 100%;
   background-repeat: no-repeat;
   font-family: cursive;
@@ -107,8 +107,12 @@
   background-color:rgba(193, 193, 193, 0.3);
   height: cover;
   width: 100%;
-  position:fixed;
-  bottom:0;
+  position:absolute;
+  bottom:-20%;
   overflow: auto;
   margin-top:auto;
+}
+
+.filler{
+  height:20px;
 }

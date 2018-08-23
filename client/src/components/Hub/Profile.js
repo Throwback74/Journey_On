@@ -87,10 +87,9 @@ class Profile extends Component {
               }
             })}
           </div>
-          
-
-          
-
+        </div>
+        <div className="filler">
+        
         </div>
 
         <footer>
