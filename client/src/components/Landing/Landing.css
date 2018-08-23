@@ -10,6 +10,14 @@
     font: 50px "Arial";
     margin-left: -90px;
     font-family: 'Indie Flower', cursive;
+    width: 50%;
+}
+
+.signUpBtn, 
+.loginBtn,
+.homeBtn,
+.logoutBtn {
+  margin-top: 20px
 }
 
 .landingHeader h1 {
@@ -127,6 +135,44 @@ img {
     width: 414px;
     height: 396px;
 }
+
+
+
+
+@-webkit-keyframes fadeInLeftBig {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(-2000px, 0, 0);
+    transform: translate3d(-2000px, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeInLeftBig {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(-2000px, 0, 0);
+    transform: translate3d(-2000px, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.fadeInLeftBig {
+  -webkit-animation-name: fadeInLeftBig;
+  animation-name: fadeInLeftBig;
+}
+
+
 
 @import url('https://fonts.googleapis.com/css?family=Indie+Flower');
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import withAuth from '../../Auth/withAuth';
-import { Link } from 'react-router-dom';
+// import withAuth from '../../Auth/withAuth';
+// import { Link } from 'react-router-dom';
 import "../Resources/Resources.css";
 
 const Resources = props => {
