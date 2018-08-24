@@ -25,6 +25,9 @@ export default {
   addTask: (taskTitle, taskDescription, taskLabel, email) => {
     return axios.post('api/addtask', {taskTitle: taskTitle, taskDescription: taskDescription, taskLabel: taskLabel, email: email});
   },
+  getJourney: (journeyId) => {
+    return axios.get(`api/journey/${journeyId}`);
+  }
   
 };
 

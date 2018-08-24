@@ -1,37 +1,15 @@
 import React, { Component } from 'react';
-import API from '../../../utils/API';
-import AuthService from '../../Auth/AuthService';
-import withAuth from '../../Auth/withAuth';
 
 class List extends Component {
 
-    state = {
-        journeyArray: []
-    }
-
-    componentWillMount() {
-        API.getUser(this.props.user.id).then(res => {
-            console.log(res)
-            const newArr = []
-            for (let i = 0; i < res.data.goals.length; i++) {
-                newArr.push(res.data.goals[i].journeyName)
-            }
-            this.setState({ journeyArray: newArr })
-        })
-    }
-
-    listJourneys = () => {
-        this.journeyArray.map((journey) =>
-            <li>{journey}</li>
-        )
-    }
 
     render() {
+        console.log(this.props.journeys)
         return (
             <div className="container list">
                 <div classname="container listItems">
                     <ul>
-                        {this.state.journeyArray.map(journey => <li>{journey}</li>)}
+                        {!this.props.journeys ? <div>Loading...</div> : this.props.journeys.map(journey => <li value={journey.id} onClick={this.props.getJourneyInfo}>{journey.journeyName}</li>)}
                     </ul>
                 </div>
             </div>
@@ -39,4 +17,4 @@ class List extends Component {
         )
     }
 }
-export default withAuth(List);
+export default List;

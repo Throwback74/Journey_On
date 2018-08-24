@@ -50,7 +50,7 @@ class Kanban extends Component {
             console.log(res)
             this.setState({
                 id: this.props.user.id,
-                journeyName: res.data.goals[0].journeyName
+                journeyName: res.data.journey[0].journeyName
             })
         })
 
@@ -111,7 +111,7 @@ class Kanban extends Component {
                 <div id="modal-root"><PromptModal /></div>
                 <div className="whole-board">
                     <div className="Kanban-header text-center">
-                        <h1><b>{this.state.journeyName}</b></h1>
+                        <h1><b>{this.props.journeyName}</b></h1>
                         <h3>Organization Board</h3>
                     </div>
                     <div className="Kanban-intro">

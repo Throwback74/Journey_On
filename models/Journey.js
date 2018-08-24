@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt-nodejs');
 
-let UserGoal = new Schema({
+let Journey = new Schema({
   journeyName: {
     type: String,
     required: true,
@@ -26,4 +26,4 @@ let UserGoal = new Schema({
 });
 
 
-module.exports = mongoose.model('Goal', UserGoal);
+module.exports = mongoose.model('Journey', Journey);
