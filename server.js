@@ -159,6 +159,7 @@ app.get('/api/test/:id', (req, res) => {
 });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 app.post('/api/send/email', (req, res)=>{
 =======
 
@@ -167,6 +168,10 @@ app.post('/api/send/email', (req, res)=>{
 
 app.post('/api/send/email', (req, res) => {
 >>>>>>> b6644446309041bec571060cbec30593f52be4d5
+=======
+
+app.post('/api/send/email', (req, res) => {
+>>>>>>> 583fb52419a3972e6dc5b8c6a39466eba856cc0c
   var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {

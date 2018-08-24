@@ -25,11 +25,19 @@ export default {
   deleteGoal: (email) => {
     return axios.post('api/deletejourney', {email: email})
   },
+<<<<<<< HEAD
 
   addTask: (taskTitle, taskDescription, taskLabel, userId) => {
     return axios.post('api/addtask', {taskTitle: taskTitle, taskDescription: taskDescription, taskLabel: taskLabel, userId: userId});
   }
   
+=======
+addTask: (taskTitle, taskDescription, taskLabel, userId) => {
+    return axios.post('api/addtask', {taskTitle: taskTitle, taskDescription: taskDescription, taskLabel: taskLabel, userId: userId});
+  }
+  
+
+>>>>>>> 583fb52419a3972e6dc5b8c6a39466eba856cc0c
 };
 
 //
