@@ -132,7 +132,7 @@ class Kanban extends Component {
     };
 };
 
-export default Kanban;
+export default withAuth(Kanban);
 
 // Create query to obtain data
 // Update db when cards are moved

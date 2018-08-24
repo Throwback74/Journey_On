@@ -7,6 +7,8 @@ import Buttons from "./Buttons/Buttons";
 import Resources from "./Resources/Resources";
 import Progress from "./Progress/Progress";
 import Kanban from "./Kanban/Kanban";
+import List from "./List/List";
+
 
 class Profile extends Component {
 
@@ -50,6 +52,9 @@ class Profile extends Component {
             <h1 className="journeyOn">Journey On!</h1>
             <Link to="/">Go home</Link> ||
             <Link to="/buildjourney"> Add a Journey</Link>
+          </div>
+          <div className="listdiv">
+              <List/>
           </div>
         </div>
         <div className="Profile">
