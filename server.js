@@ -15,6 +15,11 @@ const nodemailer = require('nodemailer');
 const PORT = process.env.PORT || 3001;
 console.log(process.env.USER)
 
+
+cron.schedule('* * * * *', function(){
+  console.log('running a task every minute');
+});
+
 // Setting CORS so that any website can
 // Access our API
 app.use((req, res, next) => {
@@ -134,24 +139,24 @@ app.post('/api/send/email', (req, res)=>{
   //   html: '<h1>Welcome</h1><p>That was easy!</p>'
   // }
   
-  cron.schedule('41 22 * * *', function(){
-    console.log("----------------------");
-    console.log("Running Cron Job");
-    var mailOptions = {
-      from: 'no_reply@journey_on-admin.com',
-      to: 'corey.slade@gmail.com',
-      subject: 'Sending Email using Node.js',
-      html: `<h1>${req.body.message}</h1>`
-    };
-  transporter.sendMail(mailOptions, function(error, info){
-    if (error) {
-      res.send(error);
-    } else {
-      res.send('Email sent: ' + info.response);
-      console.log("success!");
-    }
-  });
-});
+//   cron.schedule('* * * * *', function(){
+//     console.log("----------------------");
+//     console.log("Running Cron Job");
+//     var mailOptions = {
+//       from: 'no_reply@journey_on-admin.com',
+//       to: 'corey.slade@gmail.com',
+//       subject: 'Sending Email using Node.js',
+//       html: `<h1>${req.body.message}</h1>`
+//     };
+//   transporter.sendMail(mailOptions, function(error, info){
+//     if (error) {
+//       res.send(error);
+//     } else {
+//       res.send('Email sent: ' + info.response);
+//       console.log("success!");
+//     }
+//   });
+// });
 })
 
 // var task = cron.schedule('* * 9 22 * * 0-7', function(){
@@ -163,23 +168,29 @@ app.post('/api/send/email', (req, res)=>{
 
 // task.start();
 
-// cron.schedule("* * * * Wednesday", function() {
-//   console.log("---------------------");
-//   console.log("Running Cron Job");
-//   let mailOptions = {
-//     from: "COMPANYEMAIL@gmail.com",
-//     to: "RECEPIENTEMAIL@gmail.com",
-//     subject: `Not a GDPR update ;)`,
-//     text: `Hi there, this email was automatically sent by us`
-//   };
-//   transporter.sendMail(mailOptions, function(error, info) {
-//     if (error) {
-//       throw error;
-//     } else {
-//       console.log("Email successfully sent!");
-//     }
-//   });
-// });
+cron.schedule("* * * * Wednesday", function() {
+  console.log("---------------------");
+  console.log("Running Cron Job");
+  // let mailOptions = {
+  //   from: "COMPANYEMAIL@gmail.com",
+  //   to: "RECEPIENTEMAIL@gmail.com",
+  //   subject: `Not a GDPR update ;)`,
+  //   text: `Hi there, this email was automatically sent by us`
+  // };
+  var mailOptions = {
+          from: 'no_reply@journey_on-admin.com',
+          to: 'corey.slade@gmail.com',
+          subject: 'Sending Email using Node.js',
+          html: `<h1>TESTING EMAIL Scheduler</h1>`
+        };
+  transporter.sendMail(mailOptions, function(error, info) {
+    if (error) {
+      throw error;
+    } else {
+      console.log("Email successfully sent!");
+    }
+  });
+});
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {

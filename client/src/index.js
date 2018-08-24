@@ -16,7 +16,7 @@ import Goal from './components/NewGoal/newGoal';
 import Home from './components/Hub/Home';
 import Kanban from './components/Hub/Kanban/Kanban';
 import Logout from './components/Auth/Logout';
-import Calendar from './components/Hub/Calendar/Calendar';
+import Calendar from './components/Hub/Calendar/Cal';
 
 if(localStorage.getItem("id_token")) {
     axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('id_token')}`;
