@@ -17,6 +17,26 @@ class Profile extends Component {
     progress: "show",
   };
 
+
+// cron.schedule("* * * * Wednesday", function() {
+//   console.log("---------------------");
+//   console.log("Running Cron Job");
+//   let mailOptions = {
+//     from: "COMPANYEMAIL@gmail.com",
+//     to: "RECEPIENTEMAIL@gmail.com",
+//     subject: `Not a GDPR update ;)`,
+//     text: `Hi there, this email was automatically sent by us`
+//   };
+//   transporter.sendMail(mailOptions, function(error, info) {
+//     if (error) {
+//       throw error;
+//     } else {
+//       console.log("Email successfully sent!");
+//     }
+//   });
+// });
+
+
   componentDidMount() {
     API.getUserName(this.props.user.id).then(res => {
       this.setState({
