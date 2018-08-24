@@ -37,6 +37,7 @@ class Kanban extends Component {
     };
 
     async componentWillMount() {
+        console.log(this.props)
         const response = await this.getBoard();
         this.setState({ boardData: response });
 
@@ -117,7 +118,7 @@ class Kanban extends Component {
     };
 };
 
-export default withAuth(Kanban);
+export default Kanban;
 
 // Create query to obtain data
 // Update db when cards are moved
