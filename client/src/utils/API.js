@@ -23,8 +23,8 @@ export default {
     return axios.post('api/deletejourney', {email: email})
   },
   addTask: (taskTitle, taskDescription, taskLabel, email) => {
-    return axios.post('api/addtask', {taskTitle: taskTitle, taskDescription: taskDescription, taskLabel: taskLabel, email: email});
-  },
+    return axios.post('/api/addtask', {taskTitle: taskTitle, taskDescription: taskDescription, taskLabel: taskLabel, email: email});
+  }
   
 };
 
