@@ -106,7 +106,7 @@ app.post('/api/signup', (req, res) => {
 
 // ADD GOAL ROUTE
 app.post('/api/addgoal', (req, res) => {
-  db.UserGoal.create(req.body)
+  db.Journey.create(req.body)
     .then(data => res.json(data))
     .catch(err => res.status(400).json(err));
 });

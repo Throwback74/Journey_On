@@ -22,7 +22,7 @@ const LandingBtns = (props) => {
       <Link to="/logout">
         <button type="button" className="btn btn-danger logoutBtn">Logout</button>
       </Link>
-      <Link to="/home">
+      <Link to="/profile/:id">
         <button type="button" className="btn btn-primary homeBtn">Home</button>
       </Link>
     </div>
