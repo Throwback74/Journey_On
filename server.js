@@ -55,14 +55,14 @@ app.post('/api/addgoal', (req, res) => {
     });
 });
 
-app.post('/api/addtask', (req, res) => {
+app.post('/api/addtask/:id', (req, res) => {
   db.userTasks.create(req.body)
     .then(function(dbTasks) {
       // If a Book was created successfully, find one library (there's only one) and push the new Book's _id to the Library's `books` array
       // { new: true } tells the query that we want it to return the updated Library -- it returns the original by default
       // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
       res.json(dbTasks);
-      return db.User.findOneAndUpdate({email: req.body.email}, { $push: { tasks: dbTasks._id } }, { new: true });
+      return db.journeyGoal.findOneAndUpdate({_id: req.params.id}, { $push: { tasks: dbTasks._id } }, { new: true });
     })
     .then(function(dbUser) {
       // If the Library was updated successfully, send it back to the client
@@ -74,11 +74,27 @@ app.post('/api/addtask', (req, res) => {
     });
 });
 
-app.get('/api/userCards/:id', (req, res) => {
-  db.userTasks.find({userId: req.params.id}).then(dbTasks => {
+app.get('/api/journeyCards/:id', (req, res) => {
+  db.userTasks.find({journeyId: req.params.id}).then(dbTasks => {
     res.json(dbTasks);
   })
 });
+
+app.post('/api/videos', (req, res) => {
+  db.Video.create(req.body) 
+    .then(function(dbVideos) {
+      res.json(dbVideos);
+      // return db.Videos.findOneAndUpdate({})
+    });
+});
+
+app.get('/api/videos/:id', (req, res) => {
+  db.Video.find({journeyId: req.params.id}).then(dbVideos => {
+    res.json(dbVideos);
+  })
+});
+
+
 
 
 // LOGIN ROUTE
@@ -158,20 +174,8 @@ app.get('/api/test/:id', (req, res) => {
   }).catch(err => res.status(400).send(err));
 });
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-app.post('/api/send/email', (req, res)=>{
-=======
-
-
-
-
 app.post('/api/send/email', (req, res) => {
->>>>>>> b6644446309041bec571060cbec30593f52be4d5
-=======
 
-app.post('/api/send/email', (req, res) => {
->>>>>>> 583fb52419a3972e6dc5b8c6a39466eba856cc0c
   var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {

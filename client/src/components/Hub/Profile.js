@@ -17,6 +17,10 @@ class Profile extends Component {
     email: "",
     component: "Button",
     progress: "show",
+    videoUrl: "",
+    currentJourney: {
+      id: '5b804dbbbeb1cc871c3c0ed8'
+    }
   };
 
   componentDidMount() {
@@ -29,9 +33,22 @@ class Profile extends Component {
     });
   };
 
+  addVideo = () => {
+    API.addVideo(this.state.videoUrl, this.state.currentJourney.id).then(function(res){
+      console.log(res);
+    })
+  }
+
   getResources = () => {
     console.log("sup");
     this.setState({ resoruces: true });
+  };
+
+  handleChange = event => {
+    let {name, value} = event.target;
+    this.setState({
+      [name]: value
+    });
   };
 
   renderButton = (newComponent) => {
@@ -75,11 +92,12 @@ class Profile extends Component {
             })()} */}
             { 
               (!window.location.pathname.includes("item")) ?
-              <Buttons renderButton={this.renderButton} userId={this.props.user.id} />
+              <Buttons renderButton={this.renderButton} userId={this.props.user.id} handleChange={this.handleChange} videoUrl={this.state.videoUrl} addVideo={this.addVideo} />
               :
               ""
             }
-            <Route exact path={`/profile/${this.props.user.id}/item/resources`} component={Resources} />
+            <Route exact path={`/profile/${this.props.user.id}/item/resources`} render={(props) => ( <Resources handleChange={this.handleChange} videoUrl={this.state.videoUrl} addVideo={this.addVideo}/> )} />
+            {/* <Route exact  component={Resources} handleChange={this.handleChange} newVideoUrl={this.state.videoUrl}/> */}
             {/* <Route exact path={`/profile/${this.props.user.id}/item/calendar`} component={Calendar} /> */}
             <Route exact path={`/profile/${this.props.user.id}/item/board`} component={Kanban} />
           
