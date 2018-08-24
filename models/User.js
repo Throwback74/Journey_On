@@ -29,7 +29,7 @@ let UserSchema = new Schema({
   goals: [
     {
       type: Schema.Types.ObjectId,
-      ref: "UserGoal"
+      ref: "Goal"
     }
   ],
   tasks: [
