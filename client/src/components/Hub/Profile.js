@@ -18,6 +18,7 @@ class Profile extends Component {
   };
 
   componentDidMount() {
+    console.log(this.props)
     API.getUserName(this.props.user.id).then(res => {
       this.setState({
         username: res.data.username,
@@ -53,7 +54,7 @@ class Profile extends Component {
         </div>
         <div className="Profile">
           <div className="welcome container">
-            <h1>Welcome... {this.props.user.email}</h1>
+            <h1>Welcome... {this.state.username}</h1>
             <p>Time to get shit done!</p>
             <Link to={`/profile/${this.props.user.id}`}><button type="button" class="btn-primary add">Hub</button></Link>
           </div>

@@ -8,7 +8,7 @@
 .title {
     padding: 10px;
     font: 50px "Arial";
-    margin-left: -90px;
+    margin-left: -60px;
     font-family: 'Indie Flower', cursive;
     width: 50%;
 }
@@ -70,7 +70,8 @@ svg {
 .foot {
     text-align: center;
     background-image: linear-gradient(55deg,#488192 25%,#b3d2d8);
-    height: cover;
+    font-display: bolder;
+    height: 100%;
     width: 100%;
     padding-top: 30px;
     margin-top: 30px;
@@ -81,11 +82,17 @@ svg {
     position: relative;
     bottom: 75px;
     right: 50px;
+    color: white;
 }
 
 .white-text {
     color: white;
     margin-right: 550px;
+}
+
+.grey-text {
+    font-family: 'Merienda', cursive;
+    color: white;
 }
 
 .dotts {
@@ -98,6 +105,13 @@ svg {
 
 .signupEmail {
     margin-right: 40px;
+    color: white;
+    font-family: 'Merienda', cursive;
+}
+
+.copywrite {
+    color: white;
+    margin-right: 50px;
 }
 
 #picture {
