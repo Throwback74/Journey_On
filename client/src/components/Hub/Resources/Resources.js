@@ -4,11 +4,18 @@ import React from 'react';
 import "../Resources/Resources.css";
 
 const Resources = props => {
+    // const { addVideo, handleChange, videoUrl } = props.location.myCustomProps.props;
+    console.log(props);
     return (
         <div className="middle row">
             <div className="Articles col-md-4">
-                <input type="text" class="form-control"></input>
-                <button type="button" class="btn-primary add">Submit</button>
+                <input type="text" 
+                    name="videoUrl" 
+                    onChange={props.handleChange} 
+                    value={props.videoUrl} 
+                    class="form-control"
+                />
+                <button type="button" class="btn-primary add" onClick={() => props.addVideo()}>Submit</button>
                 <div className="Vlinks">
                     My Vidoes
                 </div>
