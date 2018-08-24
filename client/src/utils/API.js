@@ -25,13 +25,10 @@ export default {
   deleteGoal: (email) => {
     return axios.post('api/deletejourney', {email: email})
   },
-  addTask: (taskTitle, taskDescription, taskLabel, email) => {
-    return axios.post('api/addtask', {taskTitle: taskTitle, taskDescription: taskDescription, taskLabel: taskLabel, email: email});
-  },
-  getJourney: (journeyId) => {
-    return axios.get(`api/journey/${journeyId}`);
+
+  addTask: (taskTitle, taskDescription, taskLabel, userId) => {
+    return axios.post('api/addtask', {taskTitle: taskTitle, taskDescription: taskDescription, taskLabel: taskLabel, userId: userId});
   }
-  
 };
 
 //
