@@ -2,7 +2,7 @@
     font-size: 32px;
 } */
 
-.foot {
+.ffoot {
     text-align: center;
     background-image: linear-gradient(55deg,#488192 25%,#b3d2d8);
     font-display: bolder;
@@ -12,7 +12,7 @@
     margin-top: 30px;
 }
 
-.footerTitle {
+.ffooterTitle {
     font-family: 'Indie Flower', cursive;
     position: relative;
     bottom: 75px;
@@ -20,31 +20,31 @@
     color: white;
 }
 
-.white-text {
+.fwhite-text {
     color: white;
     margin-right: 550px;
 }
 
-.grey-text {
+.fgrey-text {
     font-family: 'Merienda', cursive;
     color: white;
 }
 
-.dotts {
+.fdotts {
     list-style-type: none;
 }
 
-.about {
+.fabout {
     padding-top: 65px;
 }
 
-.signupEmail {
+.fsignupEmail {
     margin-right: 40px;
     color: white;
     font-family: 'Merienda', cursive;
 }
 
-.copywrite {
+.fcopywrite {
     color: white;
     margin-right: 50px;
 }
