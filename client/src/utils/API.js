@@ -11,33 +11,26 @@ export default {
   },
   // sign up a user to our service
   signUpUser: (username, email, password) => {
-    return axios.post('api/signup', {username: username, email: email, password: password});
+    return axios.post('api/signup', { username: username, email: email, password: password });
   },
-  
+
   addGoal: (journeyName, journeySummary, completeBy, email) => {
-    return axios.post('api/addgoal', {journeyName: journeyName, journeySummary: journeySummary, completeBy: completeBy, email: email});
+    return axios.post('api/addgoal', { journeyName: journeyName, journeySummary: journeySummary, completeBy: completeBy, email: email });
   },
 
   loginUser: (email, password) => {
-    return axios.post('api/login', {email: email, password: password});
+    return axios.post('api/login', { email: email, password: password });
   },
 
   deleteGoal: (email) => {
-    return axios.post('api/deletejourney', {email: email})
+    return axios.post('api/deletejourney', { email: email })
   },
-<<<<<<< HEAD
 
   addTask: (taskTitle, taskDescription, taskLabel, userId) => {
-    return axios.post('api/addtask', {taskTitle: taskTitle, taskDescription: taskDescription, taskLabel: taskLabel, userId: userId});
+    return axios.post('api/addtask', { taskTitle: taskTitle, taskDescription: taskDescription, taskLabel: taskLabel, userId: userId });
   }
-  
-=======
-addTask: (taskTitle, taskDescription, taskLabel, userId) => {
-    return axios.post('api/addtask', {taskTitle: taskTitle, taskDescription: taskDescription, taskLabel: taskLabel, userId: userId});
-  }
-  
 
->>>>>>> 583fb52419a3972e6dc5b8c6a39466eba856cc0c
+
 };
 
 //

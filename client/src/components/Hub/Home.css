@@ -1,28 +1,23 @@
 .App {
   text-align: center;
 }
-
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
 }
-
 .App-header {
   background-color: #222;
   height: 150px;
   padding: 20px;
   color: white;
 }
-
 .App-intro {
   font-size: large;
 }
-
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
-
 .body{
   background-image: url("../../images/bailey-zindel-396398-unsplash.jpg");
   background-size:cover;
@@ -31,11 +26,9 @@
   background-repeat: no-repeat;
   font-family: cursive;
 }
-
 .Profile{
   text-align: center;
 }
-
 .progress {
   border: 1px solid black;
   position: relative;
@@ -45,33 +38,27 @@
   margin-right: 25%;
   background-color:rgba(193, 193, 193, 0.2);
 }
-
 .bar{
   position:relative;
   text-align:center;
   color:black;
 }
-
 .welcome{
   text-align: center;
   position: relative;
   top:-75px;
 }
-
 .nav{
   height:200px;
   position: relative;
   font-size: 20px;
 }
-
 .journeyOn{
   font-size:40px;
 }
-
 .middle{
   height:275px;
 }
-
 .button {
   background-size:contain;
   border: black;
@@ -86,22 +73,18 @@
   margin: 4px 2px;
   border-radius: 50%;
 }
-
 .button1{
   background:url("../../images/download.png");
   background-size:contain;
 }
-
 .button2{
   background:url("../../images/800px_COLOURBOX14837835.jpg");
   background-size:contain;
 }
-
 .button3{
   background:url("../../images/Brain-Games-grey.png");
   background-size:contain;
 }
-
 .foot2 {
   text-align: center;
   background-color:rgba(193, 193, 193, 0.5);
@@ -112,7 +95,6 @@
   overflow: auto;
   margin-top:auto;
 }
-
 .filler{
   height:20px;
 }
