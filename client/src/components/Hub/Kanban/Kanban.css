@@ -1,10 +1,11 @@
 .whole-board {
-  width: 75%;
+  width: 100%;
   margin: 10px auto;
+  height: 20px;
 }
 
 .Kanban-header {
-  background-color: #222;
+  background-color:rgba(193, 193, 193, 0.2);
   padding: 10px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px; 
@@ -23,7 +24,10 @@
 }
 
 .cBXKgf {
-  background-color: #8db5bf;
+  background-color:#111213;
+  height:400px !important;
+  top:100%;
+  flex:1;
 }
 
 @keyframes Kanban-logo-spin {
