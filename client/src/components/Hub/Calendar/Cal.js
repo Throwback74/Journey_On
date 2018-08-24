@@ -1,84 +1,306 @@
 import React, { Component } from 'react';
-import './react-cal.css';
-import './Cal.css';
-import AuthService from '../../Auth/AuthService';
-import withAuth from '../../Auth/withAuth';
-import InfiniteCalendar, {
-  Calendar,
-  withRange,
-  withMultipleDates,
-  defaultMultipleDateInterpolation
-} from 'react-infinite-calendar';
-// import 'react-infinite-calendar/styles.css';
+import { Calendar, DateRange, DateRangePicker, DefinedRange } from '../../../src';
+import * as rdrLocales from '../../../src/locale';
+import { format, addDays } from 'date-fns';
+import Section from './Section';
 
 
-const CalendarWithRange = withRange(Calendar);
-const Auth = new AuthService();
 
-var today = new Date();
-var lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
+function formatDateDisplay(date, defaultText) {
+  if (!date) return defaultText;
+  return format(date, 'MM/DD/YYYY');
+}
 
-class Cal extends Component {
+export default class Main extends Component {
+  constructor(props, context) {
+    super(props, context);
 
-  state = {
-    userId: this.props.user.id,
-    profileLink: "",
-    date: new Date(),
-  };
+    this.state = {
+      dateRange: {
+        selection: {
+          startDate: new Date(),
+          endDate: null,
+          key: 'selection',
+        },
+      },
+      dateRangeWithDisabled: {
+        selection: {
+          startDate: addDays(new Date(), 4),
+          endDate: null,
+          key: 'selection',
+        },
+      },
+      definedRange: {
+        selection: {
+          startDate: new Date(),
+          endDate: new Date(),
+          key: 'selection',
+        },
+      },
+      dateRangePickerI: {
+        selection: {
+          startDate: new Date(),
+          endDate: null,
+          key: 'selection',
+        },
+        compare: {
+          startDate: new Date(),
+          endDate: addDays(new Date(), 3),
+          key: 'compare',
+        },
+      },
+      multipleRanges: {
+        selection1: {
+          startDate: addDays(new Date(), 1),
+          endDate: null,
+          key: 'selection1',
+        },
+        selection2: {
+          startDate: addDays(new Date(), 4),
+          endDate: addDays(new Date(), 8),
+          key: 'selection2',
+        },
+        selection3: {
+          startDate: addDays(new Date(), 8),
+          endDate: addDays(new Date(), 10),
+          key: 'selection3',
+          showDateDisplay: false,
+          autoFocus: false,
+        },
+      },
+      datePickerInternational: null,
+      locale: 'ja',
+      dateRangePicker: {
+        selection: {
+          startDate: new Date(),
+          endDate: addDays(new Date(), 7),
+          key: 'selection',
+        },
+      },
+    };
+  }
 
-  handleLogout = () => {
-    Auth.logout();
-    this.props.history.replace('/signup');
-  };
-
-
-  onChange = date => this.setState({ date });
-
+  handleChange(which, payload) {
+    console.log(which, payload);
+    this.setState({
+      [which]: payload,
+    });
+  }
+  handleRangeChange(which, payload) {
+    console.log(which, payload);
+    this.setState({
+      [which]: {
+        ...this.state[which],
+        ...payload,
+      },
+    });
+  }
 
   render() {
     return (
-      <div className="Cal">
-        <div className="Cal-header">
-          
-          <h2>Welcome {this.props.user.email}</h2>
-          <p className="App-intro">
-          <button type="button" className="btn btn-danger" onClick={this.handleLogout}>Logout</button>
-        </p>
-        </div>
-        <div className="container-fluid cal-container">
-        {/* <InfiniteCalendar
-            width={400}
-            height={600}
-            selected={today}
-            disabledDays={[0,6]}
-            minDate={lastWeek}
-          /> */}
+      <main className={'Main'}>
+        <h1 className={'Title'}>React-date-range</h1>
 
-        <InfiniteCalendar
-            className="chain"
-            displayOptions={{
-              layout: 'landscape',
-              showOverlay: false,
-              shouldHeaderAnimate: true
-            }}
-            width={1200}
-            height={600}
-            minDate={lastWeek}
-            Component={withMultipleDates(Calendar)}
-            selected={[
-              new Date(2018, 8, 16),
-              new Date(),
-              new Date(2018, 9, 2)
+        <Section title="DateRangePicker - 2 month">
+          <div>
+            <input
+              type="text"
+              readOnly
+              value={formatDateDisplay(this.state.dateRangePicker.selection.startDate)}
+            />
+            <input
+              type="text"
+              readOnly
+              value={formatDateDisplay(this.state.dateRangePicker.selection.endDate)}
+            />
+          </div>
+          <div>
+            <DateRangePicker
+              onChange={this.handleRangeChange.bind(this, 'dateRangePicker')}
+              showSelectionPreview={true}
+              moveRangeOnFirstSelection={false}
+              className={'PreviewArea'}
+              months={2}
+              ranges={[this.state.dateRangePicker.selection]}
+              direction="horizontal"
+            />
+          </div>
+        </Section>
+
+        <Section title="DateRangePicker - Vertical Infinite">
+          <div>
+            <input
+              type="text"
+              readOnly
+              value={formatDateDisplay(this.state.dateRangePickerI.selection.startDate)}
+            />
+            <input
+              type="text"
+              readOnly
+              value={formatDateDisplay(this.state.dateRangePickerI.selection.endDate)}
+            />
+          </div>
+          <div>
+            <DateRangePicker
+              onChange={this.handleRangeChange.bind(this, 'dateRangePickerI')}
+              className={'PreviewArea'}
+              months={1}
+              minDate={addDays(new Date(), -300)}
+              maxDate={addDays(new Date(), 900)}
+              direction="vertical"
+              scroll={{ enabled: true }}
+              ranges={[this.state.dateRangePickerI.selection, this.state.dateRangePickerI.compare]}
+            />
+          </div>
+        </Section>
+
+        <Section title="DateRangePicker - Multiple Range">
+          <div>
+            <label className={'label'}>Selection1 Start:</label>
+            <input
+              type="text"
+              readOnly
+              value={formatDateDisplay(this.state.multipleRanges.selection1.startDate, '-')}
+            />
+            <label className={'label'}>Selection1 End:</label>
+            <input
+              type="text"
+              readOnly
+              value={formatDateDisplay(this.state.multipleRanges.selection1.endDate, 'Continuous')}
+            />
+            <div className={'newLine'} />
+
+            <label className={'label'}>Selection2 Start:</label>
+            <input
+              type="text"
+              readOnly
+              value={formatDateDisplay(this.state.multipleRanges.selection2.startDate, '-')}
+            />
+            <label className={'label'}>Selection2 End:</label>
+            <input
+              type="text"
+              readOnly
+              value={formatDateDisplay(this.state.multipleRanges.selection2.endDate, 'Continuous')}
+            />
+            <div className={'newLine'} />
+
+            <label className={'label'}>Selection3 Start:</label>
+            <input
+              type="text"
+              readOnly
+              value={formatDateDisplay(this.state.multipleRanges.selection3.startDate, '-')}
+            />
+            <label className={'label'}>Selection3 End:</label>
+            <input
+              type="text"
+              readOnly
+              value={formatDateDisplay(this.state.multipleRanges.selection3.endDate, 'Continuous')}
+            />
+          </div>
+          <DateRangePicker
+            onChange={this.handleRangeChange.bind(this, 'multipleRanges')}
+            ranges={[
+              this.state.multipleRanges.selection1,
+              this.state.multipleRanges.selection2,
+              this.state.multipleRanges.selection3,
             ]}
-            locale={{
-              headerFormat: 'MMM Do',
-            }}
-            interpolateSelection={defaultMultipleDateInterpolation}
+            className={'PreviewArea'}
           />
-        </div>
-      </div>
+        </Section>
+
+        <Section title="DatePicker - Internationalization">
+          <div>
+            <select
+              onChange={e => this.setState({ locale: e.target.value })}
+              value={this.state.locale}>
+              {localeOptions.map((option, i) => (
+                <option value={option.value} key={i}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+            <input
+              type="text"
+              readOnly
+              value={formatDateDisplay(this.state.datePickerInternational)}
+            />
+          </div>
+          <Calendar
+            locale={rdrLocales[this.state.locale]}
+            date={this.state.datePickerInternational}
+            onChange={this.handleChange.bind(this, 'datePickerInternational')}
+            className={'PreviewArea'}
+          />
+        </Section>
+
+        <Section title="RangePicker">
+          <div>
+            <input
+              type="text"
+              readOnly
+              value={formatDateDisplay(this.state.dateRange.selection.startDate)}
+            />
+            <input
+              type="text"
+              readOnly
+              value={formatDateDisplay(this.state.dateRange.selection.endDate, 'Continuous')}
+            />
+          </div>
+
+          <DateRange
+            onChange={this.handleRangeChange.bind(this, 'dateRange')}
+            moveRangeOnFirstSelection={false}
+            ranges={[this.state.dateRange.selection]}
+            className={'PreviewArea'}
+          />
+        </Section>
+        <Section title="DefinedRange">
+          <div>
+            <input
+              type="text"
+              readOnly
+              value={formatDateDisplay(this.state.definedRange.selection.startDate)}
+            />
+            <input
+              type="text"
+              readOnly
+              value={formatDateDisplay(this.state.definedRange.selection.endDate, 'Continuous')}
+            />
+          </div>
+
+          <DefinedRange
+            ranges={[this.state.definedRange.selection]}
+            onChange={this.handleRangeChange.bind(this, 'definedRange')}
+            className={'centered'}
+          />
+        </Section>
+        <Section title="RangePicker with disabled dates">
+          <div>
+            <input
+              type="text"
+              readOnly
+              value={formatDateDisplay(this.state.dateRangeWithDisabled.selection.startDate)}
+            />
+            <input
+              type="text"
+              readOnly
+              value={formatDateDisplay(
+                this.state.dateRangeWithDisabled.selection.endDate,
+                'Continuous'
+              )}
+            />
+          </div>
+
+          <DateRange
+            onChange={this.handleRangeChange.bind(this, 'dateRangeWithDisabled')}
+            moveRangeOnFirstSelection={false}
+            ranges={[this.state.dateRangeWithDisabled.selection]}
+            className={'PreviewArea'}
+            disabledDates={[new Date(), addDays(new Date(), 3)]}
+            minDate={addDays(new Date(), -3)}
+          />
+        </Section>
+      </main>
     );
   }
 }
-
-export default withAuth(Cal);
