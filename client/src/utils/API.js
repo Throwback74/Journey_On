@@ -22,6 +22,10 @@ export default {
   loginUser: (email, password) => {
     return axios.post('api/login', {email: email, password: password});
   },
+
+  addTask: (taskTitle, taskDescription, taskLabel, email) => {
+    return axios.post('api/addtask', {taskTitle: taskTitle, taskDescription: taskDescription, taskLabel: taskLabel, email: email});
+  }
 };
 
 //
