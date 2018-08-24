@@ -4,7 +4,7 @@ class List extends Component {
 
 
     render() {
-        console.log(this.props.journeys)
+        console.log(this.props)
         return (
             <div className="container list">
                 <div classname="container listItems">

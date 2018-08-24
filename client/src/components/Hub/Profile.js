@@ -34,7 +34,10 @@ class Profile extends Component {
   };
 
   getJourneyInfo = () => {
-
+    console.log("hello")
+    // API.getJourney(this.value).then(res => {
+    //   console.log(res.data)
+    // })
   }
 
   getResources = () => {

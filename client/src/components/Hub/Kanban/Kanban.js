@@ -32,7 +32,7 @@ class Kanban extends Component {
             boardData: { lanes: [] },
             id: "",
             journeyName: ""
-         }
+        }
         this.Auth = new AuthService();
     };
 
