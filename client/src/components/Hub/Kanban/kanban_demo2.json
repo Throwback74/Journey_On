@@ -1,0 +1,36 @@
+{
+    "lanes": [
+      {
+        "id": "TODO",
+        "title": "To Do:",
+        "style": {
+          "width": 285
+        },
+        "cards": []
+      },
+      {
+        "id": "INPROG",
+        "title": "In Progress:",
+        "style": {
+          "width": 285
+        },
+        "cards": []
+      },
+      {
+        "id": "COMPLETED",
+        "title": "Completed:",
+        "style": {
+          "width": 285
+        },
+        "cards": []
+      },
+      {
+        "id": "ARCHIVED",
+        "title": "Archived:",
+        "style": {
+          "width": 285
+        },
+        "cards": []
+      }
+    ]
+  }

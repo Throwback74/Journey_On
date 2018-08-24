@@ -26,7 +26,7 @@
 .body{
   background-image: url("../../images/bailey-zindel-396398-unsplash.jpg");
   background-size:cover;
-  height: 899px;
+  height: 1200px;
   width: 100%;
   background-repeat: no-repeat;
   font-family: cursive;
@@ -38,10 +38,11 @@
 
 .progress {
   border: 1px solid black;
-  position: fixed;
+  position: relative;
   height: 200px;
-  top:600px;
-  left:400px;
+  top:500px;
+  margin-left: 20%;
+  margin-right: 25%;
   background-color:rgba(193, 193, 193, 0.2);
 }
 
@@ -99,4 +100,19 @@
 .button3{
   background:url("../../images/Brain-Games-grey.png");
   background-size:contain;
+}
+
+.foot2 {
+  text-align: center;
+  background-color:rgba(193, 193, 193, 0.5);
+  height: cover;
+  width: 100%;
+  position:absolute;
+  bottom:-20%;
+  overflow: auto;
+  margin-top:auto;
+}
+
+.filler{
+  height:20px;
 }
