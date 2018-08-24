@@ -17,28 +17,17 @@ class Profile extends Component {
     email: "",
     component: "Button",
     progress: "show",
-    currentJourney: "",
-    journeys: []
   };
 
-  componentWillMount() {
+  componentDidMount() {
     console.log(this.props)
-    API.getUser(this.props.user.id).then(res => {
-      console.log(res.data)
+    API.getUserName(this.props.user.id).then(res => {
       this.setState({
         username: res.data.username,
-        email: res.data.email,
-        journeys: res.data.journey
+        email: res.data.email
       })
     });
   };
-
-  getJourneyInfo = () => {
-    console.log("hello")
-    // API.getJourney(this.value).then(res => {
-    //   console.log(res.data)
-    // })
-  }
 
   getResources = () => {
     console.log("sup");
@@ -65,7 +54,7 @@ class Profile extends Component {
             <Link to="/buildjourney"> Add a Journey</Link>
           </div>
           <div className="listdiv">
-              <List journeys = {this.state.journeys}/>
+              <List/>
           </div>
         </div>
         <div className="Profile">
