@@ -2,7 +2,8 @@
 import React from 'react';
 
 import PropTypes from 'prop-types';
-import momentPropTypes from 'react-moment-proptypes';
+// import momentPropTypes from 'react-moment-proptypes';
+import momentPropTypes from '../../../../node_modules/react-moment-proptypes';
 import { forbidExtraProps } from 'airbnb-prop-types';
 import moment from 'moment';
 import omit from 'lodash/omit';
@@ -17,6 +18,8 @@ import './Cal.css';
 import { START_DATE, END_DATE, HORIZONTAL_ORIENTATION } from 'react-dates';
 import isInclusivelyAfterDay from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
+
+// var momentPropTypes = require('react-moment-proptypes')
 
 const propTypes = forbidExtraProps({
   // example props for the demo
