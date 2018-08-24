@@ -37,7 +37,23 @@ const isAuthenticated = exjwt({
 });
 
 
-
+app.post('/api/addgoal', (req, res) => {
+  db.Journey.create(req.body)
+    .then(function (dbGoals) {
+      // If a Book was created successfully, find one library (there's only one) and push the new Book's _id to the Library's `books` array
+      // { new: true } tells the query that we want it to return the updated Library -- it returns the original by default
+      // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
+      return db.User.findOneAndUpdate({ email: req.body.email }, { $push: { goals: dbGoals._id } }, { new: true });
+    })
+    .then(function (dbUser) {
+      // If the Library was updated successfully, send it back to the client
+      res.json(dbUser);
+    })
+    .catch(function (err) {
+      // If an error occurs, send it back to the client
+      res.json(err);
+    });
+});
 
 app.post('/api/addtask/:id', (req, res) => {
   db.userTasks.create(req.body)
@@ -106,7 +122,7 @@ app.post('/api/signup', (req, res) => {
 
 // ADD GOAL ROUTE
 app.post('/api/addgoal', (req, res) => {
-  db.UserGoal.create(req.body)
+  db.Journey.create(req.body)
     .then(data => res.json(data))
     .catch(err => res.status(400).json(err));
 });
@@ -125,18 +141,18 @@ app.get('/api/user/:id', isAuthenticated, (req, res) => {
     }).catch(err => res.status(400).send(err));
 });
 
-// app.post('api/deletejourney', isAuthenticated, (req, res) => {
-//   db.User.update({
-//     email: req.body.email
-//   },
-//     {
-//       $unset:
-//         { goals: 0 }
-//     }).then(user => {
-//       res.json(user)
-//       user.deleteOne({ goals })
-//     }).catch(err => res.status(400).send(err))
-// })
+app.post('/api/deletejourney', isAuthenticated, (req, res) => {
+  db.User.update({
+    email: req.body.email
+  },
+    {
+      $unset:
+        { goals: 0 }
+    }).then(user => {
+      res.json(user)
+      user.deleteOne({ goals })
+    }).catch(err => res.status(400).send(err))
+})
 
 app.get('/api/username/:id', isAuthenticated, (req, res) => {
   db.User.findById(req.params.id).then(data => {
@@ -148,38 +164,8 @@ app.get('/api/username/:id', isAuthenticated, (req, res) => {
   }).catch(err => res.status(400).send(err));
 });
 
-app.post('/api/addgoal', (req, res) => {
-  db.Journey.create(req.body)
-    .then(function (dbJourney) {
-      // If a Book was created successfully, find one library (there's only one) and push the new Book's _id to the Library's `books` array
-      // { new: true } tells the query that we want it to return the updated Library -- it returns the original by default
-      // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
-      return db.User.findOneAndUpdate({ email: req.body.email }, { $push: { journey: dbJourney._id } }, { new: true });
-    })
-    .then(function (dbUser) {
-      // If the Library was updated successfully, send it back to the client
-      res.json(dbUser);
-    })
-    .catch(function (err) {
-      // If an error occurs, send it back to the client
-      res.json(err);
-    });
-});
-
-//GET JOURNEY INFORMATION BY JOURNEY ID
-app.get('/api/journey/:journeyId', (req, res) => {
-  db.Journey.findById(req.params.journeyId)
-  .then(data => {
-    if(data) {
-      res.json(data)
-    } else {
-      res.status(404).send({ success: false, message: 'No journey found' });
-    }
-  })
-})
-
 app.get('/api/test/:id', (req, res) => {
-  db.User.findById(req.params.id).populate("journey").then(data => {
+  db.User.findById(req.params.id).populate("goals").then(data => {
     if (data) {
       res.json(data);
     } else {
@@ -265,5 +251,3 @@ app.get("*", function (req, res) {
 app.listen(PORT, function () {
   console.log(`🌎 ==> Server now on port ${PORT}!`);
 });
-
-////////////////
