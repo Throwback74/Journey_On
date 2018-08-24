@@ -23,8 +23,8 @@ export default {
     return axios.post('api/login', {email: email, password: password});
   },
 
-  addTask: (taskTitle, taskDescription, taskLabel, email) => {
-    return axios.post('api/addtask', {taskTitle: taskTitle, taskDescription: taskDescription, taskLabel: taskLabel, email: email});
+  addTask: (taskTitle, taskDescription, taskLabel, userId) => {
+    return axios.post('api/addtask', {taskTitle: taskTitle, taskDescription: taskDescription, taskLabel: taskLabel, userId: userId});
   }
 };
 
