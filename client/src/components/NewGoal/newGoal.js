@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import AuthService from '../Auth/AuthService';
 import API from '../../utils/API';
 import withAuth from '../Auth/withAuth';
+import Footer from '../Footer/Footer';
+import "./newGoal.css";
 
 
 
@@ -89,6 +91,7 @@ class Goal extends Component {
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
                 <button className="btn btn-primary" onClick={this.handleGoToProfile}>Go to profile</button>
+                <Footer />
             </div>
         )
     }
