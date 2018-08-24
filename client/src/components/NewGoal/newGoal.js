@@ -57,7 +57,7 @@ class Goal extends Component {
     render() {
         return (
             <div className="container">
-                <h1>Add a Goal!</h1>
+                <h1>Add a Journey!</h1>
                 <form onSubmit={this.handleFormSubmit} ref='form'>
                     <div className="form-group">
                         <label htmlFor="firstStep">Journey Name:</label>
