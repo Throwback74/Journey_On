@@ -41,7 +41,6 @@ class Kanban extends Component {
     };
 
     async componentWillMount() {
-
         const response = await this.getBoard();
         this.setState(
             { boardData: response }
