@@ -1,15 +1,16 @@
 require("dotenv").config();
 var cron = require('node-cron');
 const axios = require('axios');
+const mongoose = require('mongoose');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/appDB');
+const db = require('./models');
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const exjwt = require('express-jwt');
-const mongoose = require('mongoose');
 const morgan = require('morgan'); // used to see requests
 const app = express();
-const db = require('./models');
 const nodemailer = require('nodemailer');
 
 const PORT = process.env.PORT || 3001;
@@ -35,7 +36,7 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/appDB');
+
 
 // Init the express-jwt middleware
 const isAuthenticated = exjwt({
@@ -45,11 +46,29 @@ const isAuthenticated = exjwt({
 
 app.post('/api/addgoal', (req, res) => {
   db.journeyGoal.create(req.body)
-    .then(function(dbGoals) {
+    .then(function (dbGoals) {
       // If a Book was created successfully, find one library (there's only one) and push the new Book's _id to the Library's `books` array
       // { new: true } tells the query that we want it to return the updated Library -- it returns the original by default
       // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
-      return db.User.findOneAndUpdate({email: req.body.email}, { $push: { goals: dbGoals._id } }, { new: true });
+      return db.User.findOneAndUpdate({ email: req.body.email }, { $push: { goals: dbGoals._id } }, { new: true });
+    })
+    .then(function (dbUser) {
+      // If the Library was updated successfully, send it back to the client
+      res.json(dbUser);
+    })
+    .catch(function (err) {
+      // If an error occurs, send it back to the client
+      res.json(err);
+    });
+});
+
+app.post('/api/addtask', (req, res) => {
+  db.userTasks.create(req.body)
+    .then(function(dbTasks) {
+      // If a Book was created successfully, find one library (there's only one) and push the new Book's _id to the Library's `books` array
+      // { new: true } tells the query that we want it to return the updated Library -- it returns the original by default
+      // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
+      return db.User.findOneAndUpdate({email: req.body.email}, { $push: { tasks: dbTasks._id } }, { new: true });
     })
     .then(function(dbUser) {
       // If the Library was updated successfully, send it back to the client
@@ -68,21 +87,21 @@ app.post('/api/login', (req, res) => {
     email: req.body.email
   }).then(user => {
     user.verifyPassword(req.body.password, (err, isMatch) => {
-      if(isMatch && !err) {
+      if (isMatch && !err) {
         let token = jwt.sign({ id: user._id, email: user.email }, 'all sorts of code up in here', { expiresIn: 129600 }); // Sigining the token
-        res.json({success: true, message: "Token Issued!", token: token, user: user});
+        res.json({ success: true, message: "Token Issued!", token: token, user: user });
       } else {
-        res.status(401).json({success: false, message: "Authentication failed. Wrong password."});
+        res.status(401).json({ success: false, message: "Authentication failed. Wrong password." });
       }
     });
-  }).catch(err => res.status(404).json({success: false, message: "User not found", error: err}));
+  }).catch(err => res.status(404).json({ success: false, message: "User not found", error: err }));
 });
 
 // SIGNUP ROUTE
 app.post('/api/signup', (req, res) => {
   db.User.create(req.body)
     .then(data => res.json(data))
-    .catch(err => res.status(400).json({success: false, message: "Username or Email Already in Use", error: err}));
+    .catch(err => res.status(400).json({ success: false, message: "Username or Email Already in Use", error: err }));
 });
 
 // ADD GOAL ROUTE
@@ -96,23 +115,45 @@ app.post('/api/signup', (req, res) => {
 // to access
 app.get('/api/user/:id', isAuthenticated, (req, res) => {
   db.User.findById(req.params.id)
-  .populate("goals")
-  .then(data => {
-    if(data) {
-      res.json(data);
-    } else {
-      res.status(404).send({success: false, message: 'No user found'});
-    }
-  }).catch(err => res.status(400).send(err));
+    .populate("goals")
+    .then(data => {
+      if (data) {
+        res.json(data);
+      } else {
+        res.status(404).send({ success: false, message: 'No user found' });
+      }
+    }).catch(err => res.status(400).send(err));
 });
 
+app.post('api/deletejourney', isAuthenticated, (req, res) => {
+  db.User.update({
+    email: req.body.email
+  },
+    {
+      $unset:
+        { goals: 0 }
+    }).then(user => {
+      res.json(user)
+      user.deleteOne({ goals })
+    }).catch(err => res.status(400).send(err))
+})
 
 app.get('/api/username/:id', isAuthenticated, (req, res) => {
   db.User.findById(req.params.id).then(data => {
-    if(data) {
+    if (data) {
       res.json(data);
     } else {
-      res.status(404).send({success: false, message: 'No user found'});
+      res.status(404).send({ success: false, message: 'No user found' });
+    }
+  }).catch(err => res.status(400).send(err));
+});
+
+app.get('/api/test/:id', (req, res) => {
+  db.User.findById(req.params.id).populate("goals").then(data => {
+    if (data) {
+      res.json(data);
+    } else {
+      res.status(404).send({ success: false, message: 'No user found' });
     }
   }).catch(err => res.status(400).send(err));
 });
@@ -120,7 +161,8 @@ app.get('/api/username/:id', isAuthenticated, (req, res) => {
 
 
 
-app.post('/api/send/email', (req, res)=>{
+
+app.post('/api/send/email', (req, res) => {
   var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -128,9 +170,14 @@ app.post('/api/send/email', (req, res)=>{
       pass: process.env.PASS
     }
   });
-  
 
-  
+  var mailOptions = {
+    from: 'no_reply@journey_on-admin.com',
+    to: 'corey.slade@gmail.com',
+    subject: 'Sending Email using Node.js',
+    html: `<h1>${req.body.message}</h1>`
+  };
+
   // HTML version of Mail Options
   // var mailOptions = {
   //   from: 'youremail@gmail.com',
@@ -197,14 +244,14 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-app.get("/api/users", function(req, res) {
+app.get("/api/users", function (req, res) {
   // Using our Library model, "find" every library in our db
   db.User.find()
-    .then(function(dbUser) {
+    .then(function (dbUser) {
       // If any Libraries are found, send them to the client
       res.json(dbUser);
     })
-    .catch(function(err) {
+    .catch(function (err) {
       // If an error occurs, send it back to the client
       res.json(err);
     });
@@ -228,10 +275,12 @@ app.use(function (err, req, res, next) {
 
 // Send every request to the React app
 // Define any API routes before this runs
-app.get("*", function(req, res) {
+app.get("*", function (req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
-app.listen(PORT, function() {
+app.listen(PORT, function () {
   console.log(`🌎 ==> Server now on port ${PORT}!`);
 });
+
+////////////////

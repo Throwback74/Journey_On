@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import './Landing.css';
 import './Animate.css';
 // eslint-disable-next-line
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import LandingBtns from "./LandingBtns";
+import Footer from "../Footer";
 
 
 class Landing extends Component {
@@ -22,14 +23,13 @@ class Landing extends Component {
             <div className="h1Header">
               <LandingBtns tokenID={this.btnTrigger} />
 
-
               <h1 className="title animated fadeInLeftBig">JOURNEY ON</h1>
             </div>
             <div className="row">
               <div className="col s8">
-                <p className="paragraph animated fadeInUp">"Believe in yourself. You are braver than you think, more talented than you know, and capable of more than you imagine" <br/><br/>- Roy T. Bennett -</p>  
+                <p className="paragraph animated fadeInUp">"Believe in yourself. You are braver than you think, more talented than you know, and capable of more than you imagine" <br /><br />- Roy T. Bennett -</p>
               </div>
-              <div  id="pic" className="col s4">
+              <div id="pic" className="col s4">
                 <div>
                   <img id="picture" src="https://www.bestbeachimage.info/wp-content/uploads/2018/03/mac-wallpaper-tumblr-beach-8362.jpeg" alt="placeholder" />
                 </div>
@@ -87,37 +87,11 @@ class Landing extends Component {
               </div>
             </div>
           </div>
-          <footer>
-            <div className="foot">
-              <div className="container">
-                <div className="row">
-                  <div className="col l6 s12 about">
-                    <p className="grey-text">Press</p>
-                    <p className="grey-text">Contact</p>
-                    <p className="grey-text">Folow us</p>
-                  </div>
-                  <div className="col l4 offset-l2 s12">
-                    <h5 className="white-text">Newsletter</h5>
-                    <p className="signupEmail">Sign up to our newsletter and stay up to date.</p>
-                    <ul className="dotts">
-                      <li><a className="grey-text text-lighten-3" href="https://www.facebook.com">Facebook</a></li>
-                      <li><a className="grey-text text-lighten-3" href="https://www.twitter.com">Twitter</a></li>
-                      <li><a className="grey-text text-lighten-3" href="https://www.instagram.com">Instagram</a></li>
-                      <li><a className="grey-text text-lighten-3" href="https://www.snapchat.com">Snapchat</a></li>
-                    </ul>
-                  </div>
-                </div>
-                <h1 className="footerTitle">Journey</h1>
-              </div>
-              <div class="footer-copyright">
-                <div class="container">
-                  © 2018 Copyright Journey
-            </div>
-              </div>
-            </div>
-          </footer>
+          <Footer />
         </section>
+
       </div>
+
     )
   }
 };
