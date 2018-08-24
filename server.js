@@ -1,13 +1,14 @@
 require("dotenv").config();
+const mongoose = require('mongoose');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/appDB');
+const db = require('./models');
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const exjwt = require('express-jwt');
-const mongoose = require('mongoose');
 const morgan = require('morgan'); // used to see requests
 const app = express();
-const db = require('./models');
 const nodemailer = require('nodemailer');
 
 const PORT = process.env.PORT || 3001;
@@ -28,7 +29,7 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/appDB');
+
 
 // Init the express-jwt middleware
 const isAuthenticated = exjwt({
@@ -106,7 +107,7 @@ app.post('/api/signup', (req, res) => {
 // Any route with isAuthenticated is protected and you need a valid token
 // to access
 app.get('/api/user/:id', isAuthenticated, (req, res) => {
-  db.User.findOne(req.params.id)
+  db.User.findById(req.params.id)
     .populate("goals")
     .then(data => {
       if (data) {
@@ -139,6 +140,17 @@ app.get('/api/username/:id', isAuthenticated, (req, res) => {
     }
   }).catch(err => res.status(400).send(err));
 });
+
+app.get('/api/test/:id', (req, res) => {
+  db.User.findById(req.params.id).populate("goals").then(data => {
+    if (data) {
+      res.json(data);
+    } else {
+      res.status(404).send({ success: false, message: 'No user found' });
+    }
+  }).catch(err => res.status(400).send(err));
+});
+
 
 
 

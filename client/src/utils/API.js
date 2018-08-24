@@ -3,7 +3,7 @@ import axios from 'axios';
 export default {
   // Gets a single user by id
   getUser: (id) => {
-    return axios.get(`/api/user/${id}`);
+    return axios.get(`/api/test/${id}`);
   },
   // Gets a single user by id
   getUserName: (id) => {
@@ -24,7 +24,8 @@ export default {
   },
   addTask: (taskTitle, taskDescription, taskLabel, email) => {
     return axios.post('api/addtask', {taskTitle: taskTitle, taskDescription: taskDescription, taskLabel: taskLabel, email: email});
-  }
+  },
+  
 };
 
 //
