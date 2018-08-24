@@ -3,48 +3,53 @@
     {
       "id": "TODO",
       "title": "To Do:",
-      "style": {"width": 285},
+      "style": {
+        "width": 285
+      },
       "cards": [
         {
-          "id": "Milk",
+          "id": "TODO",
           "title": "Buy milk",
           "label": "15 mins",
-          "cardStyle": { "width": 275, "maxWidth": 275, "margin": "auto", "marginBottom": 5 },
+          "cardStyle": {
+            "width": 275,
+            "maxWidth": 275,
+            "margin": "auto",
+            "marginBottom": 5
+          },
           "description": "2 Gallons of milk at the Deli store"
         },
         {
-          "id": "Plan2",
+          "id": "TODO",
           "title": "Dispose Garbage",
           "label": "10 mins",
-          "cardStyle": { "width": 275, "maxWidth": 275, "margin": "auto", "marginBottom": 5 },
+          "cardStyle": {
+            "width": 275,
+            "maxWidth": 275,
+            "margin": "auto",
+            "marginBottom": 5
+          },
           "description": "Sort out recyclable and waste as needed"
-        },
-        {
-          "id": "Plan3",
-          "title": "Write Blog",
-          "label": "30 mins",
-          "cardStyle": { "width": 275, "maxWidth": 275, "margin": "auto", "marginBottom": 5 },
-          "description": "Can AI make memes?"
-        },
-        {
-          "id": "Plan4",
-          "title": "Pay Rent",
-          "label": "5 mins",
-          "cardStyle": { "width": 275, "maxWidth": 275, "margin": "auto", "marginBottom": 5 },
-          "description": "Transfer to bank account"
         }
       ]
     },
     {
       "id": "INPROG",
       "title": "In Progress:",
-      "style": {"width": 285},
+      "style": {
+        "width": 285
+      },
       "cards": [
         {
-          "id": "Wip1",
+          "id": "INPROG",
           "title": "Clean House",
           "label": "30 mins",
-          "cardStyle": { "width": 275, "maxWidth": 275, "margin": "auto", "marginBottom": 5 },
+          "cardStyle": {
+            "width": 275,
+            "maxWidth": 275,
+            "margin": "auto",
+            "marginBottom": 5
+          },
           "description": "Soap wash and polish floor. Polish windows and doors. Scrap all broken glasses"
         }
       ]
@@ -52,20 +57,32 @@
     {
       "id": "COMPLETED",
       "title": "Completed:",
-      "style": {"width": 285},
+      "style": {
+        "width": 285
+      },
       "cards": [
         {
-          "id": "Completed1",
+          "id": "COMPLETED",
           "title": "Practice Meditation",
           "label": "15 mins",
-          "cardStyle": { "width": 275, "maxWidth": 275, "margin": "auto", "marginBottom": 5 },
+          "cardStyle": {
+            "width": 275,
+            "maxWidth": 275,
+            "margin": "auto",
+            "marginBottom": 5
+          },
           "description": "Use Headspace app"
         },
         {
-          "id": "Completed2",
+          "id": "COMPLETED",
           "title": "Maintain Daily Journal",
           "label": "15 mins",
-          "cardStyle": { "width": 275, "maxWidth": 275, "margin": "auto", "marginBottom": 5 },
+          "cardStyle": {
+            "width": 275,
+            "maxWidth": 275,
+            "margin": "auto",
+            "marginBottom": 5
+          },
           "description": "Use Spreadsheet for now"
         }
       ]
@@ -73,13 +90,20 @@
     {
       "id": "ARCHIVED",
       "title": "Archived:",
-      "style": {"width": 285},
+      "style": {
+        "width": 285
+      },
       "cards": [
         {
-          "id": "Archived1",
+          "id": "ARCHIVED",
           "title": "Go Trekking",
           "label": "300 mins",
-          "cardStyle": { "width": 275, "maxWidth": 275, "margin": "auto", "marginBottom": 5 },
+          "cardStyle": {
+            "width": 275,
+            "maxWidth": 275,
+            "margin": "auto",
+            "marginBottom": 5
+          },
           "description": "Completed 10km on cycle"
         }
       ]
