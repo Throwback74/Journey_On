@@ -61,6 +61,7 @@ app.post('/api/addtask', (req, res) => {
       // If a Book was created successfully, find one library (there's only one) and push the new Book's _id to the Library's `books` array
       // { new: true } tells the query that we want it to return the updated Library -- it returns the original by default
       // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
+      res.json(dbTasks);
       return db.User.findOneAndUpdate({email: req.body.email}, { $push: { tasks: dbTasks._id } }, { new: true });
     })
     .then(function(dbUser) {
@@ -71,6 +72,12 @@ app.post('/api/addtask', (req, res) => {
       // If an error occurs, send it back to the client
       res.json(err);
     });
+});
+
+app.get('/api/userCards/:id', (req, res) => {
+  db.userTasks.find({userId: req.params.id}).then(dbTasks => {
+    res.json(dbTasks);
+  })
 });
 
 
@@ -98,11 +105,11 @@ app.post('/api/signup', (req, res) => {
 });
 
 // ADD GOAL ROUTE
-// app.post('/api/addgoal', (req, res) => {
-//   db.UserGoal.create(req.body)
-//     .then(data => res.json(data))
-//     .catch(err => res.status(400).json(err));
-// });
+app.post('/api/addgoal', (req, res) => {
+  db.UserGoal.create(req.body)
+    .then(data => res.json(data))
+    .catch(err => res.status(400).json(err));
+});
 
 // Any route with isAuthenticated is protected and you need a valid token
 // to access
@@ -151,11 +158,20 @@ app.get('/api/test/:id', (req, res) => {
   }).catch(err => res.status(400).send(err));
 });
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+app.post('/api/send/email', (req, res)=>{
+=======
 
 
 
 
 app.post('/api/send/email', (req, res) => {
+>>>>>>> b6644446309041bec571060cbec30593f52be4d5
+=======
+
+app.post('/api/send/email', (req, res) => {
+>>>>>>> 583fb52419a3972e6dc5b8c6a39466eba856cc0c
   var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
