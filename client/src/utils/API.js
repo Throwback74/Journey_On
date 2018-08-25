@@ -27,7 +27,7 @@ export default {
   },
 
   addTask: (taskTitle, taskDescription, taskLabel, journeyId) => {
-    return axios.post('/api/addtask', {taskTitle: taskTitle, taskDescription: taskDescription, taskLabel: taskLabel, journeyId: journeyId});
+    return axios.post(`/api/addtask/${journeyId}`, {taskTitle: taskTitle, taskDescription: taskDescription, taskLabel: taskLabel});
   },
 
   addVideo: (videoLink, journeyId) => {

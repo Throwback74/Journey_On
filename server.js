@@ -36,14 +36,33 @@ const isAuthenticated = exjwt({
   secret: 'all sorts of code up in here'
 });
 
+// ORIGINAL
+// app.post('/api/addgoal', (req, res) => {
+//   db.Journey.create(req.body)
+//     .then(function (dbGoals) {
+//       // If a Book was created successfully, find one library (there's only one) and push the new Book's _id to the Library's `books` array
+//       // { new: true } tells the query that we want it to return the updated Library -- it returns the original by default
+//       // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
+//       return db.User.findOneAndUpdate({ email: req.body.email }, { $push: { goals: dbGoals._id } }, { new: true });
+//     })
+//     .then(function (dbUser) {
+//       // If the Library was updated successfully, send it back to the client
+//       res.json(dbUser);
+//     })
+//     .catch(function (err) {
+//       // If an error occurs, send it back to the client
+//       res.json(err);
+//     });
+// });
 
+// TEST FOR 2 TABLES
 app.post('/api/addgoal', (req, res) => {
   db.Journey.create(req.body)
-    .then(function (dbGoals) {
+    .then(function (dbJourney) {
       // If a Book was created successfully, find one library (there's only one) and push the new Book's _id to the Library's `books` array
       // { new: true } tells the query that we want it to return the updated Library -- it returns the original by default
       // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
-      return db.User.findOneAndUpdate({ email: req.body.email }, { $push: { goals: dbGoals._id } }, { new: true });
+      return db.User.findOneAndUpdate({ email: req.body.email }, { $push: { journey: dbJourney._id } }, { new: true });
     })
     .then(function (dbUser) {
       // If the Library was updated successfully, send it back to the client
@@ -55,14 +74,33 @@ app.post('/api/addgoal', (req, res) => {
     });
 });
 
+
+// app.post('/api/addtask/:id', (req, res) => {
+//   db.userTasks.create(req.body)
+//     .then(function(dbTasks) {
+//       // If a Book was created successfully, find one library (there's only one) and push the new Book's _id to the Library's `books` array
+//       // { new: true } tells the query that we want it to return the updated Library -- it returns the original by default
+//       // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
+//       res.json(dbTasks);
+//       return db.journeyGoal.findOneAndUpdate({_id: req.params.id}, { $push: { tasks: dbTasks._id } }, { new: true });
+//     })
+//     .then(function(dbUser) {
+//       // If the Library was updated successfully, send it back to the client
+//       res.json(dbUser);
+//     })
+//     .catch(function(err) {
+//       // If an error occurs, send it back to the client
+//       res.json(err);
+//     });
+// });
+
 app.post('/api/addtask/:id', (req, res) => {
-  db.userTasks.create(req.body)
+  db.Task.create(req.body)
     .then(function(dbTasks) {
       // If a Book was created successfully, find one library (there's only one) and push the new Book's _id to the Library's `books` array
       // { new: true } tells the query that we want it to return the updated Library -- it returns the original by default
       // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
-      res.json(dbTasks);
-      return db.journeyGoal.findOneAndUpdate({_id: req.params.id}, { $push: { tasks: dbTasks._id } }, { new: true });
+      return db.Journey.findOneAndUpdate({_id: req.params.id}, { $push: { tasks: dbTasks._id } }, { new: true });
     })
     .then(function(dbUser) {
       // If the Library was updated successfully, send it back to the client
@@ -164,15 +202,29 @@ app.get('/api/username/:id', isAuthenticated, (req, res) => {
   }).catch(err => res.status(400).send(err));
 });
 
+// ORIGINAL
+// app.get('/api/test/:id', (req, res) => {
+//   db.User.findById(req.params.id).populate("goals").then(data => {
+//     if (data) {
+//       res.json(data);
+//     } else {
+//       res.status(404).send({ success: false, message: 'No user found' });
+//     }
+//   }).catch(err => res.status(400).send(err));
+// });
+
+
+// TEST FOR USING ONLY 2 TABLES
 app.get('/api/test/:id', (req, res) => {
-  db.User.findById(req.params.id).populate("goals").then(data => {
-    if (data) {
-      res.json(data);
-    } else {
-      res.status(404).send({ success: false, message: 'No user found' });
-    }
-  }).catch(err => res.status(400).send(err));
-});
+    db.User.findById(req.params.id).populate("journey").then(data => {
+      if (data) {
+        res.json(data);
+      } else {
+        res.status(404).send({ success: false, message: 'No user found' });
+      }
+    }).catch(err => res.status(400).send(err));
+  });
+  
 
 app.post('/api/send/email', (req, res) => {
 
@@ -247,6 +299,8 @@ app.use(function (err, req, res, next) {
 app.get("*", function (req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
+
+
 
 app.listen(PORT, function () {
   console.log(`🌎 ==> Server now on port ${PORT}!`);

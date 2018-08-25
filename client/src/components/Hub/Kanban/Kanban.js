@@ -30,7 +30,11 @@ class Kanban extends Component {
 
     constructor() {
         super();
-        this.state = { boardData: { lanes: [] } }
+        this.state = { 
+            boardData: { lanes: [] },
+            journeyName: "",
+            tasks: [] 
+        }
         this.Auth = new AuthService();
     };
 
@@ -46,7 +50,11 @@ class Kanban extends Component {
         this.setState({ boardData: response });
 
         API.getUser(this.props.user.id).then(res => {
-            console.log(res.data.tasks);
+            console.log(res.data);
+            this.setState({
+                journeyName: res.data.journey[0].journeyName,
+                tasks: res.data.journey[0].tasks[0]
+            })
         })
 
         // API.getCards().then(function (res) {
@@ -106,7 +114,7 @@ class Kanban extends Component {
                 <div id="modal-root"><PromptModal /></div>
                 <div className="whole-board">
                     <div className="Kanban-header text-center">
-                        <h1><b>Journey Name Goes Here</b></h1>
+                        <h1><b>{this.state.journeyName}</b></h1>
                         <h3>Organization Board</h3>
                     </div>
                     <div className="Kanban-intro">
