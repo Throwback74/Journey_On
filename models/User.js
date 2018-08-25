@@ -26,10 +26,10 @@ let UserSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  goals: [
+  journey: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Goal"
+      ref: "Journey"
     }
   ]
 });
