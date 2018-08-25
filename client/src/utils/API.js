@@ -15,7 +15,7 @@ export default {
   },
   
   updateLogin: (id) => {
-    return axios.post(`/api/update`, {_id: id, last_login_date: Date.now()});
+    return axios.post(`/api/update`, {_id: id, updatedAt: Date.now()});
   },
 
   addGoal: (journeyName, journeySummary, completeBy, email) => {

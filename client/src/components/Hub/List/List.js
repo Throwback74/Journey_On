@@ -26,7 +26,7 @@ class List extends Component {
     render() {
        return (
            <div className="container list">
-               <div classname="container listItems">
+               <div className="container listItems">
                    <ul>
                        {this.state.journeyArray.map(journey => <li>{journey}</li>)}
                    </ul>

@@ -149,5 +149,13 @@ class Profile extends Component {
     )
   }
 }
+// createdAt: {
+//   type: Date,
+//   default: Date.now
+// },
+// last_login_date: {
+//   type: Date,
+//   default: Date.now
+// },
 
 export default withAuth(Profile);

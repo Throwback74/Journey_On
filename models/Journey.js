@@ -13,10 +13,6 @@ let UserGoal = new Schema({
     required: true,
     trim: true
   },
-  createdAt: {
-    type: Date,
-    default: Date.now
-  },
   completeBy: {
     type: Date,
     default: Date.now,
@@ -35,7 +31,9 @@ let UserGoal = new Schema({
     }
   ]
 
-});
+},{
+  timestamps: true
+  });
 
 
 module.exports = mongoose.model('Goal', UserGoal);

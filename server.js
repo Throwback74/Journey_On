@@ -307,36 +307,21 @@ cron.schedule('* * * * *', function () {
 
 
 app.post('/api/update', isAuthenticated, (req, res) => {
-    db.User.findByIdAndUpdate(req.body.id)({
-      _id: req.body.id
-    }, {
-      $push: {
-        last_login_date: req.body.last_login_date
-      }
-    }, {
-      new: true
-    })
-  .then(data => {
-    console.log(data);
-    res.json(data)
-  })
-  .catch(err => res.status(400).json(err));
-})
-//   .then(data => {
-//     if (data) {
-//       res.json(data);
-//     } else {
-//       res.status(404).send({ success: false, message: 'No user found' });
-//     }
-//   }).catch(err => res.status(400).send(err));
-// });
+  id = req.body._id
+  console.log("id", id);
+  db.User.findByIdAndUpdate(id, {
+    $set: {
+      updatedAt: req.body.updatedAt
+    }
+  }, {
+    new: true
+  }, function (err, data) {
+    if (err) return handleError(err);
+    res.send(data);
+  }) .catch(err => res.status(400).json(err));
+});
 
-// return db.Journey.findOneAndUpdate({_id: req.params.id}, { $push: { tasks: dbTasks._id } }, { new: true });
-// })
-// .then(function(dbUser) {
-// var task = cron.schedule('* * 9 22 * * 0-7', function(){
-//   console.log('running every day Sunday-Monday at 9');
-//   axios.get('/api/users').then(res => {
+
 
 //   })
 // }, false);

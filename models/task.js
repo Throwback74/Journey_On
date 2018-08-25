@@ -27,7 +27,9 @@ let Task = new Schema({
         required: true,
         trim: true
     }
-});
+},{
+    timestamps: true
+    });
 
 
 module.exports = mongoose.model('Task', Task);
