@@ -18,6 +18,11 @@ let Task = new Schema({
         required: true,
         trim: true
     },
+    journeyId: {
+        type: String,
+        required: true,
+        trim: true
+    }
 });
 
 

@@ -1,6 +1,6 @@
 module.exports = {
   User: require('./User'),
   Journey: require('./Journey'),
-  Task: require('./task'),
+  userTasks: require('./task'),
   Video: require("./Video")
 };

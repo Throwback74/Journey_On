@@ -27,13 +27,11 @@ class PromptModal extends React.Component {
       modalIsOpen: false,
       taskTitle: "",
       taskDescription: "",
-      taskLabel: "TODO",
-      journeyId: ""
+      taskLabel: "TODO"
     };
 
     this.Auth = new AuthService();
   }
-
 
   handleChange = event => {
     const { name, value } = event.target;
@@ -44,14 +42,7 @@ class PromptModal extends React.Component {
 
 
   openModal = () => {
-    console.log(this.props)
     this.setState({ modalIsOpen: true });
-    API.getUser(this.props.user.id).then(res => {
-      console.log(res)
-      this.setState({
-        journeyId: res.data.journey[0]._id
-      })
-    })
   }
 
   afterOpenModal = () => {
@@ -66,7 +57,7 @@ class PromptModal extends React.Component {
   handleFormSubmit = event => {
     event.preventDefault();
     console.log("Helloo");
-    API.addTask(this.state.taskTitle, this.state.taskDescription, this.state.taskLabel, this.state.journeyId)
+    API.addTask(this.state.taskTitle, this.state.taskDescription, this.state.taskLabel, this.props.user.email)
       .then(res => {
         console.log(res.data);
         // once the user has signed up
