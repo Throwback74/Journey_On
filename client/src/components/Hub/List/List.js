@@ -3,6 +3,7 @@ import API from '../../../utils/API';
 import AuthService from '../../Auth/AuthService';
 import withAuth from '../../Auth/withAuth';
 
+
 class List extends Component {
     state = {
        journeyArray: []
@@ -25,7 +26,7 @@ class List extends Component {
     render() {
        return (
            <div className="container list">
-               <div classname="container listItems">
+               <div className="container listItems">
                    <ul>
                        {this.state.journeyArray.map(journey => <li>{journey}</li>)}
                    </ul>
