@@ -2,6 +2,7 @@ import React from 'react';
 // import withAuth from '../../Auth/withAuth';
 import "../Resources/Resources.css";
 import {Link} from "react-router-dom";
+// eslint-disable-next-line
 const resourceBtn = "Resources";
 
 const Buttons = (props) => {
