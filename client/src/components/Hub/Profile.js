@@ -31,6 +31,7 @@ class Profile extends Component {
         email: res.data.email
       })
     });
+    API.updateLogin(this.props.user.id);
   };
 
   addVideo = () => {

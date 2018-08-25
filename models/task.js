@@ -18,6 +18,10 @@ let Task = new Schema({
         required: true,
         trim: true
     },
+    date: { 
+        type: Date,
+        default: Date.now
+    },
     journeyId: {
         type: String,
         required: true,

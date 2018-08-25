@@ -26,6 +26,10 @@ let UserSchema = new Schema({
     type: Date,
     default: Date.now
   },
+  last_login_date: {
+    type: Date,
+    default: Date.now
+  },
   goals: [
     {
       type: Schema.Types.ObjectId,

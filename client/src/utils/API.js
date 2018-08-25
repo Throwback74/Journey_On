@@ -14,6 +14,10 @@ export default {
     return axios.post('/api/signup', {username: username, email: email, password: password});
   },
   
+  updateLogin: (id) => {
+    return axios.post(`/api/update`, {_id: id, last_login_date: Date.now()});
+  },
+
   addGoal: (journeyName, journeySummary, completeBy, email) => {
     return axios.post('/api/addgoal', {journeyName: journeyName, journeySummary: journeySummary, completeBy: completeBy, email: email});
   },
