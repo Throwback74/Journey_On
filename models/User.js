@@ -31,12 +31,6 @@ let UserSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: "Goal"
     }
-  ],
-  tasks: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Task"
-    }
   ]
 });
 

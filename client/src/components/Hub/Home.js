@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import './Home.css';
 import AuthService from '../Auth/AuthService';
 import withAuth from '../Auth/withAuth';
+import Footer from '../Footer/Footer';
 const Auth = new AuthService();
 
 class Home extends Component {
@@ -41,6 +42,7 @@ class Home extends Component {
           <button type="button" className="btn btn-primary" onClick={this.goToEditProfile}>Go to Profile</button>
           <button type="button" className="btn btn-danger" onClick={this.handleLogout}>Logout</button>
         </p>
+        <Footer />
       </div>
     );
   }

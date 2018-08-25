@@ -3,6 +3,7 @@ import './Landing.css';
 import './Animate.css';
 // eslint-disable-next-line
 import { Link } from "react-router-dom";
+
 import LandingBtns from "./LandingBtns";
 import Footer from "../Footer";
 
@@ -17,7 +18,7 @@ class Landing extends Component {
 
   render() {
     return (
-      <div>
+      <div className="landing-page">
         <header className="landingHeader">
           <div className="container">
             <div className="h1Header">

@@ -7,6 +7,8 @@ import Buttons from "./Buttons/Buttons";
 import Resources from "./Resources/Resources";
 import Progress from "./Progress/Progress";
 import Kanban from "./Kanban/Kanban";
+import List from "./List/List";
+
 
 class Profile extends Component {
 
@@ -15,6 +17,10 @@ class Profile extends Component {
     email: "",
     component: "Button",
     progress: "show",
+    videoUrl: "",
+    currentJourney: {
+      id: '5b804dbbbeb1cc871c3c0ed8'
+    }
   };
 
   componentDidMount() {
@@ -27,9 +33,22 @@ class Profile extends Component {
     });
   };
 
+  addVideo = () => {
+    API.addVideo(this.state.videoUrl, this.state.currentJourney.id).then(function(res){
+      console.log(res);
+    })
+  }
+
   getResources = () => {
     console.log("sup");
     this.setState({ resoruces: true });
+  };
+
+  handleChange = event => {
+    let {name, value} = event.target;
+    this.setState({
+      [name]: value
+    });
   };
 
   renderButton = (newComponent) => {
@@ -51,6 +70,9 @@ class Profile extends Component {
             <Link to="/">Go home</Link> ||
             <Link to="/buildjourney"> Add a Journey</Link>
           </div>
+          <div className="listdiv">
+              <List/>
+          </div>
         </div>
         <div className="Profile">
           <div className="welcome container">
@@ -70,11 +92,12 @@ class Profile extends Component {
             })()} */}
             { 
               (!window.location.pathname.includes("item")) ?
-              <Buttons renderButton={this.renderButton} userId={this.props.user.id} />
+              <Buttons renderButton={this.renderButton} userId={this.props.user.id} handleChange={this.handleChange} videoUrl={this.state.videoUrl} addVideo={this.addVideo} />
               :
               ""
             }
-            <Route exact path={`/profile/${this.props.user.id}/item/resources`} component={Resources} />
+            <Route exact path={`/profile/${this.props.user.id}/item/resources`} render={(props) => ( <Resources handleChange={this.handleChange} videoUrl={this.state.videoUrl} addVideo={this.addVideo}/> )} />
+            {/* <Route exact  component={Resources} handleChange={this.handleChange} newVideoUrl={this.state.videoUrl}/> */}
             {/* <Route exact path={`/profile/${this.props.user.id}/item/calendar`} component={Calendar} /> */}
             <Route exact path={`/profile/${this.props.user.id}/item/board`} component={Kanban} />
           
@@ -90,7 +113,7 @@ class Profile extends Component {
           </div>
         </div>
         <div className="filler">
-        
+
         </div>
 
         <footer>

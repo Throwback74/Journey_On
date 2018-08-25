@@ -45,7 +45,7 @@ const isAuthenticated = exjwt({
 
 
 app.post('/api/addgoal', (req, res) => {
-  db.journeyGoal.create(req.body)
+  db.Journey.create(req.body)
     .then(function (dbGoals) {
       // If a Book was created successfully, find one library (there's only one) and push the new Book's _id to the Library's `books` array
       // { new: true } tells the query that we want it to return the updated Library -- it returns the original by default
@@ -62,13 +62,14 @@ app.post('/api/addgoal', (req, res) => {
     });
 });
 
-app.post('/api/addtask', (req, res) => {
+app.post('/api/addtask/:id', (req, res) => {
   db.userTasks.create(req.body)
     .then(function(dbTasks) {
       // If a Book was created successfully, find one library (there's only one) and push the new Book's _id to the Library's `books` array
       // { new: true } tells the query that we want it to return the updated Library -- it returns the original by default
       // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
-      return db.User.findOneAndUpdate({email: req.body.email}, { $push: { tasks: dbTasks._id } }, { new: true });
+      res.json(dbTasks);
+      return db.journeyGoal.findOneAndUpdate({_id: req.params.id}, { $push: { tasks: dbTasks._id } }, { new: true });
     })
     .then(function(dbUser) {
       // If the Library was updated successfully, send it back to the client
@@ -79,6 +80,28 @@ app.post('/api/addtask', (req, res) => {
       res.json(err);
     });
 });
+
+app.get('/api/journeyCards/:id', (req, res) => {
+  db.userTasks.find({journeyId: req.params.id}).then(dbTasks => {
+    res.json(dbTasks);
+  })
+});
+
+app.post('/api/videos', (req, res) => {
+  db.Video.create(req.body) 
+    .then(function(dbVideos) {
+      res.json(dbVideos);
+      // return db.Videos.findOneAndUpdate({})
+    });
+});
+
+app.get('/api/videos/:id', (req, res) => {
+  db.Video.find({journeyId: req.params.id}).then(dbVideos => {
+    res.json(dbVideos);
+  })
+});
+
+
 
 
 // LOGIN ROUTE
@@ -105,11 +128,11 @@ app.post('/api/signup', (req, res) => {
 });
 
 // ADD GOAL ROUTE
-// app.post('/api/addgoal', (req, res) => {
-//   db.UserGoal.create(req.body)
-//     .then(data => res.json(data))
-//     .catch(err => res.status(400).json(err));
-// });
+app.post('/api/addgoal', (req, res) => {
+  db.Journey.create(req.body)
+    .then(data => res.json(data))
+    .catch(err => res.status(400).json(err));
+});
 
 // Any route with isAuthenticated is protected and you need a valid token
 // to access
@@ -125,7 +148,7 @@ app.get('/api/user/:id', isAuthenticated, (req, res) => {
     }).catch(err => res.status(400).send(err));
 });
 
-app.post('api/deletejourney', isAuthenticated, (req, res) => {
+app.post('/api/deletejourney', isAuthenticated, (req, res) => {
   db.User.update({
     email: req.body.email
   },
@@ -158,11 +181,8 @@ app.get('/api/test/:id', (req, res) => {
   }).catch(err => res.status(400).send(err));
 });
 
-
-
-
-
 app.post('/api/send/email', (req, res) => {
+
   var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -282,5 +302,3 @@ app.get("*", function (req, res) {
 app.listen(PORT, function () {
   console.log(`🌎 ==> Server now on port ${PORT}!`);
 });
-
-////////////////
