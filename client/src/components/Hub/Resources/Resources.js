@@ -13,23 +13,23 @@ const Resources = props => {
                     name="videoUrl" 
                     onChange={props.handleChange} 
                     value={props.videoUrl} 
-                    class="form-control"
+                    className="form-control"
                 />
-                <button type="button" class="btn-primary add" onClick={() => props.addVideo()}>Submit</button>
+                <button type="button" className="btn-primary add" onClick={() => props.addVideo()}>Submit</button>
                 <div className="Vlinks">
                     My Vidoes
                 </div>
             </div>
             <div className="Videos col-md-4">
-                <input type="text" class="form-control"></input>
-                <button type="button" class="btn-primary add">Submit</button>
+                <input type="text" className="form-control"></input>
+                <button type="button" className="btn-primary add">Submit</button>
                 <div className="Alinks">
                     My Articles
                 </div>
             </div>
             <div className="Notes col-md-4">
-                <input type="text" class="form-control"></input>
-                <button type="button" class="btn-primary add">Submit</button>
+                <input type="text" className="form-control"></input>
+                <button type="button" className="btn-primary add">Submit</button>
                 <div className="Olinks">
                     Other Shit
                 </div>

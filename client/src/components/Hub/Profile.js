@@ -78,7 +78,7 @@ class Profile extends Component {
           <div className="welcome container">
             <h1>Welcome... {this.state.username}</h1>
             <p>Time to get shit done!</p>
-            <Link to={`/profile/${this.props.user.id}`}><button type="button" class="btn-primary add">Hub</button></Link>
+            <Link to={`/profile/${this.props.user.id}`}><button type="button" className="btn-primary add">Hub</button></Link>
           </div>
           <div className="container">
             {/* {(() => {
@@ -137,8 +137,8 @@ class Profile extends Component {
                 </div>
               </div>
             </div>
-            <div class="footer-copyright">
-              <div class="container">
+            <div className="footer-copyright">
+              <div className="container">
                 © 2018 Copyright Journey
             </div>
             </div>

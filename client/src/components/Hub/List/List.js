@@ -3,7 +3,7 @@ import React from 'react';
 const List = () => {
     return (
         <div className="container list">
-            <div classname="container listItems">
+            <div className="container listItems">
                 <ul>
                     <li>
                         yo
