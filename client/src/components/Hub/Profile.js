@@ -23,12 +23,14 @@ class Profile extends Component {
     }
   };
 
-  componentDidMount() {
+  componentWillMount() {
     console.log(this.props)
-    API.getUserName(this.props.user.id).then(res => {
+    API.getUser(this.props.user.id).then(res => {
+      console.log(res.data)
       this.setState({
         username: res.data.username,
-        email: res.data.email
+        email: res.data.email,
+        journeys: res.data.journey
       })
     });
   };
@@ -71,7 +73,7 @@ class Profile extends Component {
             <Link to="/buildjourney"> Add a Journey</Link>
           </div>
           <div className="listdiv">
-              <List/>
+              <List journeys = {this.state.journeys}/>
           </div>
         </div>
         <div className="Profile">

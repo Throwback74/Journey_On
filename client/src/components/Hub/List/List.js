@@ -1,24 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const List = () => {
-    return (
-        <div className="container list">
-            <div classname="container listItems">
-                <ul>
-                    <li>
-                        yo
-                    </li>
-                    <li>
-                        yo
-                    </li>
-                    <li>
-                        yo
-                    </li>
-                </ul>
+class List extends Component {
+
+
+    render() {
+        console.log(this.props)
+        return (
+            <div className="container list">
+                <div classname="container listItems">
+                    <ul>
+                        {!this.props.journeys ? <div>Loading...</div> : this.props.journeys.map(journey => <li value={journey.id} onClick={this.props.getJourneyInfo}>{journey.journeyName}</li>)}
+                    </ul>
+                </div>
             </div>
-        </div>
 
-    )
+        )
+    }
 }
-
 export default List;
