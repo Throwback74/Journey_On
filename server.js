@@ -46,11 +46,11 @@ const isAuthenticated = exjwt({
 
 app.post('/api/addgoal', (req, res) => {
   db.Journey.create(req.body)
-    .then(function (dbGoals) {
+    .then(function (dbJourneys) {
       // If a Book was created successfully, find one library (there's only one) and push the new Book's _id to the Library's `books` array
       // { new: true } tells the query that we want it to return the updated Library -- it returns the original by default
       // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
-      return db.User.findOneAndUpdate({ email: req.body.email }, { $push: { goals: dbGoals._id } }, { new: true });
+      return db.User.findOneAndUpdate({ email: req.body.email }, { $push: { goals: dbJourneys._id } }, { new: true });
     })
     .then(function (dbUser) {
       // If the Library was updated successfully, send it back to the client
@@ -69,7 +69,7 @@ app.post('/api/addtask/:id', (req, res) => {
       // { new: true } tells the query that we want it to return the updated Library -- it returns the original by default
       // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
       res.json(dbTasks);
-      return db.journeyGoal.findOneAndUpdate({_id: req.params.id}, { $push: { tasks: dbTasks._id } }, { new: true });
+      return db.Journey.findOneAndUpdate({_id: req.params.id}, { $push: { tasks: dbTasks._id } }, { new: true });
     })
     .then(function(dbUser) {
       // If the Library was updated successfully, send it back to the client

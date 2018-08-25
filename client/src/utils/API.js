@@ -30,6 +30,7 @@ export default {
     return axios.post('/api/addtask', {taskTitle: taskTitle, taskDescription: taskDescription, taskLabel: taskLabel, journeyId: journeyId});
   },
 
+
   addVideo: (videoLink, journeyId) => {
     return axios.post('/api/videos', {videoLink: videoLink, journeyId: journeyId});
   }
