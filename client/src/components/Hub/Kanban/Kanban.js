@@ -7,7 +7,7 @@ import API from '../../../utils/API';
 import AuthService from '../../Auth/AuthService';
 import withAuth from '../../Auth/withAuth';
 
-const data = require('./kanban_demo.json') // require DB collection instead
+const data = require('./kanban_demo2.json') // require DB collection instead
 
 const handleDragStart = (cardId, laneId) => {
     console.log('drag started')
