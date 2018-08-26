@@ -50,7 +50,6 @@ class Signup extends Component {
   render() {
     return (
       <div className="container signupContainer">
-
         <h1>Signup</h1>
         <form onSubmit={this.handleFormSubmit}>
           <div className="form-group">

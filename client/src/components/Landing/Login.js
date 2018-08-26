@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import AuthService from '../Auth/AuthService';
 import {Link} from 'react-router-dom';
+import Footer from '../Footer/Footer';
+import "./Login.css";
+
 
 class Login extends Component {
   constructor() {
@@ -38,7 +41,7 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container loginContainer">
         <h1>Login</h1>
         <form onSubmit={this.handleFormSubmit}>
           <div className="form-group">
@@ -62,6 +65,7 @@ class Login extends Component {
           <button type="submit" className="btn btn-primary">Submit</button>
         </form>
         <p><Link to="/signup">Go to Signup</Link></p>
+        <Footer />
       </div>
 
     );
