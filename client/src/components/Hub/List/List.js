@@ -13,8 +13,8 @@ class List extends Component {
         API.getUser(this.props.user.id).then(res => {
             console.log(res)
             const newArr = []
-            for (let i = 0; i < res.data.goals.length; i++) {
-                newArr.push(res.data.goals[i].journeyName)
+            for (let i = 0; i < res.data.journeys.length; i++) {
+                newArr.push(res.data.journeys[i].journeyName)
             }
             this.setState({ journeyArray: newArr })
         })

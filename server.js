@@ -56,7 +56,7 @@ app.post('/api/addgoal', (req, res) => {
         email: req.body.email
       }, {
         $push: {
-          goals: dbJourneys._id
+          journeys: dbJourneys._id
         }
       }, {
         new: true
@@ -73,17 +73,17 @@ app.post('/api/addgoal', (req, res) => {
 });
 
 app.post('/api/addtask', (req, res) => {
-  db.userTasks.create(req.body)
-    .then(function (dbTasks) {
+  db.Task.create(req.body)
+    .then(function (dbTask) {
       // If a Book was created successfully, find one library (there's only one) and push the new Book's _id to the Library's `books` array
       // { new: true } tells the query that we want it to return the updated Library -- it returns the original by default
       // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
-      res.json(dbTasks);
+      // res.json(dbTasks);
       return db.Journey.findOneAndUpdate({
         _id: req.params.id
       }, {
         $push: {
-          tasks: dbTasks._id
+          tasks: dbTask._id
         }
       }, {
         new: true
@@ -95,12 +95,81 @@ app.post('/api/addtask', (req, res) => {
     })
     .catch(function (err) {
       // If an error occurs, send it back to the client
-      res.json(err);
+      // res.json(err);
+      console.log(err);
     });
 });
 
+
+// function getUserWithPosts(username){
+//   return User.findOne({ username: username })
+//     .populate('posts').exec((err, posts) => {
+//       console.log("Populated User " + posts);
+//     })
+// }
+
+
+app.get('/api/populateTasks/:id', (req, res) => {
+  db.Journey.findById(req.params.id).populate("tasks").exec((err, tasks) => {
+    console.log("Populated Journey ", tasks)
+  }).catch(err => res.status(400).send(err));
+  
+  
+//   // then(data => {
+//       if (data) {
+//         res.json(data);
+//       } else {
+//         res.status(404).send({
+//           success: false,
+//           message: 'No Journey found'
+//         });
+//       }
+//     }).catch(err => res.status(400).send(err));
+});
+
+  app.get('/api/gettasks/:journeyId', isAuthenticated, (req, res) => {
+    db.Journey.findById(req.params.journeyId).then(data => {
+      if (data) {
+        res.json(data);
+      } else {
+        res.status(404).send({
+          success: false,
+          message: 'No Journey found'
+        });
+      }
+    }).catch(err => res.status(400).send(err));
+  });
+
+
+
+
+// app.get('/api/getjourneyname/:id/:journey', isAuthenticated, (req, res) => {
+//   db.User.findOne({ _id: req.params.id }).then(data => {
+//     if (data) {
+//       res.json(data);
+//     } else {
+//       res.status(404).send({
+//         success: false,
+//         message: 'No user found'
+//       });
+//     }
+//   }).catch(err => res.status(400).send(err));
+// });
+// app.get('/api/getjourneyname/:id/', isAuthenticated, (req, res) => {
+// db.User.find({'journeys':mongoose.Types.ObjectId("5b8092b916b8bc457c5717a4")}).then(data => {
+//       if (data) {
+//         res.json(data);
+//       } else {
+//         res.status(404).send({
+//           success: false,
+//           message: 'No user found'
+//         });
+//       }
+//     }).catch(err => res.status(400).send(err));
+//   })
+
 app.get('/api/journeyCards/:id', (req, res) => {
-  db.userTasks.find({
+  db.Task.find({
     journeyId: req.params.id
   }).then(dbTasks => {
     res.json(dbTasks);
@@ -170,18 +239,18 @@ app.post('/api/signup', (req, res) => {
     }));
 });
 
-// ADD GOAL ROUTE
-app.post('/api/addgoal', (req, res) => {
-  db.Journey.create(req.body)
-    .then(data => res.json(data))
-    .catch(err => res.status(400).json(err));
-});
+// // ADD GOAL ROUTE
+// app.post('/api/addgoal', (req, res) => {
+//   db.Journey.create(req.body)
+//     .then(data => res.json(data))
+//     .catch(err => res.status(400).json(err));
+// });
 
 // Any route with isAuthenticated is protected and you need a valid token
 // to access
 app.get('/api/user/:id', isAuthenticated, (req, res) => {
   db.User.findById(req.params.id)
-    .populate("goals")
+    .populate("journeys")
     .then(data => {
       if (data) {
         res.json(data);
@@ -199,12 +268,12 @@ app.post('/api/deletejourney', isAuthenticated, (req, res) => {
     email: req.body.email
   }, {
     $unset: {
-      goals: 0
+      journeys: 0
     }
   }).then(user => {
     res.json(user)
     user.deleteOne({
-      goals
+      journeys
     })
   }).catch(err => res.status(400).send(err))
 })
@@ -223,7 +292,7 @@ app.get('/api/username/:id', isAuthenticated, (req, res) => {
 });
 
 app.get('/api/test/:id', (req, res) => {
-  db.User.findById(req.params.id).populate("goals").then(data => {
+  db.User.findById(req.params.id).populate("journeys").then(data => {
     if (data) {
       res.json(data);
     } else {

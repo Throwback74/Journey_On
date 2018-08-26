@@ -36,4 +36,4 @@ let UserGoal = new Schema({
   });
 
 
-module.exports = mongoose.model('Goal', UserGoal);
+module.exports = mongoose.model('Journey', UserGoal, 'tasks', 'videos');

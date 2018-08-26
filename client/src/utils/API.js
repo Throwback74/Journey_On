@@ -9,6 +9,15 @@ export default {
   getUserName: (id) => {
     return axios.get(`/api/username/${id}`);
   },
+
+  loadTasks: (journeyId) => {
+    return axios.get(`/api/gettasks/${journeyId}`)
+  },
+
+  getTasks: (journeyId) => {
+    return axios.get(`/api/populateTasks/${journeyId}`)
+  },
+
   // sign up a user to our service
   signUpUser: (username, email, password) => {
     return axios.post('/api/signup', {username: username, email: email, password: password});
@@ -33,7 +42,6 @@ export default {
   addTask: (taskTitle, taskDescription, taskLabel, journeyId) => {
     return axios.post('/api/addtask', {taskTitle: taskTitle, taskDescription: taskDescription, taskLabel: taskLabel, journeyId: journeyId});
   },
-
 
   addVideo: (videoLink, journeyId) => {
     return axios.post('/api/videos', {videoLink: videoLink, journeyId: journeyId});
