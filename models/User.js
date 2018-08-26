@@ -22,23 +22,15 @@ let UserSchema = new Schema({
     type: String,
     required: true
   },
-  createdAt: {
-    type: Date,
-    default: Date.now
-  },
   goals: [
     {
       type: Schema.Types.ObjectId,
       ref: "Goal"
     }
-  ],
-  tasks: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Task"
-    }
   ]
-});
+},{
+  timestamps: true
+  });
 
 // Execute before each user.save() call
 UserSchema.pre('save', function (callback) {

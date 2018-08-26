@@ -6,7 +6,15 @@ let Video = new Schema({
         type: String,
         required: true,
         trim: true
+    },
+
+    journeyId: {
+        type:String,
+        required:true,
+        trim: true
     }
-})
+},{
+    timestamps: true
+    })
 
 module.exports = mongoose.model('Video', Video);
