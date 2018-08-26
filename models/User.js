@@ -58,4 +58,4 @@ UserSchema.methods.verifyPassword = function (password, cb) {
   });
 };
 
-module.exports = mongoose.model('User', UserSchema, 'journeys');
+module.exports = mongoose.model('User', UserSchema);

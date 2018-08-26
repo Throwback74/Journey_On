@@ -32,7 +32,7 @@ export default function withAuth(AuthComponent) {
 }
 
 componentDidMount() {
-    if (!Auth.loggedIn()) {
+    if (Auth.loggedIn()) {
         API.getUser(this.state.user.id).then(res => {
             console.log(res)
             const newArr = [];
