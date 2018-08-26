@@ -97,11 +97,7 @@ class Kanban extends Component {
         card.id = laneId;
         console.dir(card);
         // When new card is added on trello board, add card to database
-<<<<<<< HEAD
-        API.addTask(card.title, card.description, card.id, this.props.user.email)
-=======
         API.addTask(card.title, card.description, card.id, this.props.journey.id)
->>>>>>> f58ce3b0e3fdf61bcf1ea802ec06a0fa60005292
             .then(res => {
                 console.log(res.data); // delete this later?
                 alert("Task Added!"); // delete alert later?
