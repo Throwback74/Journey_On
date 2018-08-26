@@ -56,7 +56,7 @@ app.post('/api/addgoal', (req, res) => {
         email: req.body.email
       }, {
         $push: {
-          goals: dbJourneys._id
+          journeys: dbJourneys._id
         }
       }, {
         new: true
@@ -73,17 +73,17 @@ app.post('/api/addgoal', (req, res) => {
 });
 
 app.post('/api/addtask', (req, res) => {
-  db.userTasks.create(req.body)
-    .then(function (dbTasks) {
+  db.Task.create(req.body)
+    .then(function (dbTask) {
       // If a Book was created successfully, find one library (there's only one) and push the new Book's _id to the Library's `books` array
       // { new: true } tells the query that we want it to return the updated Library -- it returns the original by default
       // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
-      res.json(dbTasks);
+      // res.json(dbTasks);
       return db.Journey.findOneAndUpdate({
         _id: req.params.id
       }, {
         $push: {
-          tasks: dbTasks._id
+          tasks: dbTask._id
         }
       }, {
         new: true
@@ -95,12 +95,81 @@ app.post('/api/addtask', (req, res) => {
     })
     .catch(function (err) {
       // If an error occurs, send it back to the client
-      res.json(err);
+      // res.json(err);
+      console.log(err);
     });
 });
 
+
+// function getUserWithPosts(username){
+//   return User.findOne({ username: username })
+//     .populate('posts').exec((err, posts) => {
+//       console.log("Populated User " + posts);
+//     })
+// }
+
+
+app.get('/api/populateTasks/:id', (req, res) => {
+  db.Journey.findById(req.params.id).populate("tasks").exec((err, tasks) => {
+    console.log("Populated Journey ", tasks)
+  }).catch(err => res.status(400).send(err));
+  
+  
+//   // then(data => {
+//       if (data) {
+//         res.json(data);
+//       } else {
+//         res.status(404).send({
+//           success: false,
+//           message: 'No Journey found'
+//         });
+//       }
+//     }).catch(err => res.status(400).send(err));
+});
+
+  app.get('/api/gettasks/:journeyId', isAuthenticated, (req, res) => {
+    db.Journey.findById(req.params.journeyId).then(data => {
+      if (data) {
+        res.json(data);
+      } else {
+        res.status(404).send({
+          success: false,
+          message: 'No Journey found'
+        });
+      }
+    }).catch(err => res.status(400).send(err));
+  });
+
+
+
+
+// app.get('/api/getjourneyname/:id/:journey', isAuthenticated, (req, res) => {
+//   db.User.findOne({ _id: req.params.id }).then(data => {
+//     if (data) {
+//       res.json(data);
+//     } else {
+//       res.status(404).send({
+//         success: false,
+//         message: 'No user found'
+//       });
+//     }
+//   }).catch(err => res.status(400).send(err));
+// });
+// app.get('/api/getjourneyname/:id/', isAuthenticated, (req, res) => {
+// db.User.find({'journeys':mongoose.Types.ObjectId("5b8092b916b8bc457c5717a4")}).then(data => {
+//       if (data) {
+//         res.json(data);
+//       } else {
+//         res.status(404).send({
+//           success: false,
+//           message: 'No user found'
+//         });
+//       }
+//     }).catch(err => res.status(400).send(err));
+//   })
+
 app.get('/api/journeyCards/:id', (req, res) => {
-  db.userTasks.find({
+  db.Task.find({
     journeyId: req.params.id
   }).then(dbTasks => {
     res.json(dbTasks);
@@ -170,18 +239,18 @@ app.post('/api/signup', (req, res) => {
     }));
 });
 
-// ADD GOAL ROUTE
-app.post('/api/addgoal', (req, res) => {
-  db.Journey.create(req.body)
-    .then(data => res.json(data))
-    .catch(err => res.status(400).json(err));
-});
+// // ADD GOAL ROUTE
+// app.post('/api/addgoal', (req, res) => {
+//   db.Journey.create(req.body)
+//     .then(data => res.json(data))
+//     .catch(err => res.status(400).json(err));
+// });
 
 // Any route with isAuthenticated is protected and you need a valid token
 // to access
 app.get('/api/user/:id', isAuthenticated, (req, res) => {
   db.User.findById(req.params.id)
-    .populate("goals")
+    .populate("journeys")
     .then(data => {
       if (data) {
         res.json(data);
@@ -199,12 +268,12 @@ app.post('/api/deletejourney', isAuthenticated, (req, res) => {
     email: req.body.email
   }, {
     $unset: {
-      goals: 0
+      journeys: 0
     }
   }).then(user => {
     res.json(user)
     user.deleteOne({
-      goals
+      journeys
     })
   }).catch(err => res.status(400).send(err))
 })
@@ -224,7 +293,7 @@ app.get('/api/username/:id', isAuthenticated, (req, res) => {
 });
 
 app.get('/api/test/:id', (req, res) => {
-  db.User.findById(req.params.id).populate("goals").then(data => {
+  db.User.findById(req.params.id).populate("journeys").then(data => {
     if (data) {
       res.json(data);
     } else {
@@ -286,29 +355,85 @@ var transporter = nodemailer.createTransport({
   }
 });
 
+app.get("/api/users", function (req, res) {
+  // Using our Library model, "find" every library in our db
+  db.User.find()
+    .then(function (dbUser) {
+      // If any Libraries are found, send them to the client
+      res.json(dbUser);
+    })
+    .catch(function (err) {
+      // If an error occurs, send it back to the client
+      res.json(err);
+    });
+});
+
+var email = "corey.slade@gmail.com";
+var username = "Throwback74";
+
 cron.schedule('* * * * *', function () {
   console.log("----------------------");
   console.log("Running Cron Job");
-  var mailOptions = {
-    from: 'no_reply@journey_on-admin.com',
-    to: 'corey.slade@gmail.com',
-    subject: 'Sending Email using Node.js',
-    html: `<h1>TESTING EMAIL SCHEDULER</h1>`
-  };
-  transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-      res.send(error);
-      console.log(error);
-    } else {
-      res.send('Email sent: ' + info.response);
-      console.log("success!");
-    }
+  var today = Date.now();
+  db.User.find()
+    .then(function (dbUser) {
+      // dbUser.map(users => (
+      //   console.log(users.updatedAt)
+      //   var Users = users;
+      // ))
+      for(let i = 0; i < dbUser.length; i++) {
+        var users = dbUser[i];
+        console.log(users.updatedAt - today);
+        console.log(users.email, users.username);
+        if(users.updatedAt - today > 434636190) {
+          var mailOptions = {
+            from: 'no_reply@journey_on-admin.com',
+            to: `${users.email}`,
+            subject: 'Sending Email using Node.js',
+            html: `<h2 style="text-align: center">Journey On <span> Journey Reminder Email</span></h2> 
+            <br><br>
+            <div>
+              <h4>Hi ${users.username},</h4>
+              <p>We miss you at <span style="font-weight: 700">Journey On</span>! It has been 5 days since you checked in on your Journey! Come see what you have coming up soon, and get some help meeting your goals!</p> 
+              <a href="www.JourneyOn.com">JourneyOn</a>
+            </div>
+            <hr>
+            <div style="text-align: center">
+              <h6>Looking Forward to seeing you again soon!</h6>
+              <p>Best Regards,</p>
+              <p>JOURNEY ON TEAM</p>
+            </div>`
+          };
+          transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+              res.send(error);
+              console.log(error);
+            } else {
+              res.send('Email sent: ' + info.response);
+              console.log("success!");
+            }
+          });
+        }else {
+          console.log("no users to email")
+        }
+
+  }})
+  .catch(function (err) {
+    console.log(err);
   });
+
+  
 });
 
 
 app.post('/api/update', isAuthenticated, (req, res) => {
   id = req.body._id
+  updatedAt = req.body.updatedAt
+  console.log(updatedAt, "updatedAt");
+  foo = new Date("2018-08-20T07:21:54+01:00")
+  var altDate = `2019-08-27 00:00:00.000Z`;
+  var test = foo - updatedAt;
+  console.log(test);
   console.log("id", id);
   db.User.findByIdAndUpdate(id, {
     $set: {
@@ -322,12 +447,6 @@ app.post('/api/update', isAuthenticated, (req, res) => {
   }) .catch(err => res.status(400).json(err));
 });
 
-
-
-//   })
-// }, false);
-
-// task.start();
 
 // cron.schedule("* * * * Wednesday", function() {
 //   console.log("---------------------");
@@ -358,18 +477,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-app.get("/api/users", function (req, res) {
-  // Using our Library model, "find" every library in our db
-  db.User.find()
-    .then(function (dbUser) {
-      // If any Libraries are found, send them to the client
-      res.json(dbUser);
-    })
-    .catch(function (err) {
-      // If an error occurs, send it back to the client
-      res.json(err);
-    });
-});
+
 
 
 app.get('/', isAuthenticated /* Using the express jwt MW here */ , (req, res) => {
