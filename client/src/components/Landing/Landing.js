@@ -3,6 +3,7 @@ import './Landing.css';
 import './Animate.css';
 // eslint-disable-next-line
 import { Link } from "react-router-dom";
+
 import LandingBtns from "./LandingBtns";
 import Footer from "../Footer";
 

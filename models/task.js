@@ -17,7 +17,18 @@ let Task = new Schema({
         type: String,
         required: true,
         trim: true
+    },
+    taskDate: {
+        type: Date,
+        default: Date.now
+    },
+    journeyId: {
+        type: String,
+        required: true,
+        trim: true
     }
+}, {
+    timestamps: true
 });
 
 

@@ -3,14 +3,7 @@ import {Link} from "react-router-dom";
 import './Landing.css';
 
 var btnTrigger = localStorage.getItem('id_token');
-
-// export const Container = (props) => (
-//   <div className={`container is-fluid ${props.shake ? 'animated' : ''}`}>
-//     {props.children}
-//   </div>
-// );
-
-
+var profileURL = "/profile/" + btnTrigger;
 
 
 const LandingBtns = (props) => {
@@ -22,7 +15,7 @@ const LandingBtns = (props) => {
       <Link to="/logout">
         <button type="button" className="btn btn-danger logoutBtn">Logout</button>
       </Link>
-      <Link to="/home">
+      <Link to={profileURL}>
         <button type="button" className="btn btn-primary homeBtn">Home</button>
       </Link>
     </div>

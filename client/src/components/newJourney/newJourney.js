@@ -3,11 +3,11 @@ import AuthService from '../Auth/AuthService';
 import API from '../../utils/API';
 import withAuth from '../Auth/withAuth';
 import Footer from '../Footer/Footer';
-import "./newGoal.css";
+import "./newJourney.css";
 
 
 
-class Goal extends Component {
+class Journey extends Component {
 
 
     constructor() {
@@ -28,12 +28,9 @@ class Goal extends Component {
 
     componentDidMount() {
         console.log(this.props)
-        API.getUser(this.props.user.id).then(res => {
-            this.setState({
-                id: this.props.user.id,
-            })
+        this.setState({
+            id: this.props.user.id
         })
-
     }
 
     handleGoToProfile = event => {
@@ -44,12 +41,12 @@ class Goal extends Component {
     handleFormSubmit = event => {
         event.preventDefault();
         console.log(this.state.id);
-        API.addGoal(this.state.journeyName, this.state.journeySummary, this.state.completeBy, this.props.user.email)
+        API.addJourney(this.state.journeyName, this.state.journeySummary, this.state.completeBy, this.props.user.email, this.state.id)
             .then(res => {
                 console.log(res.data);
                 // once the user has signed up
                 // send them to the login page
-                alert("Goal Added!");
+                alert("Journey Added!");
                 this.refs.form.reset();
             })
             .catch(err => alert(err));
@@ -59,7 +56,7 @@ class Goal extends Component {
     render() {
         return (
             <div className="container">
-                <h1>Add a Goal!</h1>
+                <h1>Add a Journey!</h1>
                 <form onSubmit={this.handleFormSubmit} ref='form'>
                     <div className="form-group">
                         <label htmlFor="firstStep">Journey Name:</label>
@@ -97,4 +94,4 @@ class Goal extends Component {
     }
 }
 
-export default withAuth(Goal);
+export default withAuth(Journey);

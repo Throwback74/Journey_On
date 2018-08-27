@@ -1,1 +1,1 @@
-export { default } from "./Cal";
+export * from "./Cal";

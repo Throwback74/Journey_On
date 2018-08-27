@@ -1,81 +1,153 @@
-import React, { Component } from 'react';
-import './react-cal.css';
-import './Cal.css';
+import React, { Component } from "react";
+import Calendar from "react-big-calendar";
+import moment from "moment";
+import API from '../../../utils/API';
 import AuthService from '../../Auth/AuthService';
 import withAuth from '../../Auth/withAuth';
-import InfiniteCalendar, {
-  Calendar,
-  withRange,
-  withMultipleDates,
-  defaultMultipleDateInterpolation
-} from 'react-infinite-calendar';
-// import 'react-infinite-calendar/styles.css';
-
-
-const CalendarWithRange = withRange(Calendar);
+import "./Cal.css";
+import "react-big-calendar/lib/css/react-big-calendar.css";
 const Auth = new AuthService();
+const idArr = []; 
+const newArr = [];
+var journeyID;
 
-var today = new Date();
-var lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
+
+Calendar.setLocalizer(Calendar.momentLocalizer(moment));
 
 class Cal extends Component {
-
   state = {
-    userId: this.props.user.id,
-    profileLink: "",
-    date: new Date(),
+    events: [
+      {
+        start: new Date(),
+        end: new Date(moment().add(1, "days")),
+        title: "Some title"
+      }
+    ],
+    eventsArr: [],
+    journeyArray: [],
+    journeyIds: []
   };
 
-  handleLogout = () => {
-    Auth.logout();
-    this.props.history.replace('/signup');
-  };
+  componentWillMount() {
+    API.getUser(this.props.user.id).then(res => {
+        console.log(res)
+        
+        for (let i = 0; i < res.data.journeys.length; i++) {
+            newArr.push(res.data.journeys[i].journeyName)
+            idArr.push(res.data.journeys[i]._id)
+        }
+        journeyID = res.data.journeys[0]._id;
+        console.log(res.data.journeys[0]._id);
+        console.log(idArr)
+        this.setState({ 
+          journeyArray: newArr,
+          journeyIds: idArr
+        })
+        return journeyID
+    }).then(data => {
+    console.log(data);
+      this.loadTask(data);
+  })
+  console.log(this.state.eventsArr);
+  }
+  // data.completeBy
+
+  loadTask (data) {
+    if(Auth.loggedIn()){
+      // var journeyID = this.props.journeyIds[0];
+      console.log(journeyID)
+      API.loadTasks(journeyID).then(res => {
+              console.log("loadtasksRes", res);
+              const eventsArr =[];
+                    for (let i = 0; i < res.data.tasks.length; i++) {
+                  eventsArr.push(res.data.tasks[i])
+                  
+              }
+
+              this.setState({ 
+                eventsArr: eventsArr,
+                events: [
+                  {
+                    start: new Date(),
+                    end: new Date(eventsArr[0].data.completeBy),
+                    title: "Some title"
+                  }
+                ]
+              })
+            }).catch(err => {
+              console.log(err);
+            })
+        }
+    }
+  
+  
+//   componentDidMount() {
+//     console.log(this.props.journeyIds);
+//     var journeyID = this.props.journeyIds[0];
+//     API.loadTasks(journeyID).then(res => {
+//       console.log("loadtasksRes", res);
+//       const eventsArr =[];
+//             for (let i = 0; i < res.data.tasks.length; i++) {
+//           eventsArr.push(res.data.tasks[i])
+//       }
+//       this.setState({ eventsArr: eventsArr })
+//     }).catch(err => {
+//       console.log(err);
+//     })
+// }
+
+  // componentDidMount() {
+  //   console.log("journeyID", this.state.journeyIds[0])
+  //   API.loadTasks(this.state.journeyIds[0]).then(res => {
+  //     console.log("loadtasksRes", res);
+  //     const eventsArr =[];
+  //           for (let i = 0; i < res.data.tasks.length; i++) {
+  //         eventsArr.push(res.data.tasks[i])
+  //     }
+  //     this.setState({ eventsArr: eventsArr })
+  //   }).catch(err => {
+  //     console.log(err);
+  //   })};
+
+// DO THIS EXCEPT FOR SEARCHING JOURNEY MODEL FOR TASKS
+//   componentWillMount() {
+//     API.getUser(this.props.user.id).then(res => {
+//         console.log(res)
+//         const newArr = []
+//         for (let i = 0; i < res.data.journeys.length; i++) {
+//             newArr.push(res.data.journeys[i].journeyName)
+//         }
+//         this.setState({ journeyArray: newArr })
+//     })
+// }
 
 
-  onChange = date => this.setState({ date });
+  // componentDidMount() {
+  //   API.loadTasks(this.props.user.id).then(res => {
+  //     this.setState({
+  //       username: res.data.username,
+  //       email: res.data.email
+  //     })
+  //   });
+  // }
 
 
   render() {
     return (
-      <div className="Cal">
-        <div className="Cal-header">
+      <div className="App">
+        <header className="App-header">
           
-          <h2>Welcome {this.props.user.email}</h2>
-          <p className="App-intro">
-          <button type="button" className="btn btn-danger" onClick={this.handleLogout}>Logout</button>
+          <h1 className="App-title">{this.props.journeyArray[0]}{this.props.journeyIds[0]}</h1>
+        </header>
+        <p className="App-intro">
+          To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        </div>
-        <div className="container-fluid cal-container">
-        {/* <InfiniteCalendar
-            width={400}
-            height={600}
-            selected={today}
-            disabledDays={[0,6]}
-            minDate={lastWeek}
-          /> */}
-
-        <InfiniteCalendar
-            className="chain"
-            displayOptions={{
-              layout: 'landscape',
-              showOverlay: false,
-              shouldHeaderAnimate: true
-            }}
-            width={1200}
-            height={600}
-            minDate={lastWeek}
-            Component={withMultipleDates(Calendar)}
-            selected={[
-              new Date(2018, 8, 16),
-              new Date(),
-              new Date(2018, 9, 2)
-            ]}
-            locale={{
-              headerFormat: 'MMM Do',
-            }}
-            interpolateSelection={defaultMultipleDateInterpolation}
-          />
-        </div>
+        <Calendar
+          defaultDate={new Date()}
+          defaultView="month"
+          events={this.state.events}
+          style={{ height: "100vh" }}
+        />
       </div>
     );
   }
