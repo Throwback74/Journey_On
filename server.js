@@ -167,17 +167,19 @@ app.post('/api/addtask', (req, res) => {
   db.Task.create(req.body)
     .then(function (dbTask) {
       if(dbTask){
-        res.json(dbTask)
+        return db.Journey.findByIdAndUpdate(req.body.journeyId, { $push: { tasks: dbTask._id } }, { new: true });
       }else{
-        res.status(404).send({
+       return res.status(404).send({
           success: false,
           message: 'No user found'
         });
       }
+    }).then(dbJourney => {
+      res.json(dbJourney);
     }).catch(function (err) {
           // If an error occurs, send it back to the client
           // res.json(err);
-          console.log(err);
+          res.status(400).send(err);
         });
     });
 

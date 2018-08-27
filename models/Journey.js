@@ -20,25 +20,21 @@ let Journey = new Schema({
     required: true
   },
   userId: {
-    type:String,
-    required:true,
+    type: String,
+    required: true,
     trim: true
-},
-tasks: [
-  {
+  },
+  tasks: [{
     type: Schema.Types.ObjectId,
     ref: "Task"
-  }
-],
-videos: [
-  {
+  }],
+  videos: [{
     type: Schema.Types.ObjectId,
     ref: "Video"
-  }
-]
-},{
+  }]
+}, {
   timestamps: true
-  });
+});
 
 
-module.exports = mongoose.model('Journey', Journey, 'tasks', 'videos');
+module.exports = mongoose.model('Journey', Journey);
