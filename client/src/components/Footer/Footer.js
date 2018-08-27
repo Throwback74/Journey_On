@@ -6,13 +6,7 @@ const Footer = (props) => (
         <div className="ffoot">
             <div className="fcontainer">
                 <div className="row">
-                    <div className="col l6 s12 fabout">
-                        <p className="fgrey-text">Press</p>
-                        <p className="fgrey-text">Contact</p>
-                        <p className="fgrey-text">Folow us</p>
-                    </div>
                     <div className="col l4 offset-l2 s12">
-                        <h5 className="fwhite-text">Newsletter</h5>
                         <p className="fsignupEmail">Sign up to our newsletter and stay up to date.</p>
                         <ul className="fdotts">
                             <li><a className="fgrey-text text-lighten-3" href="https://www.facebook.com">Facebook</a></li>
@@ -22,7 +16,6 @@ const Footer = (props) => (
                         </ul>
                     </div>
                 </div>
-                <h1 className="ffooterTitle">Journey</h1>
             </div>
             <div className="ffooter-copyright">
                 <div className="container">

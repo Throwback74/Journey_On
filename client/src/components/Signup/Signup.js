@@ -82,7 +82,7 @@ class Signup extends Component {
           <button type="submit" className="btn btn-primary">Submit</button>
         </form>
         <p className="link"><Link class="linkThis"to="/login">Go to Login</Link></p>
-        {/* <Footer /> */}
+        {/* { <Footer /> } */}
       </div>
     );
   }

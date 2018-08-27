@@ -1,6 +1,7 @@
 .signupContainer {
     background-image: linear-gradient(55deg,#488192 25%,#b3d2d8);
     height: 100vh;
+    bottom: 0;
     }
 
 
