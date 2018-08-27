@@ -22,9 +22,9 @@ export default {
   //   return axios.get(`/api/videos/${Videoid}`)
   // },
 
-  // populateAll: (id) => {
-  //   return axios.get(`/api/populate/${id}`)
-  // },
+  populateAll: (id) => {
+    return axios.get(`/api/populate/${id}`)
+  },
 //Todo Pass in Task ID instead of User ID for populate videos on profile page
   populateVideos: (taskId) => {
     return axios.get(`/api/video/${taskId}`)

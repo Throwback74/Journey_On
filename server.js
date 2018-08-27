@@ -402,19 +402,17 @@ app.get('/api/username/:id', isAuthenticated, (req, res) => {
   }).catch(err => res.status(400).send(err));
 });
 
-app.get('api/test2/:id', (req, res) => {
+app.get('/api/populate/:id', (req, res) => {
   db.User.findById(req.params.id)
     .populate({
-      path: "Journey",
+      path: "journeys",
       populate: {
-        path: "Task"
+        path: "tasks videos"
       }
     }).then(dbUser => {
       res.json(dbUser)
     }).catch(err => res.status(400).send(err));
 });
-
-
 
 // app.get('/api/all/:id', (req, res) => {
 //   db.User.findById(req.params.id).populate("journeys").populate("tasks").populate("videos").lean().exec((err, all) => {
@@ -462,7 +460,6 @@ app.get('/api/video/:taskId', (req, res) => {
 app.get('/api/test/:id', isAuthenticated, (req, res) => {
   db.User.findById(req.params.id)
     .populate("journeys")
-    .populate("journeys.tasks")
     .exec((err, journeys) => {
     if (journeys) {
       res.json(journeys);
