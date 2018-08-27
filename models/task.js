@@ -18,12 +18,18 @@ let Task = new Schema({
         required: true,
         trim: true
     },
+    date: { 
+        type: Date,
+        default: Date.now
+    },
     journeyId: {
         type: String,
         required: true,
         trim: true
     }
-});
+},{
+    timestamps: true
+    });
 
 
 module.exports = mongoose.model('Task', Task);
