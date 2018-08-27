@@ -18,7 +18,7 @@ let Task = new Schema({
         required: true,
         trim: true
     },
-    date: { 
+    taskDate: { 
         type: Date,
         default: Date.now
     },
@@ -32,4 +32,4 @@ let Task = new Schema({
     });
 
 
-module.exports = mongoose.model('Task', Task);
+module.exports = mongoose.model('Task', Task, 'videos');

@@ -14,8 +14,20 @@ export default {
     return axios.get(`/api/gettasks/${journeyId}`)
   },
 
-  getTasks: (journeyId) => {
+  populateTasks: (journeyId) => {
     return axios.get(`/api/populateTasks/${journeyId}`)
+  },
+
+  // getVideos: (Videoid) => {
+  //   return axios.get(`/api/videos/${Videoid}`)
+  // },
+
+  // populateAll: (id) => {
+  //   return axios.get(`/api/populate/${id}`)
+  // },
+//Todo Pass in Task ID instead of User ID for populate videos on profile page
+  populateVideos: (taskId) => {
+    return axios.get(`/api/video/${taskId}`)
   },
 
   // sign up a user to our service
@@ -27,8 +39,8 @@ export default {
     return axios.post(`/api/update`, {_id: id, updatedAt: Date.now()});
   },
 
-  addGoal: (journeyName, journeySummary, completeBy, email) => {
-    return axios.post('/api/addgoal', {journeyName: journeyName, journeySummary: journeySummary, completeBy: completeBy, email: email});
+  addGoal: (journeyName, journeySummary, completeBy, email, userID) => {
+    return axios.post('/api/addgoal', { journeyName: journeyName, journeySummary: journeySummary, completeBy: completeBy, email: email, userID: userID });
   },
 
   loginUser: (email, password) => {
@@ -39,13 +51,11 @@ export default {
     return axios.post('/api/deletejourney', {email: email})
   },
 
-  addTask: (taskTitle, taskDescription, taskLabel, journeyId) => {
-    return axios.post('/api/addtask', {taskTitle: taskTitle, taskDescription: taskDescription, taskLabel: taskLabel, journeyId: journeyId});
+  addTask: (taskTitle, taskDescription, journeyId) => {
+    return axios.post('/api/addtask/', {taskTitle: taskTitle, taskDescription: taskDescription, taskDate: Date.now(), journeyId: journeyId});
   },
 
   addVideo: (videoLink, journeyId) => {
-    return axios.post('/api/videos', {videoLink: videoLink, journeyId: journeyId});
+    return axios.put('/api/videos', {videoLink: videoLink, journeyId: journeyId});
   }
 };
-
-//

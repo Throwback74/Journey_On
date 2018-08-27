@@ -45,7 +45,7 @@ class Kanban extends Component {
     };
 
     async componentWillMount() {
-
+        // console.log(this.props.journey.id);
 
         
 
@@ -87,7 +87,7 @@ class Kanban extends Component {
     };
 
     populateTasks (journeyArray) {
-        API.getTasks(journeyArray).then(res => {
+        API.populateTasks(journeyID).then(res => {
             console.log("getTasksres", res);
         })
     }
@@ -128,7 +128,7 @@ class Kanban extends Component {
     shouldReceiveNewData = (card) => {
         console.log('New card has been added');
         console.log(card); //nextData
-        
+        console.log(card.id)
     };
 
     handleCardAdd = (card, laneId) => {
@@ -138,14 +138,16 @@ class Kanban extends Component {
         console.log(this.props.journey.id);
         // When new card is added on trello board, add card to database
         
-        API.addTask(card.title, card.description, card.id, this.props.journey.id)
+        API.addTask(card.title, card.description, journeyID)
             .then(res => {
                 console.log("Whats the journeyID?", this.props.journeyArray[0].id);
                 console.log(res.data); // delete this later?
                 alert("Task Added!"); // delete alert later?
 
-            })
-            .catch(err => alert(err));
+            }).catch(err => {
+                console.log(err.response);
+                alert(err.response.data.message)
+            });
     };
 
 

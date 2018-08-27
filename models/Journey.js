@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt-nodejs');
 
-let UserGoal = new Schema({
+
+let Journey = new Schema({
   journeyName: {
     type: String,
     required: true,
@@ -18,22 +19,14 @@ let UserGoal = new Schema({
     default: Date.now,
     required: true
   },
-  tasks: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Task"
-    }
-  ],
-  videos: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Video"
-    }
-  ]
-
+  userId: {
+    type:String,
+    required:true,
+    trim: true
+}
 },{
   timestamps: true
   });
 
 
-module.exports = mongoose.model('Journey', UserGoal, 'tasks', 'videos');
+module.exports = mongoose.model('Journey', Journey);

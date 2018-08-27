@@ -17,6 +17,7 @@ class List extends Component {
                 newArr.push(res.data.journeys[i].journeyName)
             }
             this.setState({ journeyArray: newArr })
+            console.log(this.state.journeyArray);
         })
     }
     listJourneys = () => {

@@ -44,7 +44,7 @@ class Goal extends Component {
     handleFormSubmit = event => {
         event.preventDefault();
         console.log(this.state.id);
-        API.addGoal(this.state.journeyName, this.state.journeySummary, this.state.completeBy, this.props.user.email)
+        API.addGoal(this.state.journeyName, this.state.journeySummary, this.state.completeBy, this.props.user.email, this.state.id)
             .then(res => {
                 console.log(res.data);
                 // once the user has signed up

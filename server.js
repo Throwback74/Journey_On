@@ -17,9 +17,9 @@ const PORT = process.env.PORT || 3001;
 console.log(process.env.USER)
 
 
-cron.schedule('* * * * *', function () {
-  console.log('running a task every minute');
-});
+// cron.schedule('* * * * *', function () {
+//   console.log('running a task every minute');
+// });
 
 // Setting CORS so that any website can
 // Access our API
@@ -52,6 +52,7 @@ app.post('/api/addgoal', (req, res) => {
       // If a Book was created successfully, find one library (there's only one) and push the new Book's _id to the Library's `books` array
       // { new: true } tells the query that we want it to return the updated Library -- it returns the original by default
       // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
+      console.log('added journey',dbJourneys)
       return db.User.findOneAndUpdate({
         email: req.body.email
       }, {
@@ -72,33 +73,225 @@ app.post('/api/addgoal', (req, res) => {
     });
 });
 
+// User.findById(userId)
+//   .then((user) => {
+//     const address = user.addresses.id(addressId); // returns a matching subdocument
+//     address.set(req.body); // updates the address while keeping its schema       
+//     // address.zipCode = req.body.zipCode; // individual fields can be set directly
+
+//     return user.save(); // saves document with subdocuments and triggers validation
+//   })
+//   .then((user) => {
+//     res.send({ user });
+//   })
+//   .catch(e => res.status(400).send(e));
+
+//testing change to single collection see other code below
+// app.post('/api/addtask/', (req, res) => {
+//   var journeyId = req.body.journeyId;
+//   var taskUpdates = {};
+//   taskUpdates.taskTitle = req.body.taskTitle;
+//   taskUpdates.taskDescription = req.body.taskDescription;
+//   taskUpdates.taskDate = req.body.taskDate;
+  
+//   db.Journey.findById(journeyId).then(Journey => {
+//     const Tasks = Journey.Tasks;
+//     Tasks.create(taskUpdates);
+//     return Journey.save;
+//   }).then(function (Journey) {
+//     res.json(Journey);
+//   }).catch(err => res.status(400).send(err));
+// });
+
+// app.post('/api/addtask', (req, res) => {
+//   var journeyId = req.body.journeyId;
+//   var taskUpdates = {};
+//   taskUpdates.taskTitle = req.body.taskTitle;
+//   taskUpdates.taskDescription = req.body.taskDescription;
+//   taskUpdates.taskDate = req.body.taskDate;
+//     db.Journey.findByIdAndUpdate(journeyId, 
+//       {$push: {Tasks: {
+//       taskTitle: taskUpdates.taskTitle,
+//       taskDescription: taskUpdates.taskDescription,
+//       taskDate: taskUpdates.taskDate
+//     }}
+//   }).then(function(task) {
+//       if(task){
+//         res.json(task);
+//       }else if(err) {
+//         res.status(404).send({
+//           success: false,
+//           message: 'No user found'
+//         });
+//       } else {
+//         res.status(500).send({
+//           success: false,
+//           message: 'EVERYTHING BROKE'
+//         });
+//       }
+//     }).catch(err => res.status(400).send(err));
+//   });
+// Post.findOneAndUpdate(
+//   {"_id": req.params.id}, 
+//   {$push: {comments: {
+//       comment: "Hello World",
+//       user: "933ujrfn393r"
+//   }}
+// }).then(function (post) {
+//   console.log(post);
+//   res.json({success: true});
+// });
+
+
+// db.Journey.Task.create(req.body)
+//     .then(function (dbTask) {
+//       return db.Journey.findOneAndUpdate({
+//         _id: req.params.id
+//       }, {
+//         $push: {
+//           tasks: dbTask._id
+//         }
+//       }, {
+//         new: true
+//       });
+//     })
+//     .then(function (dbUser) {
+//       // If the Library was updated successfully, send it back to the client
+//       res.json(dbUser);
+//     })
+//     .catch(function (err) {
+//       // If an error occurs, send it back to the client
+//       // res.json(err);
+//       console.log(err);
+//     });
+// });
+
 app.post('/api/addtask', (req, res) => {
   db.Task.create(req.body)
     .then(function (dbTask) {
-      // If a Book was created successfully, find one library (there's only one) and push the new Book's _id to the Library's `books` array
-      // { new: true } tells the query that we want it to return the updated Library -- it returns the original by default
-      // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
-      // res.json(dbTasks);
-      return db.Journey.findOneAndUpdate({
-        _id: req.params.id
-      }, {
-        $push: {
-          tasks: dbTask._id
-        }
-      }, {
-        new: true
-      });
-    })
-    .then(function (dbUser) {
-      // If the Library was updated successfully, send it back to the client
-      res.json(dbUser);
-    })
-    .catch(function (err) {
-      // If an error occurs, send it back to the client
-      // res.json(err);
-      console.log(err);
+      if(dbTask){
+        res.json(dbTask)
+      }else{
+        res.status(404).send({
+          success: false,
+          message: 'No user found'
+        });
+      }
+    }).catch(function (err) {
+          // If an error occurs, send it back to the client
+          // res.json(err);
+          console.log(err);
+        });
     });
-});
+
+
+    app.post('/api/videos', (req, res) => {
+      db.Video.create(req.body)
+        .then(function (dbVideos) {
+          if(dbVideos) {
+          res.json(dbVideos);
+          }else{
+            res.status(404).send({
+              success: false,
+              message: 'No user found'
+            });
+          }
+          // return db.Videos.findOneAndUpdate({})
+        }).catch(function (err) {
+          // If an error occurs, send it back to the client
+          // res.json(err);
+          console.log(err);
+        });
+    });
+
+
+
+//       return db.Journey.findOneAndUpdate({
+//         _id: journeyId
+//       }, {
+//         $push: {
+//           tasks: dbTask._id
+//         }
+//       }, {
+//         new: true
+//       });
+//     })
+//     .then(function (dbUser) {
+//       // If the Library was updated successfully, send it back to the client
+//       res.json(dbUser);
+//     })
+//     .catch(function (err) {
+//       // If an error occurs, send it back to the client
+//       // res.json(err);
+//       console.log(err);
+//     });
+// });
+
+  app.put('/api/videos', (req, res) => {
+    var journeyId = req.body.journeyId;
+    var videoUpdates = {};
+    videoUpdates.videoLink = req.body.videoLink;
+    db.Journey.findByIdAndUpdate(journeyId, {$set: 
+      videoUpdates
+    }, { new: true }, function(err, video) {
+      if(err) {
+        res.status(404).send({
+          success: false,
+          message: 'No user found'
+        });
+      } else {
+        res.json(video);
+      }
+    });
+  });
+
+    //   db.Video.create(req.body)
+    //     .then(function (dbVideos) {
+    //       res.json(dbVideos);
+    //       // return db.Videos.findOneAndUpdate({})
+    //     });
+    // });
+
+
+//   MyModel.findOneAndUpdate(
+//     {foo: 'bar'}, // find a document with that filter
+//     modelDoc, // document to insert when nothing was found
+//     {upsert: true, new: true, runValidators: true}, // options
+//     function (err, doc) { // callback
+//         if (err) {
+//             // handle error
+//         } else {
+//             // handle document
+//         }
+//     }
+// );
+
+  // db.Journey.create(req.body)
+  //   .then(function (dbTask) {
+  //     // If a Book was created successfully, find one library (there's only one) and push the new Book's _id to the Library's `books` array
+  //     // { new: true } tells the query that we want it to return the updated Library -- it returns the original by default
+  //     // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
+  //     // res.json(dbTasks);
+  //     return db.Journey.findOneAndUpdate({
+  //       _id: req.params.id
+  //     }, {
+  //       $push: {
+  //         tasks: dbTask._id
+  //       }
+  //     }, {
+  //       new: true
+  //     });
+  //   })
+  //   .then(function (dbUser) {
+  //     // If the Library was updated successfully, send it back to the client
+  //     res.json(dbUser);
+  //   })
+  //   .catch(function (err) {
+  //     // If an error occurs, send it back to the client
+  //     // res.json(err);
+  //     console.log(err);
+  //   });
+
 
 
 // function getUserWithPosts(username){
@@ -108,11 +301,42 @@ app.post('/api/addtask', (req, res) => {
 //     })
 // }
 
-
 app.get('/api/populateTasks/:id', (req, res) => {
   db.Journey.findById(req.params.id).populate("tasks").exec((err, tasks) => {
+    if(tasks){
     console.log("Populated Journey ", tasks)
+    }else if(err) {
+      res.status(500).send({
+        success: false,
+        message: err
+      })
+    } else{
+          res.status(404).send({
+            success: false,
+            message: 'No user found'
+          });
+    }
   }).catch(err => res.status(400).send(err));
+});
+
+  // app.get('/api/test/:id', isAuthenticated, (req, res) => {
+  //   db.User.findById(req.params.id).populate("journeys").exec((err, journeys) => {
+  //     if(journeys){
+  //     console.log("Populated User ", journeys)
+  //   }else if(err) {
+  //     res.status(500).send({
+  //       success: false,
+  //       message: err
+  //     })
+  //   }
+  //   else{
+  //     res.status(404).send({
+  //       success: false,
+  //       message: 'No user found'
+  //     });
+  //   }
+  //   }).catch(err => res.status(400).send(err));
+  // });
   
   
 //   // then(data => {
@@ -125,7 +349,7 @@ app.get('/api/populateTasks/:id', (req, res) => {
 //         });
 //       }
 //     }).catch(err => res.status(400).send(err));
-});
+// });
 
   app.get('/api/gettasks/:journeyId', isAuthenticated, (req, res) => {
     db.Journey.findById(req.params.journeyId).then(data => {
@@ -176,13 +400,13 @@ app.get('/api/journeyCards/:id', (req, res) => {
   })
 });
 
-app.post('/api/videos', (req, res) => {
-  db.Video.create(req.body)
-    .then(function (dbVideos) {
-      res.json(dbVideos);
-      // return db.Videos.findOneAndUpdate({})
-    });
-});
+// app.post('/api/videos', (req, res) => {
+//   db.Video.create(req.body)
+//     .then(function (dbVideos) {
+//       res.json(dbVideos);
+//       // return db.Videos.findOneAndUpdate({})
+//     });
+// });
 
 app.get('/api/videos/:id', (req, res) => {
   db.Video.find({
@@ -248,20 +472,40 @@ app.post('/api/signup', (req, res) => {
 
 // Any route with isAuthenticated is protected and you need a valid token
 // to access
-app.get('/api/user/:id', isAuthenticated, (req, res) => {
-  db.User.findById(req.params.id)
-    .populate("journeys")
-    .then(data => {
-      if (data) {
-        res.json(data);
-      } else {
-        res.status(404).send({
-          success: false,
-          message: 'No user found'
-        });
-      }
-    }).catch(err => res.status(400).send(err));
-});
+// app.get('/api/user/:id', isAuthenticated, (req, res) => {
+//   db.User.findById(req.params.id)
+//     .populate("journeys")
+//     .then(data => {
+//       if (data) {
+//         res.json(data);
+//       } else {
+//         res.status(404).send({
+//           success: false,
+//           message: 'No user found'
+//         });
+//       }
+//     }).catch(err => res.status(400).send(err));
+// });
+
+// app.get('/api/user/:id', isAuthenticated, (req, res) => {
+//   db.User.findById(req.params.id).populate("journeys").exec((err, journeys) => {
+//     console.log("Populated User ", journeys)
+//   }).catch(err => res.status(400).send(err));
+// });
+  
+//   then(data => {
+//       if (data) {
+//         res.json(data);
+//       } else {
+//         res.status(404).send({
+//           success: false,
+//           message: 'No user found'
+//         });
+//       }
+//     }).catch(err => res.status(400).send(err));
+// });
+
+
 
 app.post('/api/deletejourney', isAuthenticated, (req, res) => {
   db.User.update({
@@ -291,18 +535,100 @@ app.get('/api/username/:id', isAuthenticated, (req, res) => {
   }).catch(err => res.status(400).send(err));
 });
 
-app.get('/api/test/:id', (req, res) => {
-  db.User.findById(req.params.id).populate("journeys").then(data => {
-    if (data) {
-      res.json(data);
-    } else {
-      res.status(404).send({
-        success: false,
-        message: 'No user found'
-      });
-    }
+// app.get('/api/all/:id', (req, res) => {
+//   db.User.findById(req.params.id).populate("journeys").populate("tasks").populate("videos").lean().exec((err, all) => {
+//   if(all) {
+//     console.log("Populated User ", all)
+//   }else if(err) {
+//     res.status(500).send({
+//       success: false,
+//       message: err
+//     })
+//   }
+//   else{
+//     res.status(404).send({
+//       success: false,
+//       message: 'No user found'
+//     });
+//   }
+//   }).catch(err => res.status(400).send(err));
+// });
+
+//Todo Pass in Task ID instead of User ID for populate videos on profile page
+app.get('/api/video/:taskId', (req, res) => {
+  db.Task.findById(req.params.taskId).populate("videos").exec((err, videos) => {
+  if(videos) {
+    console.log("Populated Task ", videos)
+  }else if(err) {
+    res.status(500).send({
+      success: false,
+      message: err
+    })
+  }
+  else{
+    res.status(404).send({
+      success: false,
+      message: 'No Task found'
+    });
+  }
   }).catch(err => res.status(400).send(err));
 });
+
+//   }).then(dbVideos => {
+//     res.json(dbVideos);
+//   })
+// });
+
+app.get('/api/test/:id', isAuthenticated, (req, res) => {
+  db.User.findById(req.params.id).populate("journeys").exec((err, journeys) => {
+    if(journeys){
+    console.log("Populated User ", journeys)
+  }else if(err) {
+    res.status(500).send({
+      success: false,
+      message: err
+    })
+  }
+  else{
+    res.status(404).send({
+      success: false,
+      message: 'No user found'
+    });
+  }
+  })
+});
+
+// app.post('/api/videos', (req, res) => {
+//   db.Video.create(req.body)
+//     .then(function (dbVideos) {
+//       res.json(dbVideos);
+//       // return db.Videos.findOneAndUpdate({})
+//     });
+// });
+
+// app.get('/api/videos/:id', (req, res) => {
+//   db.Video.find({
+//     journeyId: req.params.id
+//   }).then(dbVideos => {
+//     res.json(dbVideos);
+//   })
+// });
+
+
+
+//add back populate("journeys")
+// app.get('/api/test/:id', (req, res) => {
+//   db.User.findById(req.params.id).populate("journeys").then(data => {
+//     if (data) {
+//       res.json(data);
+//     } else {
+//       res.status(404).send({
+//         success: false,
+//         message: 'No user found'
+//       });
+//     }
+//   }).catch(err => res.status(400).send(err));
+// });
 
 app.post('/api/send/email', (req, res) => {
   var transporter = nodemailer.createTransport({
@@ -370,59 +696,61 @@ app.get("/api/users", function (req, res) {
 var email = "corey.slade@gmail.com";
 var username = "Throwback74";
 
-cron.schedule('* * * * *', function () {
-  console.log("----------------------");
-  console.log("Running Cron Job");
-  var today = Date.now();
-  db.User.find()
-    .then(function (dbUser) {
-      // dbUser.map(users => (
-      //   console.log(users.updatedAt)
-      //   var Users = users;
-      // ))
-      for(let i = 0; i < dbUser.length; i++) {
-        var users = dbUser[i];
-        console.log(users.updatedAt - today);
-        console.log(users.email, users.username);
-        if(users.updatedAt - today > 434636190) {
-          var mailOptions = {
-            from: 'no_reply@journey_on-admin.com',
-            to: `${users.email}`,
-            subject: 'Sending Email using Node.js',
-            html: `<h2 style="text-align: center">Journey On <span> Journey Reminder Email</span></h2> 
-            <br><br>
-            <div>
-              <h4>Hi ${users.username},</h4>
-              <p>We miss you at <span style="font-weight: 700">Journey On</span>! It has been 5 days since you checked in on your Journey! Come see what you have coming up soon, and get some help meeting your goals!</p> 
-              <a href="www.JourneyOn.com">JourneyOn</a>
-            </div>
-            <hr>
-            <div style="text-align: center">
-              <h6>Looking Forward to seeing you again soon!</h6>
-              <p>Best Regards,</p>
-              <p>JOURNEY ON TEAM</p>
-            </div>`
-          };
-          transporter.sendMail(mailOptions, function (error, info) {
-            if (error) {
-              res.send(error);
-              console.log(error);
-            } else {
-              res.send('Email sent: ' + info.response);
-              console.log("success!");
-            }
-          });
-        }else {
-          console.log("no users to email")
-        }
 
-  }})
-  .catch(function (err) {
-    console.log(err);
-  });
+//TODO SET UP SCHEDULE PROPERLY AND TURN BACK ON
+// cron.schedule('* * * * *', function () {
+//   console.log("----------------------");
+//   console.log("Running Cron Job");
+//   var today = Date.now();
+//   db.User.find()
+//     .then(function (dbUser) {
+//       // dbUser.map(users => (
+//       //   console.log(users.updatedAt)
+//       //   var Users = users;
+//       // ))
+//       for(let i = 0; i < dbUser.length; i++) {
+//         var users = dbUser[i];
+//         console.log(users.updatedAt - today);
+//         console.log(users.email, users.username);
+//         if(users.updatedAt - today > 434636190) {
+//           var mailOptions = {
+//             from: 'no_reply@journey_on-admin.com',
+//             to: `${users.email}`,
+//             subject: 'Sending Email using Node.js',
+//             html: `<h2 style="text-align: center">Journey On <span> Journey Reminder Email</span></h2> 
+//             <br><br>
+//             <div>
+//               <h4>Hi ${users.username},</h4>
+//               <p>We miss you at <span style="font-weight: 700">Journey On</span>! It has been 5 days since you checked in on your Journey! Come see what you have coming up soon, and get some help meeting your goals!</p> 
+//               <a href="www.JourneyOn.com">JourneyOn</a>
+//             </div>
+//             <hr>
+//             <div style="text-align: center">
+//               <h6>Looking Forward to seeing you again soon!</h6>
+//               <p>Best Regards,</p>
+//               <p>JOURNEY ON TEAM</p>
+//             </div>`
+//           };
+//           transporter.sendMail(mailOptions, function (error, info) {
+//             if (error) {
+//               res.send(error);
+//               console.log(error);
+//             } else {
+//               res.send('Email sent: ' + info.response);
+//               console.log("success!");
+//             }
+//           });
+//         }else {
+//           console.log("no users to email")
+//         }
+
+//   }})
+//   .catch(function (err) {
+//     console.log(err);
+//   });
 
   
-});
+// });
 
 
 app.post('/api/update', isAuthenticated, (req, res) => {
