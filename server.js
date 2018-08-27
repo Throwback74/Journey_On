@@ -177,7 +177,7 @@ app.post('/api/addtask', (req, res) => {
       } else {
         return res.status(404).send({
           success: false,
-          message: 'No user found'
+          message: 'No Journey found'
         });
       }
     }).then(dbJourney => {
@@ -194,119 +194,27 @@ app.post('/api/videos', (req, res) => {
   db.Video.create(req.body)
     .then(function (dbVideos) {
       if (dbVideos) {
-        res.json(dbVideos);
+        return db.Journey.findByIdAndUpdate(req.body.journeyId, {
+          $push: {
+            videos: dbVideos._id
+          }
+        }, {
+          new: true
+        });
       } else {
-        res.status(404).send({
+        return res.status(404).send({
           success: false,
-          message: 'No user found'
+          message: 'No Journey found'
         });
       }
-      // return db.Videos.findOneAndUpdate({})
+    }).then(dbJourney => {
+      res.json(dbJourney);
     }).catch(function (err) {
       // If an error occurs, send it back to the client
       // res.json(err);
-      console.log(err);
+      res.status(400).send(err);
     });
 });
-
-
-
-//       return db.Journey.findOneAndUpdate({
-//         _id: journeyId
-//       }, {
-//         $push: {
-//           tasks: dbTask._id
-//         }
-//       }, {
-//         new: true
-//       });
-//     })
-//     .then(function (dbUser) {
-//       // If the Library was updated successfully, send it back to the client
-//       res.json(dbUser);
-//     })
-//     .catch(function (err) {
-//       // If an error occurs, send it back to the client
-//       // res.json(err);
-//       console.log(err);
-//     });
-// });
-
-app.put('/api/videos', (req, res) => {
-  var journeyId = req.body.journeyId;
-  var videoUpdates = {};
-  videoUpdates.videoLink = req.body.videoLink;
-  db.Journey.findByIdAndUpdate(journeyId, {
-    $set: videoUpdates
-  }, {
-    new: true
-  }, function (err, video) {
-    if (err) {
-      res.status(404).send({
-        success: false,
-        message: 'No user found'
-      });
-    } else {
-      res.json(video);
-    }
-  });
-});
-
-//   db.Video.create(req.body)
-//     .then(function (dbVideos) {
-//       res.json(dbVideos);
-//       // return db.Videos.findOneAndUpdate({})
-//     });
-// });
-
-
-//   MyModel.findOneAndUpdate(
-//     {foo: 'bar'}, // find a document with that filter
-//     modelDoc, // document to insert when nothing was found
-//     {upsert: true, new: true, runValidators: true}, // options
-//     function (err, doc) { // callback
-//         if (err) {
-//             // handle error
-//         } else {
-//             // handle document
-//         }
-//     }
-// );
-
-// db.Journey.create(req.body)
-//   .then(function (dbTask) {
-//     // If a Book was created successfully, find one library (there's only one) and push the new Book's _id to the Library's `books` array
-//     // { new: true } tells the query that we want it to return the updated Library -- it returns the original by default
-//     // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
-//     // res.json(dbTasks);
-//     return db.Journey.findOneAndUpdate({
-//       _id: req.params.id
-//     }, {
-//       $push: {
-//         tasks: dbTask._id
-//       }
-//     }, {
-//       new: true
-//     });
-//   })
-//   .then(function (dbUser) {
-//     // If the Library was updated successfully, send it back to the client
-//     res.json(dbUser);
-//   })
-//   .catch(function (err) {
-//     // If an error occurs, send it back to the client
-//     // res.json(err);
-//     console.log(err);
-//   });
-
-
-
-// function getUserWithPosts(username){
-//   return User.findOne({ username: username })
-//     .populate('posts').exec((err, posts) => {
-//       console.log("Populated User " + posts);
-//     })
-// }
 
 app.get('/api/populateTasks/:id', (req, res) => {
   db.Journey.findById(req.params.id).populate("tasks").exec((err, tasks) => {
@@ -345,19 +253,6 @@ app.get('/api/populateTasks/:id', (req, res) => {
 //   }).catch(err => res.status(400).send(err));
 // });
 
-
-//   // then(data => {
-//       if (data) {
-//         res.json(data);
-//       } else {
-//         res.status(404).send({
-//           success: false,
-//           message: 'No Journey found'
-//         });
-//       }
-//     }).catch(err => res.status(400).send(err));
-// });
-
 app.get('/api/gettasks/:journeyId', isAuthenticated, (req, res) => {
   db.Journey.findById(req.params.journeyId).then(data => {
     if (data) {
@@ -372,33 +267,6 @@ app.get('/api/gettasks/:journeyId', isAuthenticated, (req, res) => {
 });
 
 
-
-
-// app.get('/api/getjourneyname/:id/:journey', isAuthenticated, (req, res) => {
-//   db.User.findOne({ _id: req.params.id }).then(data => {
-//     if (data) {
-//       res.json(data);
-//     } else {
-//       res.status(404).send({
-//         success: false,
-//         message: 'No user found'
-//       });
-//     }
-//   }).catch(err => res.status(400).send(err));
-// });
-// app.get('/api/getjourneyname/:id/', isAuthenticated, (req, res) => {
-// db.User.find({'journeys':mongoose.Types.ObjectId("5b8092b916b8bc457c5717a4")}).then(data => {
-//       if (data) {
-//         res.json(data);
-//       } else {
-//         res.status(404).send({
-//           success: false,
-//           message: 'No user found'
-//         });
-//       }
-//     }).catch(err => res.status(400).send(err));
-//   })
-
 app.get('/api/journeyCards/:id', (req, res) => {
   db.Task.find({
     journeyId: req.params.id
@@ -406,14 +274,6 @@ app.get('/api/journeyCards/:id', (req, res) => {
     res.json(dbTasks);
   })
 });
-
-// app.post('/api/videos', (req, res) => {
-//   db.Video.create(req.body)
-//     .then(function (dbVideos) {
-//       res.json(dbVideos);
-//       // return db.Videos.findOneAndUpdate({})
-//     });
-// });
 
 app.get('/api/videos/:id', (req, res) => {
   db.Video.find({
@@ -600,7 +460,10 @@ app.get('/api/video/:taskId', (req, res) => {
 // });
 
 app.get('/api/test/:id', isAuthenticated, (req, res) => {
-  db.User.findById(req.params.id).populate("journeys").exec((err, journeys) => {
+  db.User.findById(req.params.id)
+    .populate("journeys")
+    .populate("journeys.tasks")
+    .exec((err, journeys) => {
     if (journeys) {
       res.json(journeys);
     } else if (err) {
