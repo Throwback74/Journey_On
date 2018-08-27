@@ -22,10 +22,10 @@ let UserSchema = new Schema({
     type: String,
     required: true
   },
-  goals: [
+  journeys: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Goal"
+      ref: "Journey"
     }
   ]
 },{

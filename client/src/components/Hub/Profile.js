@@ -9,7 +9,11 @@ import Progress from "./Progress/Progress";
 import Kanban from "./Kanban/Kanban";
 import List from "./List/List";
 
-
+const idArr = [];
+const newArr = [];
+const taskArr = [];
+const taskIds = [];
+var journeyID;
 class Profile extends Component {
 
   state = {
@@ -21,11 +25,16 @@ class Profile extends Component {
     currentJourney: {
       id: '5b804dbbbeb1cc871c3c0ed8'
     },
+    journeyArray: [],
+    journeyIds: [],
+    taskIds: [],
+    taskArray: [],
     videoArr: []
   };
 
-  componentDidMount() {
-    console.log(this.props)
+  componentWillMount() {
+    console.log(this.props.user)
+    console.log(this.state.journeyArray)
     API.getUserName(this.props.user.id).then(res => {
       this.setState({
         username: res.data.username,
@@ -38,25 +47,93 @@ class Profile extends Component {
     // TODO: add the res.data to the videoArr's state
   };
 
-  //   listVideos = () => {
-  //     this.videoArr.map((video) =>
-  //         <li>{video}</li>
-  //     )
-  // }
 
-  //   addVideo = () => {
-  //     API.addVideo(this.state.videoUrl, this.state.currentJourney.id).then(function (res) {
-  //       console.log(res);
-  //       console.log(res.data.videoLink);
-  //       const newArr = []
-  //       newArr.push(res.data.videoLink)
+  //Todo Pass in Task ID instead of User ID for populate videos
+  componentDidMount() {
+    API.getUser(this.props.user.id).then(res => {
+      console.log(res)
+      for (let i = 0; i < res.data.journeys.length; i++) {
+        newArr.push(res.data.journeys[i].journeyName)
+        idArr.push(res.data.journeys[i]._id)
+      }
+      journeyID = res.data.journeys[0]._id;
+      console.log(res.data.journeys[0]._id);
+      console.log(idArr)
+      this.setState({
+        journeyArray: newArr,
+        journeyIds: idArr
+      })
+      console.log(journeyID)
+      return journeyID
+    }).then(data => {
+      console.log(data);
 
-  //       this.setState({ videoArr: newArr })
+      this.loadTasks();
+      this.populateAll();
+    })
+  }
 
-  //       this.listVideos(newArr);
-  //     })
+  loadTasks = (journeyID) => {
+    API.loadTasks(journeyID).then(res => {
+      console.log("loadtasksRes", res);
+      for (let i = 0; i < res.data.tasks.length; i++) {
+        taskArr.push(res.data.tasks[i]);
+        taskIds.push(res.data.tasks[i]._id);
+      }
+      this.setState({
+        taskArray: taskArr,
+        taskIds: taskIds
+      })
+      return taskIds
+    }).then(data => {
+      console.log('task data, ', data)
+      API.populateAll(this.props.user.id).then(res => {
+        console.log('populated All', res);
+      })
+    })
+  }
 
-  //   }
+  populateAll = () => {
+    API.populateAll(this.props.user.id).then(res => {
+      console.log('populated All', res);
+      this.setState({
+        videoArr: res.data.journeys[0].videos
+      })
+      this.listVideos(this.state.videoArr)
+    })
+  }
+  listVideos = () => {
+    this.state.videoArr.map((video) =>
+      <li>{video}</li>
+    )
+  }
+
+  addVideo = () => {
+    API.addVideo(this.state.videoUrl, journeyID).then(res => {
+      console.log(res);
+      alert("Video Added!");
+      this.populateAll()
+          
+        })
+      }
+
+      // newArr.push(res.data.videoLink)
+      // this.setState({ videoArr: newArr })
+      // this.listVideos(newArr);
+      // let videoData = res.data;
+      // let videoArr = [...this.state.videoArr, videoData];
+      // this.setState({
+      //   videoArr: videoArr
+      // });
+      // console.log(res);
+      // const tempArr = []
+      // for (var i = 0; i < res.data.videos.length; i++) {
+      //   tempArr.push(res.data.videos[i])
+      // }
+      // console.log(tempArr)
+      // console.log(res);
+      // this.setState({ videoArr: tempArr })
+      // this.listVideos(tempArr);
 
   getResources = () => {
     console.log("sup");
@@ -76,25 +153,6 @@ class Profile extends Component {
       progress: "show"
     })
   };
-
-  addVideo = () => {
-    API.addVideo(this.state.videoUrl, this.state.currentJourney.id).then(res => {
-      console.log(res.data);
-      let videoData = res.data;
-      let videoArr = [...this.state.videoArr, videoData];
-      this.setState({
-        videoArr: videoArr
-      });
-      // console.log(res.data.videoUrl);
-      // const newArr = []
-      // newArr.push(res.data.videoUrl);
-
-      // this.props.setState({ videoArr: newArr })
-
-      // this.props.listVideos(newArr);
-    });
-
-  }
 
   render() {
     return (
@@ -185,13 +243,6 @@ class Profile extends Component {
     )
   }
 }
-// createdAt: {
-//   type: Date,
-//   default: Date.now
-// },
-// last_login_date: {
-//   type: Date,
-//   default: Date.now
-// },
+
 
 export default withAuth(Profile);
