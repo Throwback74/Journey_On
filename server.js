@@ -49,9 +49,6 @@ const isAuthenticated = exjwt({
 app.post('/api/addgoal', (req, res) => {
   db.Journey.create(req.body)
     .then(function (dbJourneys) {
-      // If a Book was created successfully, find one library (there's only one) and push the new Book's _id to the Library's `books` array
-      // { new: true } tells the query that we want it to return the updated Library -- it returns the original by default
-      // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
       console.log('added journey',dbJourneys)
       return db.User.findOneAndUpdate({
         email: req.body.email
@@ -69,7 +66,7 @@ app.post('/api/addgoal', (req, res) => {
     })
     .catch(function (err) {
       // If an error occurs, send it back to the client
-      res.json(err);
+      res.status(400).json(err);
     });
 });
 
@@ -535,6 +532,18 @@ app.get('/api/username/:id', isAuthenticated, (req, res) => {
   }).catch(err => res.status(400).send(err));
 });
 
+app.get('api/test2/:id', (req, res) => {
+  db.User.findById(req.params.id)
+  .populate({
+    path: "Journey",
+    populate: {path: "Task"}
+  }).then(dbUser => {
+    res.json(dbUser)
+  }).catch(err => res.status(400).send(err));
+});
+
+
+
 // app.get('/api/all/:id', (req, res) => {
 //   db.User.findById(req.params.id).populate("journeys").populate("tasks").populate("videos").lean().exec((err, all) => {
 //   if(all) {
@@ -580,7 +589,7 @@ app.get('/api/video/:taskId', (req, res) => {
 // });
 
 app.get('/api/test/:id', isAuthenticated, (req, res) => {
-  db.User.findById(req.params.id).populate("journeys").exec((err, journeys) => {
+  db.User.findById(req.params.id).populate("Journey").exec((err, journeys) => {
     if(journeys){
     console.log("Populated User ", journeys)
   }else if(err) {

@@ -46,9 +46,8 @@ class Profile extends Component {
 
   //Todo Pass in Task ID instead of User ID for populate videos
   componentDidMount(){
-    API.getUser(this.props.user.id).then(res => {
+    API.getUserName(this.props.user.id).then(res => {
       console.log(res)
-        
       for (let i = 0; i < res.data.journeys.length; i++) {
           newArr.push(res.data.journeys[i].journeyName)
           idArr.push(res.data.journeys[i]._id)

@@ -28,12 +28,9 @@ class Goal extends Component {
 
     componentDidMount() {
         console.log(this.props)
-        API.getUser(this.props.user.id).then(res => {
-            this.setState({
-                id: this.props.user.id,
-            })
+        this.setState({
+            id: this.props.user.id
         })
-
     }
 
     handleGoToProfile = event => {

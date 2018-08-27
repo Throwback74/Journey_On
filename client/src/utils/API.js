@@ -40,7 +40,7 @@ export default {
   },
 
   addGoal: (journeyName, journeySummary, completeBy, email, userID) => {
-    return axios.post('/api/addgoal', { journeyName: journeyName, journeySummary: journeySummary, completeBy: completeBy, email: email, userID: userID });
+    return axios.post('/api/addgoal', { journeyName: journeyName, journeySummary: journeySummary, completeBy: completeBy, email: email, userId: userID });
   },
 
   loginUser: (email, password) => {
