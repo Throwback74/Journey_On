@@ -67,7 +67,7 @@ class Kanban extends Component {
             return journeyID
         }).then(data => {
             console.log("data", data);
-            this.populateTasks(data);
+            // this.populateTasks(data);
         })
 
                 
@@ -86,11 +86,11 @@ class Kanban extends Component {
 
     };
 
-    populateTasks (journeyArray) {
-        API.populateTasks(journeyID).then(res => {
-            console.log("getTasksres", res);
-        })
-    }
+    // populateTasks (journeyArray) {
+    //     API.populateTasks(journeyID).then(res => {
+    //         console.log("getTasksres", res);
+    //     })
+    // }
 
 
     // componentDidMount () {
@@ -137,17 +137,18 @@ class Kanban extends Component {
         console.dir(card);
         console.log(this.props.journey.id);
         // When new card is added on trello board, add card to database
+        console.log("addtask card info ", card, card.title, card.description);
         
-        API.addTask(card.title, card.description, journeyID)
-            .then(res => {
-                console.log("Whats the journeyID?", this.props.journeyArray[0].id);
-                console.log(res.data); // delete this later?
-                alert("Task Added!"); // delete alert later?
+        // API.addTask(card.title, card.description, journeyID)
+        //     .then(res => {
+        //         console.log("Whats the journeyID?", this.props.journeyArray[0].id);
+        //         console.log(res.data); // delete this later?
+        //         alert("Task Added!"); // delete alert later?
 
-            }).catch(err => {
-                console.log(err.response);
-                alert(err.response.data.message)
-            });
+        //     }).catch(err => {
+        //         console.log(err.response);
+        //         alert(err.response.data.message)
+        //     });
     };
 
 
@@ -155,7 +156,7 @@ class Kanban extends Component {
     render() {
         return (
             <div className="full-container">
-                <div id="modal-root"><PromptModal /></div>
+                <div id="modal-root"><PromptModal journeyID={this.journeyID}/></div>
                 <div className="whole-board">
                     <div className="Kanban-header text-center">
                         <h1><b>{this.props.journeyArray[0]}</b></h1>

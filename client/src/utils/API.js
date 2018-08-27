@@ -14,9 +14,9 @@ export default {
     return axios.get(`/api/gettasks/${journeyId}`)
   },
 
-  populateTasks: (journeyId) => {
-    return axios.get(`/api/populateTasks/${journeyId}`)
-  },
+  // populateTasks: (journeyId) => {
+  //   return axios.get(`/api/populateTasks/${journeyId}`)
+  // },
 
   // getVideos: (Videoid) => {
   //   return axios.get(`/api/videos/${Videoid}`)
@@ -39,8 +39,8 @@ export default {
     return axios.post(`/api/update`, {_id: id, updatedAt: Date.now()});
   },
 
-  addGoal: (journeyName, journeySummary, completeBy, email, userID) => {
-    return axios.post('/api/addgoal', { journeyName: journeyName, journeySummary: journeySummary, completeBy: completeBy, email: email, userId: userID });
+  addJourney: (journeyName, journeySummary, completeBy, email, userID) => {
+    return axios.post('/api/addJourney', { journeyName: journeyName, journeySummary: journeySummary, completeBy: completeBy, email: email, userId: userID });
   },
 
   loginUser: (email, password) => {

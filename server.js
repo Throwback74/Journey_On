@@ -46,7 +46,7 @@ const isAuthenticated = exjwt({
 });
 
 
-app.post('/api/addgoal', (req, res) => {
+app.post('/api/addJourney', (req, res) => {
   db.Journey.create(req.body)
     .then(function (dbJourneys) {
       console.log('added journey', dbJourneys)
@@ -69,99 +69,6 @@ app.post('/api/addgoal', (req, res) => {
       res.status(400).json(err);
     });
 });
-
-// User.findById(userId)
-//   .then((user) => {
-//     const address = user.addresses.id(addressId); // returns a matching subdocument
-//     address.set(req.body); // updates the address while keeping its schema       
-//     // address.zipCode = req.body.zipCode; // individual fields can be set directly
-
-//     return user.save(); // saves document with subdocuments and triggers validation
-//   })
-//   .then((user) => {
-//     res.send({ user });
-//   })
-//   .catch(e => res.status(400).send(e));
-
-//testing change to single collection see other code below
-// app.post('/api/addtask/', (req, res) => {
-//   var journeyId = req.body.journeyId;
-//   var taskUpdates = {};
-//   taskUpdates.taskTitle = req.body.taskTitle;
-//   taskUpdates.taskDescription = req.body.taskDescription;
-//   taskUpdates.taskDate = req.body.taskDate;
-
-//   db.Journey.findById(journeyId).then(Journey => {
-//     const Tasks = Journey.Tasks;
-//     Tasks.create(taskUpdates);
-//     return Journey.save;
-//   }).then(function (Journey) {
-//     res.json(Journey);
-//   }).catch(err => res.status(400).send(err));
-// });
-
-// app.post('/api/addtask', (req, res) => {
-//   var journeyId = req.body.journeyId;
-//   var taskUpdates = {};
-//   taskUpdates.taskTitle = req.body.taskTitle;
-//   taskUpdates.taskDescription = req.body.taskDescription;
-//   taskUpdates.taskDate = req.body.taskDate;
-//     db.Journey.findByIdAndUpdate(journeyId, 
-//       {$push: {Tasks: {
-//       taskTitle: taskUpdates.taskTitle,
-//       taskDescription: taskUpdates.taskDescription,
-//       taskDate: taskUpdates.taskDate
-//     }}
-//   }).then(function(task) {
-//       if(task){
-//         res.json(task);
-//       }else if(err) {
-//         res.status(404).send({
-//           success: false,
-//           message: 'No user found'
-//         });
-//       } else {
-//         res.status(500).send({
-//           success: false,
-//           message: 'EVERYTHING BROKE'
-//         });
-//       }
-//     }).catch(err => res.status(400).send(err));
-//   });
-// Post.findOneAndUpdate(
-//   {"_id": req.params.id}, 
-//   {$push: {comments: {
-//       comment: "Hello World",
-//       user: "933ujrfn393r"
-//   }}
-// }).then(function (post) {
-//   console.log(post);
-//   res.json({success: true});
-// });
-
-
-// db.Journey.Task.create(req.body)
-//     .then(function (dbTask) {
-//       return db.Journey.findOneAndUpdate({
-//         _id: req.params.id
-//       }, {
-//         $push: {
-//           tasks: dbTask._id
-//         }
-//       }, {
-//         new: true
-//       });
-//     })
-//     .then(function (dbUser) {
-//       // If the Library was updated successfully, send it back to the client
-//       res.json(dbUser);
-//     })
-//     .catch(function (err) {
-//       // If an error occurs, send it back to the client
-//       // res.json(err);
-//       console.log(err);
-//     });
-// });
 
 app.post('/api/addtask', (req, res) => {
   db.Task.create(req.body)
@@ -216,23 +123,7 @@ app.post('/api/videos', (req, res) => {
     });
 });
 
-app.get('/api/populateTasks/:id', (req, res) => {
-  db.Journey.findById(req.params.id).populate("tasks").exec((err, tasks) => {
-    if (tasks) {
-      console.log("Populated Journey ", tasks)
-    } else if (err) {
-      res.status(500).send({
-        success: false,
-        message: err
-      })
-    } else {
-      res.status(404).send({
-        success: false,
-        message: 'No user found'
-      });
-    }
-  }).catch(err => res.status(400).send(err));
-});
+
 
 // app.get('/api/test/:id', isAuthenticated, (req, res) => {
 //   db.User.findById(req.params.id).populate("journeys").exec((err, journeys) => {
@@ -330,8 +221,8 @@ app.post('/api/signup', (req, res) => {
     }));
 });
 
-// // ADD GOAL ROUTE
-// app.post('/api/addgoal', (req, res) => {
+// // ADD Journey ROUTE
+// app.post('/api/addJourney', (req, res) => {
 //   db.Journey.create(req.body)
 //     .then(data => res.json(data))
 //     .catch(err => res.status(400).json(err));
