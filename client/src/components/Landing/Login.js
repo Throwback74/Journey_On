@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import AuthService from '../Auth/AuthService';
 import {Link} from 'react-router-dom';
-import Footer from '../Footer/Footer';
+// import Footer from '../Footer/Footer';
 import "./Login.css";
 
 
@@ -65,7 +65,7 @@ class Login extends Component {
           <button type="submit" className="btn btn-primary">Submit</button>
         </form>
         <p><Link to="/signup">Go to Signup</Link></p>
-        <Footer />
+        {/* <Footer /> */}
       </div>
 
     );

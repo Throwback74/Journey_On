@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import AuthService from '../Auth/AuthService';
 import API from '../../utils/API';
-import Footer from '../Footer/Footer';
+// import Footer from '../Footer/Footer';
 import "./Signup.css";
 
 class Signup extends Component {
@@ -81,8 +81,8 @@ class Signup extends Component {
           </div>
           <button type="submit" className="btn btn-primary">Submit</button>
         </form>
-        <p className="link"><Link to="/login">Go to Login</Link></p>
-        <Footer />
+        <p className="link"><Link class="linkThis"to="/login">Go to Login</Link></p>
+        {/* <Footer /> */}
       </div>
     );
   }

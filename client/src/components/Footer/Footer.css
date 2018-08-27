@@ -6,11 +6,11 @@
     text-align: center;
     background-image: linear-gradient(55deg,#488192 25%,#b3d2d8);
     font-display: bolder;
-    height: 100%;
+    height: 50% !important;
     width: 100%;
     padding-top: 30px;
     margin-top: 30px;
-}
+} 
 
 .ffooterTitle {
     font-family: 'Indie Flower', cursive;
