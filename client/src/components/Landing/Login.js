@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import AuthService from '../Auth/AuthService';
 import {Link} from 'react-router-dom';
-// import Footer from '../Footer/Footer';
+//import Footer from '../Footer/Footer';
 import "./Login.css";
 
 

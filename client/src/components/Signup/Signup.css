@@ -1,7 +1,10 @@
-.signupContainer {
-    background-image: linear-gradient(55deg,#488192 25%,#b3d2d8);
-    height: 100vh;
-    bottom: 0;
+.signupContainer{
+        background-image: url("../../images/bailey-zindel-396398-unsplash.jpg");
+        background-size:cover;
+        height: 900px;
+        width: 100%;
+        background-repeat: no-repeat;
+        font-family: cursive;
     }
 
 
