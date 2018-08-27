@@ -2,6 +2,9 @@ import React from 'react';
 // import withAuth from '../../Auth/withAuth';
 // import { Link } from 'react-router-dom';
 import "../Resources/Resources.css";
+import API from '../../../utils/API';
+
+
 
 const Resources = props => {
     // const { addVideo, handleChange, videoUrl } = props.location.myCustomProps.props;

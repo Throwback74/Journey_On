@@ -26,6 +26,10 @@ export default {
     return axios.post('/api/deletejourney', {email: email})
   },
 
+  // addTask: (taskTitle, taskDescription, taskLabel, journeyId) => {
+  //   return axios.post('/api/addtask', {taskTitle: taskTitle, taskDescription: taskDescription, taskLabel: taskLabel, journeyId: journeyId});
+  // },
+
   addTask: (taskTitle, taskDescription, taskLabel, journeyId) => {
     return axios.post('/api/addtask', {taskTitle: taskTitle, taskDescription: taskDescription, taskLabel: taskLabel, journeyId: journeyId});
   },
