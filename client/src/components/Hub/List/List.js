@@ -8,34 +8,34 @@ import { mapPropsStream } from 'recompose';
 
 class List extends Component {
     state = {
-       journeyArray: []
-   }
+        journeyArray: []
+    }
     componentWillMount() {
-       API.getUser(this.props.user.id).then(res => {
-           console.log(res)
-           const newArr = []
-           for (let i = 0; i < res.data.goals.length; i++) {
-               newArr.push(res.data.goals[i].journeyName)
-           }
-           this.setState({ journeyArray: newArr })
-       })
-   }
+        API.getUser(this.props.user.id).then(res => {
+            console.log(res)
+            const newArr = []
+            for (let i = 0; i < res.data.goals.length; i++) {
+                newArr.push(res.data.goals[i].journeyName)
+            }
+            this.setState({ journeyArray: newArr })
+        })
+    }
     listJourneys = () => {
-       this.journeyArray.map((journey) =>
-           <li>{journey}</li>
-       )
-   }
+        this.journeyArray.map((journey) =>
+            <li>{journey}</li>
+        )
+    }
     render() {
-       return (
-           <div className="container list">
-               <div className="container listItems">
-                   <ul>
-                       {this.state.journeyArray.map(journey => <li onClick={this.props.handleClick}>{journey}</li>)}
-                   </ul>
-               </div>
+        return (
+            <div className="container list">
+                <div className="container listItems">
+                    <ul>
+                        {this.state.journeyArray.map(journey => <li onClick={this.props.mouseEvent}>{journey}</li>)}
+                    </ul>
+                </div>
             </div>
-       )
+        )
     }
 }
-export default withAuth(List); 
+export default withAuth(List);
 

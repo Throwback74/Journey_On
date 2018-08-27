@@ -40,7 +40,7 @@ class Profile extends Component {
     })
   }
 
-  handleClick = () => {
+  mouseEvent = () => {
     console.log("Hello!")
   }
 

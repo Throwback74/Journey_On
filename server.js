@@ -285,25 +285,25 @@ var transporter = nodemailer.createTransport({
   }
 });
 
-cron.schedule('* * * * *', function () {
-  console.log("----------------------");
-  console.log("Running Cron Job");
-  var mailOptions = {
-    from: 'no_reply@journey_on-admin.com',
-    to: 'corey.slade@gmail.com',
-    subject: 'Sending Email using Node.js',
-    html: `<h1>TESTING EMAIL SCHEDULER</h1>`
-  };
-  transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-      res.send(error);
-      console.log(error);
-    } else {
-      res.send('Email sent: ' + info.response);
-      console.log("success!");
-    }
-  });
-});
+// cron.schedule('* * * * *', function (req, res) {
+//   console.log("----------------------");
+//   console.log("Running Cron Job");
+//   var mailOptions = {
+//     from: 'no_reply@journey_on-admin.com',
+//     to: 'corey.slade@gmail.com',
+//     subject: 'Sending Email using Node.js',
+//     html: `<h1>TESTING EMAIL SCHEDULER</h1>`
+//   };
+//   transporter.sendMail(mailOptions, function (error, info) {
+//     if (error) {
+//       res.send(error);
+//       console.log(error);
+//     } else {
+//       res.send('Email sent: ' + info.response);
+//       console.log("success!");
+//     }
+//   });
+// });
 
 
 app.post('/api/update', isAuthenticated, (req, res) => {
