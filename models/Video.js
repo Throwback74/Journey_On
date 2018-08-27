@@ -7,7 +7,6 @@ let Video = new Schema({
         required: true,
         trim: true
     },
-
     journeyId: {
         type:String,
         required:true,

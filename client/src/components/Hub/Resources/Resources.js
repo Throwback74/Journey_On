@@ -3,6 +3,9 @@ import React from 'react';
 // import { Link } from 'react-router-dom';
 import "../Resources/Resources.css";
 
+//Passing multiple functions within an onClick
+// <a href="#" onClick={(event) => { func1(); func2();}}>Test Link</a>
+
 const Resources = props => {
     // const { addVideo, handleChange, videoUrl } = props.location.myCustomProps.props;
     console.log(props);
@@ -15,7 +18,7 @@ const Resources = props => {
                     value={props.videoUrl} 
                     className="form-control"
                 />
-                <button type="button" className="btn-primary add" onClick={() => props.addVideo()}>Submit</button>
+                <button type="button" className="btn-primary add" onClick={() => {props.addVideo()}}>Submit</button>
                 <div className="Vlinks">
                     My Vidoes
                 </div>

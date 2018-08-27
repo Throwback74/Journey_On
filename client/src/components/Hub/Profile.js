@@ -9,7 +9,11 @@ import Progress from "./Progress/Progress";
 import Kanban from "./Kanban/Kanban";
 import List from "./List/List";
 
-
+const idArr = []; 
+const newArr = [];
+const taskArr = [];
+const taskIds = [];
+var journeyID;
 class Profile extends Component {
 
   state = {
@@ -20,11 +24,16 @@ class Profile extends Component {
     videoUrl: "",
     currentJourney: {
       id: '5b804dbbbeb1cc871c3c0ed8'
-    }
+    },
+    journeyArray: [],
+    journeyIds: [],
+    taskIds: [],
+    taskArray: []
   };
 
-  componentDidMount() {
-    console.log(this.props)
+  componentWillMount() {
+    console.log(this.props.user)
+    console.log(this.state.journeyArray)
     API.getUserName(this.props.user.id).then(res => {
       this.setState({
         username: res.data.username,
@@ -34,10 +43,79 @@ class Profile extends Component {
     API.updateLogin(this.props.user.id);
   };
 
-  addVideo = () => {
-    API.addVideo(this.state.videoUrl, this.state.currentJourney.id).then(function(res){
-      console.log(res);
+
+  //Todo Pass in Task ID instead of User ID for populate videos
+  componentDidMount(){
+    API.getUser(this.props.user.id).then(res => {
+      console.log(res)
+      for (let i = 0; i < res.data.journeys.length; i++) {
+          newArr.push(res.data.journeys[i].journeyName)
+          idArr.push(res.data.journeys[i]._id)
+      }
+      journeyID = res.data.journeys[0]._id;
+      console.log(res.data.journeys[0]._id);
+      console.log(idArr)
+      this.setState({ 
+        journeyArray: newArr,
+        journeyIds: idArr
+      })
+      console.log(journeyID)
+      return journeyID
+  }).then(data => {
+  console.log(data);
+
+  this.loadTasks();
+  this.populateAll();
+  })
+  }
+
+  loadTasks = (journeyID) => {
+    API.loadTasks(journeyID).then(res => {
+      console.log("loadtasksRes", res);
+      for (let i = 0; i < res.data.tasks.length; i++) {
+        taskArr.push(res.data.tasks[i]);
+        taskIds.push(res.data.tasks[i]._id);
+      }
+        this.setState({
+          taskArray: taskArr,
+          taskIds: taskIds
+        })
+        return taskIds
+      }).then(data => {
+        console.log('task data, ', data)
+        API.populateAll(this.props.user.id).then(res => {
+          console.log('populated All', res);
+        })
+      })
+  }
+
+  populateAll = () => {
+    API.populateAll(this.props.user.id).then(res => {
+      console.log('populated All', res);
     })
+  }
+
+
+  // API.addTask(card.title, card.description, journeyID)
+  // .then(res => {
+  //     console.log("Whats the journeyID?", this.props.journeyArray[0].id);
+  //     console.log(res.data); // delete this later?
+  //     alert("Task Added!"); // delete alert later?
+
+  // }).catch(err => {
+  //     console.log(err.response);
+  //     alert(err.response.data.message)
+  // });
+
+
+  addVideo = () => {
+    API.addVideo(this.state.videoUrl, journeyID).then(function(res){
+      console.log(res);
+      alert("Video Added!");
+    }).catch(err => {
+          console.log(err.response);
+          alert(err.response.data.message)
+      });
   }
 
   getResources = () => {
@@ -97,7 +175,7 @@ class Profile extends Component {
               :
               ""
             }
-            <Route exact path={`/profile/${this.props.user.id}/item/resources`} render={(props) => ( <Resources handleChange={this.handleChange} videoUrl={this.state.videoUrl} addVideo={this.addVideo}/> )} />
+            <Route exact path={`/profile/${this.props.user.id}/item/resources`} render={(props) => ( <Resources handleChange={this.handleChange} videoUrl={this.state.videoUrl} addVideo={this.addVideo} userId={this.props.user.id} /> )} />
             {/* <Route exact  component={Resources} handleChange={this.handleChange} newVideoUrl={this.state.videoUrl}/> */}
             {/* <Route exact path={`/profile/${this.props.user.id}/item/calendar`} component={Calendar} /> */}
             <Route exact path={`/profile/${this.props.user.id}/item/board`} component={Kanban} />
@@ -149,13 +227,6 @@ class Profile extends Component {
     )
   }
 }
-// createdAt: {
-//   type: Date,
-//   default: Date.now
-// },
-// last_login_date: {
-//   type: Date,
-//   default: Date.now
-// },
+
 
 export default withAuth(Profile);
