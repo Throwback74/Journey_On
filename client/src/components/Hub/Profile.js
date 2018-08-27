@@ -40,6 +40,10 @@ class Profile extends Component {
     })
   }
 
+  handleClick = () => {
+    console.log("Hello!")
+  }
+
   getResources = () => {
     console.log("sup");
     this.setState({ resoruces: true });
