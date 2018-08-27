@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let Video = new Schema({
-    videoLink: {
+    videoUrl: {
         type: String,
         required: true,
         trim: true

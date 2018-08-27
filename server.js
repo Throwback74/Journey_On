@@ -17,10 +17,6 @@ const PORT = process.env.PORT || 3001;
 console.log(process.env.USER)
 
 
-cron.schedule('* * * * *', function () {
-  console.log('running a task every minute');
-});
-
 // Setting CORS so that any website can
 // Access our API
 app.use((req, res, next) => {
@@ -111,7 +107,7 @@ app.post('/api/videos', (req, res) => {
   db.Video.create(req.body)
     .then(function (dbVideos) {
       res.json(dbVideos);
-      // return db.Videos.findOneAndUpdate({})
+      return db.Videos.findOneAndUpdate({})
     });
 });
 

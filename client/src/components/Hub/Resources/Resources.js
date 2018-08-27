@@ -1,44 +1,30 @@
-import React from 'react';
+import React, { Component } from 'react';
 // import withAuth from '../../Auth/withAuth';
 // import { Link } from 'react-router-dom';
 import "../Resources/Resources.css";
-import API from '../../../utils/API';
 
 
-
-const Resources = props => {
-    // const { addVideo, handleChange, videoUrl } = props.location.myCustomProps.props;
-    console.log(props);
-    return (
-        <div className="middle row">
-            <div className="Articles col-md-4">
-                <input type="text" 
-                    name="videoUrl" 
-                    onChange={props.handleChange} 
-                    value={props.videoUrl} 
-                    className="form-control"
-                />
-                <button type="button" className="btn-primary add" onClick={() => props.addVideo()}>Submit</button>
+class Resources extends Component {
+    render() {
+        return (
+            <div className="middle row">
+                <div className="Articles container">
+                    <input type="text"
+                        name="videoUrl"
+                        onChange={this.props.handleChange}
+                        value={this.props.videoUrl}
+                        className="form-control"
+                    />
+                    <button className="col-md-2 add" onClick={() => this.props.addVideo()}>Submit</button>
+                </div>
                 <div className="Vlinks">
-                    My Vidoes
+                    <ul>
+                        {this.props.videoArr.map(video => <li>{video.videoUrl}</li>)}
+                    </ul>
                 </div>
             </div>
-            <div className="Videos col-md-4">
-                <input type="text" className="form-control"></input>
-                <button type="button" className="btn-primary add">Submit</button>
-                <div className="Alinks">
-                    My Articles
-                </div>
-            </div>
-            <div className="Notes col-md-4">
-                <input type="text" className="form-control"></input>
-                <button type="button" className="btn-primary add">Submit</button>
-                <div className="Olinks">
-                    Other Shit
-                </div>
-            </div>
-        </div>
-    )
+        )
+    }
 };
 
 export default Resources;

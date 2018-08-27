@@ -39,8 +39,8 @@ export default {
   },
 
 
-  addVideo: (videoLink, journeyId) => {
-    return axios.post('/api/videos', {videoLink: videoLink, journeyId: journeyId});
+  addVideo: (videoUrl, journeyId) => {
+    return axios.post('/api/videos', {videoUrl: videoUrl, journeyId: journeyId});
   }
 };
 

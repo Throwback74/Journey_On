@@ -1,9 +1,9 @@
 .Vlinks{
     height: 400px;
-    width: 730px;
+    width: 100%;
     overflow-y: auto;
     background-color:rgba(193, 193, 193, 0.2);
-    margin-left: -110%;
+    margin: auto 0%;
 
 }
 

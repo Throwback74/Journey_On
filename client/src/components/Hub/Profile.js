@@ -20,7 +20,8 @@ class Profile extends Component {
     videoUrl: "",
     currentJourney: {
       id: '5b804dbbbeb1cc871c3c0ed8'
-    }
+    },
+    videoArr: []
   };
 
   componentDidMount() {
@@ -34,11 +35,25 @@ class Profile extends Component {
     API.updateLogin(this.props.user.id);
   };
 
-  addVideo = () => {
-    API.addVideo(this.state.videoUrl, this.state.currentJourney.id).then(function(res){
-      console.log(res);
-    })
-  }
+  //   listVideos = () => {
+  //     this.videoArr.map((video) =>
+  //         <li>{video}</li>
+  //     )
+  // }
+
+  //   addVideo = () => {
+  //     API.addVideo(this.state.videoUrl, this.state.currentJourney.id).then(function (res) {
+  //       console.log(res);
+  //       console.log(res.data.videoLink);
+  //       const newArr = []
+  //       newArr.push(res.data.videoLink)
+
+  //       this.setState({ videoArr: newArr })
+
+  //       this.listVideos(newArr);
+  //     })
+
+  //   }
 
   getResources = () => {
     console.log("sup");
@@ -46,7 +61,7 @@ class Profile extends Component {
   };
 
   handleChange = event => {
-    let {name, value} = event.target;
+    let { name, value } = event.target;
     this.setState({
       [name]: value
     });
@@ -59,8 +74,26 @@ class Profile extends Component {
     })
   };
 
+  addVideo = () => {
+    API.addVideo(this.state.videoUrl, this.state.currentJourney.id).then(res => {
+      console.log(res.data);
+      let videoData = res.data;
+      let videoArr = [...this.state.videoArr, videoData];
+      this.setState({
+        videoArr: videoArr
+      });
+      // console.log(res.data.videoUrl);
+      // const newArr = []
+      // newArr.push(res.data.videoUrl);
+
+      // this.props.setState({ videoArr: newArr })
+
+      // this.props.listVideos(newArr);
+    });
+
+  }
+
   render() {
-    console.log(window.location.pathname)
     return (
       <div className="body">
         <div className="nav">
@@ -72,14 +105,14 @@ class Profile extends Component {
             <Link to="/buildjourney"> Add a Journey</Link>
           </div>
           <div className="listdiv">
-              <List/>
+            <List />
           </div>
         </div>
         <div className="Profile">
           <div className="welcome container">
             <h1>Welcome... {this.state.username}</h1>
             <p>Time to get shit done!</p>
-            <Link to={`/profile/${this.props.user.id}`}><button type="button" className="btn-primary add">Hub</button></Link>
+            <Link to={`/profile/${this.props.user.id}`}><button type="button" className="add">Hub</button></Link>
           </div>
           <div className="container">
             {/* {(() => {
@@ -91,24 +124,24 @@ class Profile extends Component {
                 default: return <Buttons renderButton={this.renderButton} userId={this.props.user.id} />;
               }
             })()} */}
-            { 
+            {
               (!window.location.pathname.includes("item")) ?
-              <Buttons renderButton={this.renderButton} userId={this.props.user.id} handleChange={this.handleChange} videoUrl={this.state.videoUrl} addVideo={this.addVideo} />
-              :
-              ""
+                <Buttons renderButton={this.renderButton} userId={this.props.user.id} handleChange={this.handleChange} videoUrl={this.state.videoUrl} addVideo={this.addVideo} />
+                :
+                ""
             }
-            <Route exact path={`/profile/${this.props.user.id}/item/resources`} render={(props) => ( <Resources handleChange={this.handleChange} videoUrl={this.state.videoUrl} addVideo={this.addVideo}/> )} />
+            <Route exact path={`/profile/${this.props.user.id}/item/resources`} render={(props) => (<Resources handleChange={this.handleChange} videoUrl={this.state.videoUrl} addVideo={this.addVideo} videoArr={this.state.videoArr} />)} />
             {/* <Route exact  component={Resources} handleChange={this.handleChange} newVideoUrl={this.state.videoUrl}/> */}
             {/* <Route exact path={`/profile/${this.props.user.id}/item/calendar`} component={Calendar} /> */}
             <Route exact path={`/profile/${this.props.user.id}/item/board`} component={Kanban} />
-          
+
           </div>
           <div className="container">
             {(() => {
               switch (this.state.progress) {
-                case "show": return <Progress renderButton={this.renderButton}/>
+                case "show": return <Progress renderButton={this.renderButton} />
                 case "hide": return ""
-                default: return <Progress/>
+                default: return <Progress />
               }
             })}
           </div>
