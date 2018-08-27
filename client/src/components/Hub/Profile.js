@@ -33,6 +33,9 @@ class Profile extends Component {
       })
     });
     API.updateLogin(this.props.user.id);
+
+    // TODO: make API request to get the video data
+    // TODO: add the res.data to the videoArr's state
   };
 
   //   listVideos = () => {
