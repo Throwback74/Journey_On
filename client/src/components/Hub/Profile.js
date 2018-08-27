@@ -63,6 +63,7 @@ class Profile extends Component {
   }).then(data => {
   console.log(data);
   this.loadTasks();
+  this.populateAll();
   })
   }
 
@@ -80,17 +81,17 @@ class Profile extends Component {
         return taskIds
       }).then(data => {
         console.log('task data, ', data)
-        API.populateVideos(this.props.user.id).then(res => {
-          console.log('populated videos', res);
+        API.populateAll(this.props.user.id).then(res => {
+          console.log('populated All', res);
         })
       })
   }
 
-  // populateAll = () => {
-  //   API.populateAll(this.props.user.id).then(res => {
-  //     console.log('populated All', res);
-  //   })
-  // }
+  populateAll = () => {
+    API.populateAll(this.props.user.id).then(res => {
+      console.log('populated All', res);
+    })
+  }
 
 
   // API.addTask(card.title, card.description, journeyID)

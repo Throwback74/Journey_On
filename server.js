@@ -174,9 +174,6 @@ app.get('/api/videos/:id', (req, res) => {
   })
 });
 
-
-
-
 // LOGIN ROUTE
 app.post('/api/login', (req, res) => {
   db.User.findOne({
