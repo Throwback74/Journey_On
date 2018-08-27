@@ -49,7 +49,7 @@ const isAuthenticated = exjwt({
 app.post('/api/addgoal', (req, res) => {
   db.Journey.create(req.body)
     .then(function (dbJourneys) {
-      console.log('added journey',dbJourneys)
+      console.log('added journey', dbJourneys)
       return db.User.findOneAndUpdate({
         email: req.body.email
       }, {
@@ -90,7 +90,7 @@ app.post('/api/addgoal', (req, res) => {
 //   taskUpdates.taskTitle = req.body.taskTitle;
 //   taskUpdates.taskDescription = req.body.taskDescription;
 //   taskUpdates.taskDate = req.body.taskDate;
-  
+
 //   db.Journey.findById(journeyId).then(Journey => {
 //     const Tasks = Journey.Tasks;
 //     Tasks.create(taskUpdates);
@@ -166,10 +166,16 @@ app.post('/api/addgoal', (req, res) => {
 app.post('/api/addtask', (req, res) => {
   db.Task.create(req.body)
     .then(function (dbTask) {
-      if(dbTask){
-        return db.Journey.findByIdAndUpdate(req.body.journeyId, { $push: { tasks: dbTask._id } }, { new: true });
-      }else{
-       return res.status(404).send({
+      if (dbTask) {
+        return db.Journey.findByIdAndUpdate(req.body.journeyId, {
+          $push: {
+            tasks: dbTask._id
+          }
+        }, {
+          new: true
+        });
+      } else {
+        return res.status(404).send({
           success: false,
           message: 'No user found'
         });
@@ -177,31 +183,31 @@ app.post('/api/addtask', (req, res) => {
     }).then(dbJourney => {
       res.json(dbJourney);
     }).catch(function (err) {
-          // If an error occurs, send it back to the client
-          // res.json(err);
-          res.status(400).send(err);
-        });
+      // If an error occurs, send it back to the client
+      // res.json(err);
+      res.status(400).send(err);
     });
+});
 
 
-    app.post('/api/videos', (req, res) => {
-      db.Video.create(req.body)
-        .then(function (dbVideos) {
-          if(dbVideos) {
-          res.json(dbVideos);
-          }else{
-            res.status(404).send({
-              success: false,
-              message: 'No user found'
-            });
-          }
-          // return db.Videos.findOneAndUpdate({})
-        }).catch(function (err) {
-          // If an error occurs, send it back to the client
-          // res.json(err);
-          console.log(err);
+app.post('/api/videos', (req, res) => {
+  db.Video.create(req.body)
+    .then(function (dbVideos) {
+      if (dbVideos) {
+        res.json(dbVideos);
+      } else {
+        res.status(404).send({
+          success: false,
+          message: 'No user found'
         });
+      }
+      // return db.Videos.findOneAndUpdate({})
+    }).catch(function (err) {
+      // If an error occurs, send it back to the client
+      // res.json(err);
+      console.log(err);
     });
+});
 
 
 
@@ -226,30 +232,32 @@ app.post('/api/addtask', (req, res) => {
 //     });
 // });
 
-  app.put('/api/videos', (req, res) => {
-    var journeyId = req.body.journeyId;
-    var videoUpdates = {};
-    videoUpdates.videoLink = req.body.videoLink;
-    db.Journey.findByIdAndUpdate(journeyId, {$set: 
-      videoUpdates
-    }, { new: true }, function(err, video) {
-      if(err) {
-        res.status(404).send({
-          success: false,
-          message: 'No user found'
-        });
-      } else {
-        res.json(video);
-      }
-    });
+app.put('/api/videos', (req, res) => {
+  var journeyId = req.body.journeyId;
+  var videoUpdates = {};
+  videoUpdates.videoLink = req.body.videoLink;
+  db.Journey.findByIdAndUpdate(journeyId, {
+    $set: videoUpdates
+  }, {
+    new: true
+  }, function (err, video) {
+    if (err) {
+      res.status(404).send({
+        success: false,
+        message: 'No user found'
+      });
+    } else {
+      res.json(video);
+    }
   });
+});
 
-    //   db.Video.create(req.body)
-    //     .then(function (dbVideos) {
-    //       res.json(dbVideos);
-    //       // return db.Videos.findOneAndUpdate({})
-    //     });
-    // });
+//   db.Video.create(req.body)
+//     .then(function (dbVideos) {
+//       res.json(dbVideos);
+//       // return db.Videos.findOneAndUpdate({})
+//     });
+// });
 
 
 //   MyModel.findOneAndUpdate(
@@ -265,31 +273,31 @@ app.post('/api/addtask', (req, res) => {
 //     }
 // );
 
-  // db.Journey.create(req.body)
-  //   .then(function (dbTask) {
-  //     // If a Book was created successfully, find one library (there's only one) and push the new Book's _id to the Library's `books` array
-  //     // { new: true } tells the query that we want it to return the updated Library -- it returns the original by default
-  //     // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
-  //     // res.json(dbTasks);
-  //     return db.Journey.findOneAndUpdate({
-  //       _id: req.params.id
-  //     }, {
-  //       $push: {
-  //         tasks: dbTask._id
-  //       }
-  //     }, {
-  //       new: true
-  //     });
-  //   })
-  //   .then(function (dbUser) {
-  //     // If the Library was updated successfully, send it back to the client
-  //     res.json(dbUser);
-  //   })
-  //   .catch(function (err) {
-  //     // If an error occurs, send it back to the client
-  //     // res.json(err);
-  //     console.log(err);
-  //   });
+// db.Journey.create(req.body)
+//   .then(function (dbTask) {
+//     // If a Book was created successfully, find one library (there's only one) and push the new Book's _id to the Library's `books` array
+//     // { new: true } tells the query that we want it to return the updated Library -- it returns the original by default
+//     // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
+//     // res.json(dbTasks);
+//     return db.Journey.findOneAndUpdate({
+//       _id: req.params.id
+//     }, {
+//       $push: {
+//         tasks: dbTask._id
+//       }
+//     }, {
+//       new: true
+//     });
+//   })
+//   .then(function (dbUser) {
+//     // If the Library was updated successfully, send it back to the client
+//     res.json(dbUser);
+//   })
+//   .catch(function (err) {
+//     // If an error occurs, send it back to the client
+//     // res.json(err);
+//     console.log(err);
+//   });
 
 
 
@@ -302,42 +310,42 @@ app.post('/api/addtask', (req, res) => {
 
 app.get('/api/populateTasks/:id', (req, res) => {
   db.Journey.findById(req.params.id).populate("tasks").exec((err, tasks) => {
-    if(tasks){
-    console.log("Populated Journey ", tasks)
-    }else if(err) {
+    if (tasks) {
+      console.log("Populated Journey ", tasks)
+    } else if (err) {
       res.status(500).send({
         success: false,
         message: err
       })
-    } else{
-          res.status(404).send({
-            success: false,
-            message: 'No user found'
-          });
+    } else {
+      res.status(404).send({
+        success: false,
+        message: 'No user found'
+      });
     }
   }).catch(err => res.status(400).send(err));
 });
 
-  // app.get('/api/test/:id', isAuthenticated, (req, res) => {
-  //   db.User.findById(req.params.id).populate("journeys").exec((err, journeys) => {
-  //     if(journeys){
-  //     console.log("Populated User ", journeys)
-  //   }else if(err) {
-  //     res.status(500).send({
-  //       success: false,
-  //       message: err
-  //     })
-  //   }
-  //   else{
-  //     res.status(404).send({
-  //       success: false,
-  //       message: 'No user found'
-  //     });
-  //   }
-  //   }).catch(err => res.status(400).send(err));
-  // });
-  
-  
+// app.get('/api/test/:id', isAuthenticated, (req, res) => {
+//   db.User.findById(req.params.id).populate("journeys").exec((err, journeys) => {
+//     if(journeys){
+//     console.log("Populated User ", journeys)
+//   }else if(err) {
+//     res.status(500).send({
+//       success: false,
+//       message: err
+//     })
+//   }
+//   else{
+//     res.status(404).send({
+//       success: false,
+//       message: 'No user found'
+//     });
+//   }
+//   }).catch(err => res.status(400).send(err));
+// });
+
+
 //   // then(data => {
 //       if (data) {
 //         res.json(data);
@@ -350,18 +358,18 @@ app.get('/api/populateTasks/:id', (req, res) => {
 //     }).catch(err => res.status(400).send(err));
 // });
 
-  app.get('/api/gettasks/:journeyId', isAuthenticated, (req, res) => {
-    db.Journey.findById(req.params.journeyId).then(data => {
-      if (data) {
-        res.json(data);
-      } else {
-        res.status(404).send({
-          success: false,
-          message: 'No Journey found'
-        });
-      }
-    }).catch(err => res.status(400).send(err));
-  });
+app.get('/api/gettasks/:journeyId', isAuthenticated, (req, res) => {
+  db.Journey.findById(req.params.journeyId).then(data => {
+    if (data) {
+      res.json(data);
+    } else {
+      res.status(404).send({
+        success: false,
+        message: 'No Journey found'
+      });
+    }
+  }).catch(err => res.status(400).send(err));
+});
 
 
 
@@ -491,7 +499,7 @@ app.post('/api/signup', (req, res) => {
 //     console.log("Populated User ", journeys)
 //   }).catch(err => res.status(400).send(err));
 // });
-  
+
 //   then(data => {
 //       if (data) {
 //         res.json(data);
@@ -536,12 +544,14 @@ app.get('/api/username/:id', isAuthenticated, (req, res) => {
 
 app.get('api/test2/:id', (req, res) => {
   db.User.findById(req.params.id)
-  .populate({
-    path: "Journey",
-    populate: {path: "Task"}
-  }).then(dbUser => {
-    res.json(dbUser)
-  }).catch(err => res.status(400).send(err));
+    .populate({
+      path: "Journey",
+      populate: {
+        path: "Task"
+      }
+    }).then(dbUser => {
+      res.json(dbUser)
+    }).catch(err => res.status(400).send(err));
 });
 
 
@@ -568,20 +578,19 @@ app.get('api/test2/:id', (req, res) => {
 //Todo Pass in Task ID instead of User ID for populate videos on profile page
 app.get('/api/video/:taskId', (req, res) => {
   db.Task.findById(req.params.taskId).populate("videos").exec((err, videos) => {
-  if(videos) {
-    console.log("Populated Task ", videos)
-  }else if(err) {
-    res.status(500).send({
-      success: false,
-      message: err
-    })
-  }
-  else{
-    res.status(404).send({
-      success: false,
-      message: 'No Task found'
-    });
-  }
+    if (videos) {
+      console.log("Populated Task ", videos)
+    } else if (err) {
+      res.status(500).send({
+        success: false,
+        message: err
+      })
+    } else {
+      res.status(404).send({
+        success: false,
+        message: 'No Task found'
+      });
+    }
   }).catch(err => res.status(400).send(err));
 });
 
@@ -591,21 +600,20 @@ app.get('/api/video/:taskId', (req, res) => {
 // });
 
 app.get('/api/test/:id', isAuthenticated, (req, res) => {
-  db.User.findById(req.params.id).populate("Journey").exec((err, journeys) => {
-    if(journeys){
-    console.log("Populated User ", journeys)
-  }else if(err) {
-    res.status(500).send({
-      success: false,
-      message: err
-    })
-  }
-  else{
-    res.status(404).send({
-      success: false,
-      message: 'No user found'
-    });
-  }
+  db.User.findById(req.params.id).populate("journeys").exec((err, journeys) => {
+    if (journeys) {
+      res.json(journeys);
+    } else if (err) {
+      res.status(500).send({
+        success: false,
+        message: err
+      })
+    } else {
+      res.status(404).send({
+        success: false,
+        message: 'No user found'
+      });
+    }
   })
 });
 
@@ -760,7 +768,7 @@ var username = "Throwback74";
 //     console.log(err);
 //   });
 
-  
+
 // });
 
 
@@ -782,7 +790,7 @@ app.post('/api/update', isAuthenticated, (req, res) => {
   }, function (err, data) {
     if (err) return handleError(err);
     res.send(data);
-  }) .catch(err => res.status(400).json(err));
+  }).catch(err => res.status(400).json(err));
 });
 
 
