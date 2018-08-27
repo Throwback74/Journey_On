@@ -109,6 +109,7 @@ app.post('/api/videos', (req, res) => {
           new: true
         });
       } else {
+        console.log(err)
         return res.status(404).send({
           success: false,
           message: 'No Journey found'

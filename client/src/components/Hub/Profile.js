@@ -9,7 +9,7 @@ import Progress from "./Progress/Progress";
 import Kanban from "./Kanban/Kanban";
 import List from "./List/List";
 
-const idArr = []; 
+const idArr = [];
 const newArr = [];
 const taskArr = [];
 const taskIds = [];
@@ -28,7 +28,8 @@ class Profile extends Component {
     journeyArray: [],
     journeyIds: [],
     taskIds: [],
-    taskArray: []
+    taskArray: [],
+    videoArr: []
   };
 
   componentWillMount() {
@@ -41,32 +42,35 @@ class Profile extends Component {
       })
     });
     API.updateLogin(this.props.user.id);
+
+    // TODO: make API request to get the video data
+    // TODO: add the res.data to the videoArr's state
   };
 
 
   //Todo Pass in Task ID instead of User ID for populate videos
-  componentDidMount(){
+  componentDidMount() {
     API.getUser(this.props.user.id).then(res => {
       console.log(res)
       for (let i = 0; i < res.data.journeys.length; i++) {
-          newArr.push(res.data.journeys[i].journeyName)
-          idArr.push(res.data.journeys[i]._id)
+        newArr.push(res.data.journeys[i].journeyName)
+        idArr.push(res.data.journeys[i]._id)
       }
       journeyID = res.data.journeys[0]._id;
       console.log(res.data.journeys[0]._id);
       console.log(idArr)
-      this.setState({ 
+      this.setState({
         journeyArray: newArr,
         journeyIds: idArr
       })
       console.log(journeyID)
       return journeyID
-  }).then(data => {
-  console.log(data);
+    }).then(data => {
+      console.log(data);
 
-  this.loadTasks();
-  this.populateAll();
-  })
+      this.loadTasks();
+      this.populateAll();
+    })
   }
 
   loadTasks = (journeyID) => {
@@ -76,47 +80,60 @@ class Profile extends Component {
         taskArr.push(res.data.tasks[i]);
         taskIds.push(res.data.tasks[i]._id);
       }
-        this.setState({
-          taskArray: taskArr,
-          taskIds: taskIds
-        })
-        return taskIds
-      }).then(data => {
-        console.log('task data, ', data)
-        API.populateAll(this.props.user.id).then(res => {
-          console.log('populated All', res);
-        })
+      this.setState({
+        taskArray: taskArr,
+        taskIds: taskIds
       })
+      return taskIds
+    }).then(data => {
+      console.log('task data, ', data)
+      API.populateAll(this.props.user.id).then(res => {
+        console.log('populated All', res);
+      })
+    })
   }
 
   populateAll = () => {
     API.populateAll(this.props.user.id).then(res => {
       console.log('populated All', res);
+      this.setState({
+        videoArr: res.data.journeys[0].videos
+      })
+      this.listVideos(this.state.videoArr)
     })
   }
-
-
-  // API.addTask(card.title, card.description, journeyID)
-  // .then(res => {
-  //     console.log("Whats the journeyID?", this.props.journeyArray[0].id);
-  //     console.log(res.data); // delete this later?
-  //     alert("Task Added!"); // delete alert later?
-
-  // }).catch(err => {
-  //     console.log(err.response);
-  //     alert(err.response.data.message)
-  // });
-
+  listVideos = () => {
+    this.state.videoArr.map((video) =>
+      <li>{video}</li>
+    )
+  }
 
   addVideo = () => {
-    API.addVideo(this.state.videoUrl, journeyID).then(function(res){
+    API.addVideo(this.state.videoUrl, journeyID).then(res => {
       console.log(res);
       alert("Video Added!");
-    }).catch(err => {
-          console.log(err.response);
-          alert(err.response.data.message)
-      });
-  }
+      this.populateAll()
+          
+        })
+      }
+
+      // newArr.push(res.data.videoLink)
+      // this.setState({ videoArr: newArr })
+      // this.listVideos(newArr);
+      // let videoData = res.data;
+      // let videoArr = [...this.state.videoArr, videoData];
+      // this.setState({
+      //   videoArr: videoArr
+      // });
+      // console.log(res);
+      // const tempArr = []
+      // for (var i = 0; i < res.data.videos.length; i++) {
+      //   tempArr.push(res.data.videos[i])
+      // }
+      // console.log(tempArr)
+      // console.log(res);
+      // this.setState({ videoArr: tempArr })
+      // this.listVideos(tempArr);
 
   getResources = () => {
     console.log("sup");
@@ -124,7 +141,7 @@ class Profile extends Component {
   };
 
   handleChange = event => {
-    let {name, value} = event.target;
+    let { name, value } = event.target;
     this.setState({
       [name]: value
     });
@@ -138,7 +155,6 @@ class Profile extends Component {
   };
 
   render() {
-    console.log(window.location.pathname)
     return (
       <div className="body">
         <div className="nav">
@@ -150,14 +166,14 @@ class Profile extends Component {
             <Link to="/buildjourney"> Add a Journey</Link>
           </div>
           <div className="listdiv">
-              <List/>
+            <List />
           </div>
         </div>
         <div className="Profile">
           <div className="welcome container">
             <h1>Welcome... {this.state.username}</h1>
             <p>Time to get shit done!</p>
-            <Link to={`/profile/${this.props.user.id}`}><button type="button" className="btn-primary add">Hub</button></Link>
+            <Link to={`/profile/${this.props.user.id}`}><button type="button" className="add">Hub</button></Link>
           </div>
           <div className="container">
             {/* {(() => {
@@ -169,24 +185,24 @@ class Profile extends Component {
                 default: return <Buttons renderButton={this.renderButton} userId={this.props.user.id} />;
               }
             })()} */}
-            { 
+            {
               (!window.location.pathname.includes("item")) ?
-              <Buttons renderButton={this.renderButton} userId={this.props.user.id} handleChange={this.handleChange} videoUrl={this.state.videoUrl} addVideo={this.addVideo} />
-              :
-              ""
+                <Buttons renderButton={this.renderButton} userId={this.props.user.id} handleChange={this.handleChange} videoUrl={this.state.videoUrl} addVideo={this.addVideo} />
+                :
+                ""
             }
-            <Route exact path={`/profile/${this.props.user.id}/item/resources`} render={(props) => ( <Resources handleChange={this.handleChange} videoUrl={this.state.videoUrl} addVideo={this.addVideo} userId={this.props.user.id} /> )} />
+            <Route exact path={`/profile/${this.props.user.id}/item/resources`} render={(props) => (<Resources handleChange={this.handleChange} videoUrl={this.state.videoUrl} addVideo={this.addVideo} videoArr={this.state.videoArr} />)} />
             {/* <Route exact  component={Resources} handleChange={this.handleChange} newVideoUrl={this.state.videoUrl}/> */}
             {/* <Route exact path={`/profile/${this.props.user.id}/item/calendar`} component={Calendar} /> */}
             <Route exact path={`/profile/${this.props.user.id}/item/board`} component={Kanban} />
-          
+
           </div>
           <div className="container">
             {(() => {
               switch (this.state.progress) {
-                case "show": return <Progress renderButton={this.renderButton}/>
+                case "show": return <Progress renderButton={this.renderButton} />
                 case "hide": return ""
-                default: return <Progress/>
+                default: return <Progress />
               }
             })}
           </div>
