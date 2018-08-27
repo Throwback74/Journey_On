@@ -4,7 +4,7 @@ import "./Footer.css";
 const Footer = (props) => (
     <footer>
         <div className="ffoot">
-            <div className="container">
+            <div className="fcontainer">
                 <div className="row">
                     <div className="col l6 s12 fabout">
                         <p className="fgrey-text">Press</p>
