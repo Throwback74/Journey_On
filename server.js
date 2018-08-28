@@ -14,6 +14,7 @@ const app = express();
 const nodemailer = require('nodemailer');
 
 const PORT = process.env.PORT || 3001;
+
 // Setting CORS so that any website can
 // Access our API
 app.use((req, res, next) => {
