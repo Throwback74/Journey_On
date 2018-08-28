@@ -172,7 +172,7 @@ class Profile extends Component {
         <div className="Profile">
           <div className="welcome container">
             <h1 className="welcomeHeader">Welcome... {this.state.username}</h1>
-            <p className="timeP">Time to get shit done!</p>
+            <p className="timeP">Time to get work done!</p>
             <Link to={`/profile/${this.props.user.id}`}><button type="button" className="add">Hub</button></Link>
           </div>
           <div className="container">
