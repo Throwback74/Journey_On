@@ -8,12 +8,16 @@ import Resources from "./Resources/Resources";
 import Progress from "./Progress/Progress";
 import Kanban from "./Kanban/Kanban";
 import List from "./List/List";
+import Calendar from "./Calendar/Cal";
+import Footer from "../Footer/Footer";
 
 const idArr = [];
 const newArr = [];
-const taskArr = [];
-const taskIds = [];
+// const taskArr = [];
+// const taskIds = [];
 var journeyID;
+// const location = this.props.history.location;
+
 class Profile extends Component {
 
   state = {
@@ -29,7 +33,8 @@ class Profile extends Component {
     journeyIds: [],
     taskIds: [],
     taskArray: [],
-    videoArr: []
+    videoArr: [],
+    locationTrigger: ""
   };
 
   componentWillMount() {
@@ -68,29 +73,11 @@ class Profile extends Component {
     }).then(data => {
       console.log(data);
 
-      this.loadTasks();
-      this.populateAll();
-    })
-  }
-
-  loadTasks = (journeyID) => {
-    API.loadTasks(journeyID).then(res => {
-      console.log("loadtasksRes", res);
-      for (let i = 0; i < res.data.tasks.length; i++) {
-        taskArr.push(res.data.tasks[i]);
-        taskIds.push(res.data.tasks[i]._id);
-      }
-      this.setState({
-        taskArray: taskArr,
-        taskIds: taskIds
-      })
-      return taskIds
-    }).then(data => {
-      console.log('task data, ', data)
-      API.populateAll(this.props.user.id).then(res => {
-        console.log('populated All', res);
-      })
-    })
+  // this.loadTasks();
+  this.populateAll();
+  this.loadVideos(journeyID);
+  this.checkLocation(this.props.history.location.pathname);
+  })
   }
 
   populateAll = () => {
@@ -102,10 +89,24 @@ class Profile extends Component {
       this.listVideos(this.state.videoArr)
     })
   }
+
   listVideos = () => {
     this.state.videoArr.map((video) =>
       <li>{video}</li>
     )
+  }
+
+
+  loadVideos = (journeyID) => {
+    API.loadVideos(journeyID).then(function(res){
+      console.log(res);
+      console.log(res.data.videos);
+    }).catch(err => {
+      console.log(err.response);
+      alert(err.response.data.message)
+  }).catch(err => {
+    alert(err)
+  });
   }
 
   addVideo = () => {
@@ -113,27 +114,8 @@ class Profile extends Component {
       console.log(res);
       alert("Video Added!");
       this.populateAll()
-          
         })
       }
-
-      // newArr.push(res.data.videoLink)
-      // this.setState({ videoArr: newArr })
-      // this.listVideos(newArr);
-      // let videoData = res.data;
-      // let videoArr = [...this.state.videoArr, videoData];
-      // this.setState({
-      //   videoArr: videoArr
-      // });
-      // console.log(res);
-      // const tempArr = []
-      // for (var i = 0; i < res.data.videos.length; i++) {
-      //   tempArr.push(res.data.videos[i])
-      // }
-      // console.log(tempArr)
-      // console.log(res);
-      // this.setState({ videoArr: tempArr })
-      // this.listVideos(tempArr);
 
   getResources = () => {
     console.log("sup");
@@ -154,11 +136,29 @@ class Profile extends Component {
     })
   };
 
+  checkLocation = (location) => {
+    console.log(location);
+    if(location === `/profile/${this.props.user.id}/item/calendar`) {
+      this.setState({
+        locationTrigger: "Calendar"
+      })
+    }else {
+      this.setState({
+        locationTrigger: ""
+      })
+    }
+  }
+
   render() {
     return (
       <div className="body">
         <div className="nav">
-          <div className="col-md-10">
+        <div className="col-md-2">
+          <Link to="/logout">
+            <button type="button" className="btn btn-danger landingLogoutBtn">Logout</button>
+          </Link>
+          </div>
+          <div className="col-md-8">
           </div>
           <div className="col-md-2">
             <h1 className="journeyOn">Journey On!</h1>
@@ -171,8 +171,8 @@ class Profile extends Component {
         </div>
         <div className="Profile">
           <div className="welcome container">
-            <h1>Welcome... {this.state.username}</h1>
-            <p>Time to get shit done!</p>
+            <h1 className="welcomeHeader">Welcome... {this.state.username}</h1>
+            <p className="timeP">Time to get shit done!</p>
             <Link to={`/profile/${this.props.user.id}`}><button type="button" className="add">Hub</button></Link>
           </div>
           <div className="container">
@@ -193,7 +193,7 @@ class Profile extends Component {
             }
             <Route exact path={`/profile/${this.props.user.id}/item/resources`} render={(props) => (<Resources handleChange={this.handleChange} videoUrl={this.state.videoUrl} addVideo={this.addVideo} videoArr={this.state.videoArr} />)} />
             {/* <Route exact  component={Resources} handleChange={this.handleChange} newVideoUrl={this.state.videoUrl}/> */}
-            {/* <Route exact path={`/profile/${this.props.user.id}/item/calendar`} component={Calendar} /> */}
+            <Route exact path={`/profile/${this.props.user.id}/item/calendar`} component={Calendar} />
             <Route exact path={`/profile/${this.props.user.id}/item/board`} component={Kanban} />
 
           </div>
@@ -207,38 +207,8 @@ class Profile extends Component {
             })}
           </div>
         </div>
-        <div className="filler">
-
-        </div>
-
-        <footer>
-          <div className="foot2">
-            <div className="container">
-              <div className="row">
-                <div className="col l6 s12 about">
-                  <p className="grey-text">Press</p>
-                  <p className="grey-text">Contact</p>
-                  <p className="grey-text">Folow us</p>
-                </div>
-                <div className="col l4 offset-l2 s12">
-                  <h5 className="white-text">Newsletter</h5>
-                  <p className="signupEmail">Sign up to our newsletter and stay up to date.</p>
-                  <ul className="dotts">
-                    <li><a className="grey-text text-lighten-3" href="https://www.facebook.com">Facebook</a></li>
-                    <li><a className="grey-text text-lighten-3" href="https://www.twitter.com">Twitter</a></li>
-                    <li><a className="grey-text text-lighten-3" href="https://www.instagram.com">Instagram</a></li>
-                    <li><a className="grey-text text-lighten-3" href="https://www.snapchat.com">Snapchat</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="footer-copyright">
-              <div className="container">
-                © 2018 Copyright Journey
-            </div>
-            </div>
-          </div>
-        </footer>
+        <Footer locationTrigger={this.state.locationTrigger}/>
+        
       </div>
     )
   }

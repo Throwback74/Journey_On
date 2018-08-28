@@ -17,10 +17,6 @@ const PORT = process.env.PORT || 3001;
 console.log(process.env.USER)
 
 
-// cron.schedule('* * * * *', function () {
-//   console.log('running a task every minute');
-// });
-
 // Setting CORS so that any website can
 // Access our API
 app.use((req, res, next) => {
@@ -61,7 +57,7 @@ app.post('/api/addJourney', (req, res) => {
       });
     })
     .then(function (dbUser) {
-      // If the Library was updated successfully, send it back to the client
+      // If the User was updated successfully, send it back to the client
       res.json(dbUser);
     })
     .catch(function (err) {
@@ -124,26 +120,20 @@ app.post('/api/videos', (req, res) => {
     });
 });
 
+app.get('/api/getvideos/:journeyId', (req, res) => {
+  db.Journey.findById(req.params.journeyId).then(data => {
+    if (data) {
+      res.json(data);
+    } else {
+      res.status(404).send({
+        success: false,
+        message: 'No Journey found'
+      });
+    }
+  }).catch(err => res.status(400).send(err));
+});
 
 
-// app.get('/api/test/:id', isAuthenticated, (req, res) => {
-//   db.User.findById(req.params.id).populate("journeys").exec((err, journeys) => {
-//     if(journeys){
-//     console.log("Populated User ", journeys)
-//   }else if(err) {
-//     res.status(500).send({
-//       success: false,
-//       message: err
-//     })
-//   }
-//   else{
-//     res.status(404).send({
-//       success: false,
-//       message: 'No user found'
-//     });
-//   }
-//   }).catch(err => res.status(400).send(err));
-// });
 
 app.get('/api/gettasks/:journeyId', isAuthenticated, (req, res) => {
   db.Journey.findById(req.params.journeyId).then(data => {
@@ -219,49 +209,6 @@ app.post('/api/signup', (req, res) => {
     }));
 });
 
-// // ADD Journey ROUTE
-// app.post('/api/addJourney', (req, res) => {
-//   db.Journey.create(req.body)
-//     .then(data => res.json(data))
-//     .catch(err => res.status(400).json(err));
-// });
-
-// Any route with isAuthenticated is protected and you need a valid token
-// to access
-// app.get('/api/user/:id', isAuthenticated, (req, res) => {
-//   db.User.findById(req.params.id)
-//     .populate("journeys")
-//     .then(data => {
-//       if (data) {
-//         res.json(data);
-//       } else {
-//         res.status(404).send({
-//           success: false,
-//           message: 'No user found'
-//         });
-//       }
-//     }).catch(err => res.status(400).send(err));
-// });
-
-// app.get('/api/user/:id', isAuthenticated, (req, res) => {
-//   db.User.findById(req.params.id).populate("journeys").exec((err, journeys) => {
-//     console.log("Populated User ", journeys)
-//   }).catch(err => res.status(400).send(err));
-// });
-
-//   then(data => {
-//       if (data) {
-//         res.json(data);
-//       } else {
-//         res.status(404).send({
-//           success: false,
-//           message: 'No user found'
-//         });
-//       }
-//     }).catch(err => res.status(400).send(err));
-// });
-
-
 
 app.post('/api/deletejourney', isAuthenticated, (req, res) => {
   db.User.update({
@@ -299,30 +246,20 @@ app.get('/api/populate/:id', (req, res) => {
         path: "tasks videos"
       }
     }).then(dbUser => {
+      if(dbUser){
       res.json(dbUser)
-    }).catch(err => res.status(400).send(err));
+      }else {
+        res.status(404).send({
+          success: false,
+          message: 'No user found'
+        });
+      }
+    }).catch(err => res.status(400).send({
+      success: false,
+      message: err
+    }));
 });
 
-// app.get('/api/all/:id', (req, res) => {
-//   db.User.findById(req.params.id).populate("journeys").populate("tasks").populate("videos").lean().exec((err, all) => {
-//   if(all) {
-//     console.log("Populated User ", all)
-//   }else if(err) {
-//     res.status(500).send({
-//       success: false,
-//       message: err
-//     })
-//   }
-//   else{
-//     res.status(404).send({
-//       success: false,
-//       message: 'No user found'
-//     });
-//   }
-//   }).catch(err => res.status(400).send(err));
-// });
-
-//Todo Pass in Task ID instead of User ID for populate videos on profile page
 app.get('/api/video/:taskId', (req, res) => {
   db.Task.findById(req.params.taskId).populate("videos").exec((err, videos) => {
     if (videos) {
@@ -340,11 +277,6 @@ app.get('/api/video/:taskId', (req, res) => {
     }
   }).catch(err => res.status(400).send(err));
 });
-
-//   }).then(dbVideos => {
-//     res.json(dbVideos);
-//   })
-// });
 
 app.get('/api/test/:id', isAuthenticated, (req, res) => {
   db.User.findById(req.params.id)
@@ -366,38 +298,8 @@ app.get('/api/test/:id', isAuthenticated, (req, res) => {
   })
 });
 
-// app.post('/api/videos', (req, res) => {
-//   db.Video.create(req.body)
-//     .then(function (dbVideos) {
-//       res.json(dbVideos);
-//       // return db.Videos.findOneAndUpdate({})
-//     });
-// });
 
-// app.get('/api/videos/:id', (req, res) => {
-//   db.Video.find({
-//     journeyId: req.params.id
-//   }).then(dbVideos => {
-//     res.json(dbVideos);
-//   })
-// });
-
-
-
-//add back populate("journeys")
-// app.get('/api/test/:id', (req, res) => {
-//   db.User.findById(req.params.id).populate("journeys").then(data => {
-//     if (data) {
-//       res.json(data);
-//     } else {
-//       res.status(404).send({
-//         success: false,
-//         message: 'No user found'
-//       });
-//     }
-//   }).catch(err => res.status(400).send(err));
-// });
-
+// TODO set up to customize future messages
 app.post('/api/send/email', (req, res) => {
   var transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -449,7 +351,7 @@ var transporter = nodemailer.createTransport({
 });
 
 app.get("/api/users", function (req, res) {
-  // Using our Library model, "find" every library in our db
+  // Using our User model, "find" every User in our db
   db.User.find()
     .then(function (dbUser) {
       // If any Libraries are found, send them to the client
@@ -465,60 +367,60 @@ var email = "corey.slade@gmail.com";
 var username = "Throwback74";
 
 
-//TODO SET UP SCHEDULE PROPERLY AND TURN BACK ON
-// cron.schedule('* * * * *', function () {
-//   console.log("----------------------");
-//   console.log("Running Cron Job");
-//   var today = Date.now();
-//   db.User.find()
-//     .then(function (dbUser) {
-//       // dbUser.map(users => (
-//       //   console.log(users.updatedAt)
-//       //   var Users = users;
-//       // ))
-//       for(let i = 0; i < dbUser.length; i++) {
-//         var users = dbUser[i];
-//         console.log(users.updatedAt - today);
-//         console.log(users.email, users.username);
-//         if(users.updatedAt - today > 434636190) {
-//           var mailOptions = {
-//             from: 'no_reply@journey_on-admin.com',
-//             to: `${users.email}`,
-//             subject: 'Sending Email using Node.js',
-//             html: `<h2 style="text-align: center">Journey On <span> Journey Reminder Email</span></h2> 
-//             <br><br>
-//             <div>
-//               <h4>Hi ${users.username},</h4>
-//               <p>We miss you at <span style="font-weight: 700">Journey On</span>! It has been 5 days since you checked in on your Journey! Come see what you have coming up soon, and get some help meeting your goals!</p> 
-//               <a href="www.JourneyOn.com">JourneyOn</a>
-//             </div>
-//             <hr>
-//             <div style="text-align: center">
-//               <h6>Looking Forward to seeing you again soon!</h6>
-//               <p>Best Regards,</p>
-//               <p>JOURNEY ON TEAM</p>
-//             </div>`
-//           };
-//           transporter.sendMail(mailOptions, function (error, info) {
-//             if (error) {
-//               res.send(error);
-//               console.log(error);
-//             } else {
-//               res.send('Email sent: ' + info.response);
-//               console.log("success!");
-//             }
-//           });
-//         }else {
-//           console.log("no users to email")
-//         }
 
-//   }})
-//   .catch(function (err) {
-//     console.log(err);
-//   });
+cron.schedule('00 5 * * *', function () {
+  console.log("----------------------");
+  console.log("Running Cron Job");
+  var today = Date.now();
+  db.User.find()
+    .then(function (dbUser) {
+      // dbUser.map(users => (
+      //   console.log(users.updatedAt)
+      //   var Users = users;
+      // ))
+      for(let i = 0; i < dbUser.length; i++) {
+        var users = dbUser[i];
+        console.log(users.updatedAt - today);
+        console.log(users.email, users.username);
+        if(users.updatedAt - today > 434636190) {
+          var mailOptions = {
+            from: 'no_reply@journey_on-admin.com',
+            to: `${users.email}`,
+            subject: 'Sending Email using Node.js',
+            html: `<h2 style="text-align: center">Journey On <span> Journey Reminder Email</span></h2> 
+            <br><br>
+            <div>
+              <h4>Hi ${users.username},</h4>
+              <p>We miss you at <span style="font-weight: 700">Journey On</span>! It has been 5 days since you checked in on your Journey! Come see what you have coming up soon, and get some help meeting your goals!</p> 
+              <a href="https://journeyon.herokuapp.com/">JourneyOn</a>
+            </div>
+            <hr>
+            <div style="text-align: center">
+              <h6>Looking Forward to seeing you again soon!</h6>
+              <p>Best Regards,</p>
+              <p>JOURNEY ON TEAM</p>
+            </div>`
+          };
+          transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+              res.send(error);
+              console.log(error);
+            } else {
+              res.send('Email sent: ' + info.response);
+              console.log("success!");
+            }
+          });
+        }else {
+          console.log("no users to email")
+        }
+
+  }})
+  .catch(function (err) {
+    console.log(err);
+  });
 
 
-// });
+});
 
 
 app.post('/api/update', isAuthenticated, (req, res) => {
@@ -543,29 +445,7 @@ app.post('/api/update', isAuthenticated, (req, res) => {
 });
 
 
-// cron.schedule("* * * * Wednesday", function() {
-//   console.log("---------------------");
-//   console.log("Running Cron Job");
-//   // let mailOptions = {
-//   //   from: "COMPANYEMAIL@gmail.com",
-//   //   to: "RECEPIENTEMAIL@gmail.com",
-//   //   subject: `Not a GDPR update ;)`,
-//   //   text: `Hi there, this email was automatically sent by us`
-//   // };
-//   var mailOptions = {
-//           from: 'no_reply@journey_on-admin.com',
-//           to: 'corey.slade@gmail.com',
-//           subject: 'Sending Email using Node.js',
-//           html: `<h1>TESTING EMAIL Scheduler</h1>`
-//         };
-//   transporter.sendMail(mailOptions, function(error, info) {
-//     if (error) {
-//       throw error;
-//     } else {
-//       console.log("Email successfully sent!");
-//     }
-//   });
-// });
+
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {

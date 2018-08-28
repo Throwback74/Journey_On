@@ -98,7 +98,7 @@ class PromptModal extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={this.openModal}>Open Modal</button>
+        <button className="modalBtn" onClick={this.openModal}>Open Modal</button>
         <Modal
           ariaHideApp={false}
           isOpen={this.state.modalIsOpen}
@@ -135,7 +135,7 @@ class PromptModal extends React.Component {
               </textarea><br></br>
               <input type="submit" value="Submit" id="submit-task-btn"></input>
             </form>
-            <button onClick={this.closeModal}>close</button>
+            <button className="modalBtn" onClick={this.closeModal}>close</button>
           </div>
         </Modal>
       </div>

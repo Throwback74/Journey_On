@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import AuthService from '../Auth/AuthService';
 import {Link} from 'react-router-dom';
+import "./Login.css";
 
 class Login extends Component {
   constructor() {
@@ -30,7 +31,7 @@ class Login extends Component {
   };
 
   handleChange = event => {
-    const {name, value} = event.target;
+    const { name, value } = event.target;
     this.setState({
         [name]: value
     });
@@ -38,7 +39,9 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="loginContainer">
+        <div className="form-group row justify-content-center">
+          <div className="col-md-6">
         <h1>Login</h1>
         <form onSubmit={this.handleFormSubmit}>
           <div className="form-group">
@@ -62,8 +65,9 @@ class Login extends Component {
           <button type="submit" className="btn btn-primary">Submit</button>
         </form>
         <p><Link to="/signup">Go to Signup</Link></p>
+        </div>
       </div>
-
+    </div>
     );
   }
 }
