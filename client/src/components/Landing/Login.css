@@ -1,4 +1,4 @@
-.signupContainer{
+.loginContainer {
         background-image: url("../../images/bailey-zindel-396398-unsplash.jpg");
         background-size:cover;
         height: 900px;
@@ -6,7 +6,3 @@
         background-repeat: no-repeat;
         font-family: 'Indie Flower', cursive;
     }
-
-
-
-

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import AuthService from '../Auth/AuthService';
 import API from '../../utils/API';
-import Footer from '../Footer/Footer';
+// import Footer from '../Footer/Footer';
 import "./Signup.css";
 
 class Signup extends Component {
@@ -49,41 +49,44 @@ class Signup extends Component {
 
   render() {
     return (
-      <div className="container signupContainer">
-
-        <h1>Signup</h1>
-        <form onSubmit={this.handleFormSubmit}>
-          <div className="form-group">
-            <label htmlFor="username">Username:</label>
-            <input className="form-control"
-              placeholder="Username goes here..."
-              name="username"
-              type="text"
-              id="username"
-              onChange={this.handleChange} />
+      <div className="signupContainer">
+        <div className="form-group row justify-content-center">
+          <div className="col-md-6">
+            <h1>Signup</h1>
+            <form onSubmit={this.handleFormSubmit}>
+              <div className="form-group">
+                <label htmlFor="username">Username:</label>
+                <input className="form-control"
+                  placeholder="Username goes here..."
+                  name="username"
+                  type="text"
+                  id="username"
+                  onChange={this.handleChange} />
+              </div>
+              <div className="form-group">
+                <label htmlFor="email">Email address:</label>
+                <input className="form-control"
+                  placeholder="Email goes here..."
+                  name="email"
+                  type="email"
+                  id="email"
+                  onChange={this.handleChange} />
+              </div>
+              <div className="form-group">
+                <label htmlFor="pwd">Password:</label>
+                <input className="form-control"
+                  placeholder="Password goes here..."
+                  name="password"
+                  type="password"
+                  id="pwd"
+                  onChange={this.handleChange} />
+              </div>
+              <button type="submit" className="btn btn-primary">Submit</button>
+            </form>
+            <p className="link"><Link class="linkThis" to="/login">Go to Login</Link></p>
+            {/* { <Footer /> } */}
           </div>
-          <div className="form-group">
-            <label htmlFor="email">Email address:</label>
-            <input className="form-control"
-              placeholder="Email goes here..."
-              name="email"
-              type="email"
-              id="email"
-              onChange={this.handleChange} />
-          </div>
-          <div className="form-group">
-            <label htmlFor="pwd">Password:</label>
-            <input className="form-control"
-              placeholder="Password goes here..."
-              name="password"
-              type="password"
-              id="pwd"
-              onChange={this.handleChange} />
-          </div>
-          <button type="submit" className="btn btn-primary">Submit</button>
-        </form>
-        <p className="link"><Link to="/login">Go to Login</Link></p>
-        <Footer />
+        </div>
       </div>
     );
   }

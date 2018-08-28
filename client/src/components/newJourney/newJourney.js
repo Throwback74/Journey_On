@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import AuthService from '../Auth/AuthService';
 import API from '../../utils/API';
 import withAuth from '../Auth/withAuth';
-import Footer from '../Footer/Footer';
+// import Footer from '../Footer/Footer';
 import "./newJourney.css";
 
 
@@ -55,40 +55,44 @@ class Journey extends Component {
 
     render() {
         return (
-            <div className="container">
-                <h1>Add a Journey!</h1>
-                <form onSubmit={this.handleFormSubmit} ref='form'>
-                    <div className="form-group">
-                        <label htmlFor="firstStep">Journey Name:</label>
-                        <input className="form-control"
-                            placeholder="Journey Name"
-                            name="journeyName"
-                            type="text"
-                            id="journeyName"
-                            onChange={this.handleChange} />
+            <div className="bodyContainer">
+                <div className="form-group row justify-content-center">
+                    <div className="col-md-6">
+                        <h1>Add a Journey!</h1>
+                        <form onSubmit={this.handleFormSubmit} ref='form'>
+                            <div className="form-group">
+                                <label htmlFor="firstStep">Journey Name:</label>
+                                <input className="form-control"
+                                    placeholder="Journey Name"
+                                    name="journeyName"
+                                    type="text"
+                                    id="journeyName"
+                                    onChange={this.handleChange} />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="completeBy">Complete By (Required):</label>
+                                <input className="form-control"
+                                    placeholder="When would you like to achieve this by?"
+                                    name="completeBy"
+                                    type="date"
+                                    id="completeBy"
+                                    onChange={this.handleChange} />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="journeySummary">Journey Summary:</label>
+                                <textarea className="form-control"
+                                    placeholder="Journey Summary"
+                                    name="journeySummary"
+                                    type="text"
+                                    id="journeySummary"
+                                    onChange={this.handleChange} />
+                            </div>
+                            <button type="submit" className="btn btn-primary">Submit</button>
+                        </form>
+                        <button className="btn btn-primary" onClick={this.handleGoToProfile}>Go to profile</button>
+                        {/* <Footer /> */}
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="completeBy">Complete By (Required):</label>
-                        <input className="form-control"
-                            placeholder="When would you like to achieve this by?"
-                            name="completeBy"
-                            type="date"
-                            id="completeBy"
-                            onChange={this.handleChange} />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="journeySummary">Journey Summary:</label>
-                        <textarea className="form-control"
-                            placeholder="Journey Summary"
-                            name="journeySummary"
-                            type="text"
-                            id="journeySummary"
-                            onChange={this.handleChange} />
-                    </div>
-                    <button type="submit" className="btn btn-primary">Submit</button>
-                </form>
-                <button className="btn btn-primary" onClick={this.handleGoToProfile}>Go to profile</button>
-                <Footer />
+                </div>
             </div>
         )
     }
