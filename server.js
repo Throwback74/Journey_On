@@ -14,8 +14,6 @@ const app = express();
 const nodemailer = require('nodemailer');
 
 const PORT = process.env.PORT || 3001;
-console.log(process.env.USER)
-
 
 // Setting CORS so that any website can
 // Access our API
@@ -34,13 +32,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/appDB";
-
-mongoose.Promise = Promise;
-
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
-
-// mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/appDB');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/appDB', { useNewUrlParser: true });
 
 // Init the express-jwt middleware
 const isAuthenticated = exjwt({
