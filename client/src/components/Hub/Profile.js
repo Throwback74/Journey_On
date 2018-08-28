@@ -208,8 +208,6 @@ class Profile extends Component {
             })}
           </div>
         </div>
-        {/* <Footer locationTrigger={this.state.locationTrigger}/> */}
-        
       </div>
     )
   }
