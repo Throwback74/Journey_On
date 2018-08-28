@@ -1,10 +1,10 @@
 require("dotenv").config();
 var cron = require('node-cron');
 const axios = require('axios');
-const mongoose = require('mongoose');
-
-const db = require('./models');
 const express = require('express');
+const mongoose = require('mongoose');
+const db = require('./models');
+
 const path = require('path');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
@@ -34,7 +34,13 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/appDB');
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/appDB";
+
+mongoose.Promise = Promise;
+
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+
+// mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/appDB');
 
 // Init the express-jwt middleware
 const isAuthenticated = exjwt({
