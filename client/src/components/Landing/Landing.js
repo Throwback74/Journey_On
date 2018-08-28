@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import './Landing.css';
 import './Animate.css';
+// import '../Footer/Footer.css';
 // eslint-disable-next-line
 import { Link } from "react-router-dom";
 
@@ -88,8 +89,8 @@ class Landing extends Component {
               </div>
             </div>
           </div>
-          <footer>
-    <div className={`${props.locationTrigger ? 'ffoot2' : 'ffoot'}`}>
+          <footer className="landingFooter">
+    <div className="ffoot">
         <div className="ffoot">
             <div className="fcontainer">
                 <div className="row">
