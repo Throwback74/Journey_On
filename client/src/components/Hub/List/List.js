@@ -3,6 +3,7 @@ import API from '../../../utils/API';
 // eslint-disable-next-line
 import AuthService from '../../Auth/AuthService';
 import withAuth from '../../Auth/withAuth';
+import './List.css';
 
 
 class List extends Component {
@@ -29,9 +30,9 @@ class List extends Component {
         return (
             <div className="container list">
                 <div className="container listItems">
-                    <ul>
-                        {this.state.journeyArray.map(journey => <li>{journey}</li>)}
-                    </ul>
+                    <ol>
+                        {this.state.journeyArray.map(journey => <li className='journeyList'>{journey}</li>)}
+                    </ol>
                 </div>
             </div>
         )
