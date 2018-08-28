@@ -11,8 +11,8 @@ import List from "./List/List";
 
 const idArr = [];
 const newArr = [];
-const taskArr = [];
-const taskIds = [];
+// const taskArr = [];
+// const taskIds = [];
 var journeyID;
 class Profile extends Component {
 
@@ -68,29 +68,10 @@ class Profile extends Component {
     }).then(data => {
       console.log(data);
 
-      this.loadTasks();
-      this.populateAll();
-    })
-  }
-
-  loadTasks = (journeyID) => {
-    API.loadTasks(journeyID).then(res => {
-      console.log("loadtasksRes", res);
-      for (let i = 0; i < res.data.tasks.length; i++) {
-        taskArr.push(res.data.tasks[i]);
-        taskIds.push(res.data.tasks[i]._id);
-      }
-      this.setState({
-        taskArray: taskArr,
-        taskIds: taskIds
-      })
-      return taskIds
-    }).then(data => {
-      console.log('task data, ', data)
-      API.populateAll(this.props.user.id).then(res => {
-        console.log('populated All', res);
-      })
-    })
+  // this.loadTasks();
+  this.populateAll();
+  this.loadVideos(journeyID);
+  })
   }
 
   populateAll = () => {
@@ -102,10 +83,24 @@ class Profile extends Component {
       this.listVideos(this.state.videoArr)
     })
   }
+
   listVideos = () => {
     this.state.videoArr.map((video) =>
       <li>{video}</li>
     )
+  }
+
+
+  loadVideos = (journeyID) => {
+    API.loadVideos(journeyID).then(function(res){
+      console.log(res);
+      console.log(res.data.videos);
+    }).catch(err => {
+      console.log(err.response);
+      alert(err.response.data.message)
+  }).catch(err => {
+    alert(err)
+  });
   }
 
   addVideo = () => {
@@ -113,27 +108,8 @@ class Profile extends Component {
       console.log(res);
       alert("Video Added!");
       this.populateAll()
-          
         })
       }
-
-      // newArr.push(res.data.videoLink)
-      // this.setState({ videoArr: newArr })
-      // this.listVideos(newArr);
-      // let videoData = res.data;
-      // let videoArr = [...this.state.videoArr, videoData];
-      // this.setState({
-      //   videoArr: videoArr
-      // });
-      // console.log(res);
-      // const tempArr = []
-      // for (var i = 0; i < res.data.videos.length; i++) {
-      //   tempArr.push(res.data.videos[i])
-      // }
-      // console.log(tempArr)
-      // console.log(res);
-      // this.setState({ videoArr: tempArr })
-      // this.listVideos(tempArr);
 
   getResources = () => {
     console.log("sup");

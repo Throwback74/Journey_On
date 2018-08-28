@@ -14,6 +14,10 @@ export default {
     return axios.get(`/api/gettasks/${journeyId}`)
   },
 
+  loadVideos: (journeyId) => {
+    return axios.get(`/api/getvideos/${journeyId}`)
+  },
+
   // populateTasks: (journeyId) => {
   //   return axios.get(`/api/populateTasks/${journeyId}`)
   // },
@@ -51,8 +55,8 @@ export default {
     return axios.post('/api/deletejourney', {email: email})
   },
 
-  addTask: (taskTitle, taskDescription, journeyId) => {
-    return axios.post('/api/addtask/', {taskTitle: taskTitle, taskDescription: taskDescription, taskDate: Date.now(), journeyId: journeyId});
+  addTask: (taskTitle, taskDescription, taskLabel, cardID, journeyId) => {
+    return axios.post('/api/addtask/', {taskTitle: taskTitle, taskDescription: taskDescription, taskLabel: taskLabel, cardId: cardID, taskDate: Date.now(), journeyId: journeyId});
   },
 
   addVideo: (videoUrl, journeyId) => {
