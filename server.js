@@ -392,7 +392,7 @@ cron.schedule('00 5 * * *', function () {
             <div>
               <h4>Hi ${users.username},</h4>
               <p>We miss you at <span style="font-weight: 700">Journey On</span>! It has been 5 days since you checked in on your Journey! Come see what you have coming up soon, and get some help meeting your goals!</p> 
-              <a href="www.JourneyOn.com">JourneyOn</a>
+              <a href="https://journeyon.herokuapp.com/">JourneyOn</a>
             </div>
             <hr>
             <div style="text-align: center">
