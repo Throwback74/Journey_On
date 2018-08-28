@@ -1,10 +1,10 @@
 require("dotenv").config();
 var cron = require('node-cron');
 const axios = require('axios');
-const mongoose = require('mongoose');
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/appDB');
-const db = require('./models');
 const express = require('express');
+const mongoose = require('mongoose');
+const db = require('./models');
+
 const path = require('path');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
@@ -34,11 +34,17 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/appDB";
 
+mongoose.Promise = Promise;
+
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+
+// mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/appDB');
 
 // Init the express-jwt middleware
 const isAuthenticated = exjwt({
-  secret: 'all sorts of code up in here'
+  secret: process.env.SECRET || 'all sorts of code up in here'
 });
 
 
@@ -121,7 +127,7 @@ app.post('/api/videos', (req, res) => {
 });
 
 app.get('/api/getvideos/:journeyId', (req, res) => {
-  db.Journey.findById(req.params.journeyId).then(data => {
+  return db.Journey.findById(req.params.journeyId).then(data => {
     if (data) {
       res.json(data);
     } else {
@@ -136,7 +142,7 @@ app.get('/api/getvideos/:journeyId', (req, res) => {
 
 
 app.get('/api/gettasks/:journeyId', isAuthenticated, (req, res) => {
-  db.Journey.findById(req.params.journeyId).then(data => {
+  return db.Journey.findById(req.params.journeyId).then(data => {
     if (data) {
       res.json(data);
     } else {
@@ -150,7 +156,7 @@ app.get('/api/gettasks/:journeyId', isAuthenticated, (req, res) => {
 
 
 app.get('/api/journeyCards/:id', (req, res) => {
-  db.Task.find({
+  return db.Task.find({
     journeyId: req.params.id
   }).then(dbTasks => {
     res.json(dbTasks);
@@ -158,7 +164,7 @@ app.get('/api/journeyCards/:id', (req, res) => {
 });
 
 app.get('/api/videos/:id', (req, res) => {
-  db.Video.find({
+  return db.Video.find({
     journeyId: req.params.id
   }).then(dbVideos => {
     res.json(dbVideos);
@@ -175,7 +181,7 @@ app.post('/api/login', (req, res) => {
         let token = jwt.sign({
           id: user._id,
           email: user.email
-        }, 'all sorts of code up in here', {
+        }, process.env.secret || 'all sorts of code up in here', {
           expiresIn: 129600
         }); // Sigining the token
         res.json({
