@@ -2,7 +2,7 @@ require("dotenv").config();
 var cron = require('node-cron');
 const axios = require('axios');
 const mongoose = require('mongoose');
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/appDB');
+
 const db = require('./models');
 const express = require('express');
 const path = require('path');
@@ -34,7 +34,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/appDB');
 
 // Init the express-jwt middleware
 const isAuthenticated = exjwt({
@@ -121,7 +121,7 @@ app.post('/api/videos', (req, res) => {
 });
 
 app.get('/api/getvideos/:journeyId', (req, res) => {
-  db.Journey.findById(req.params.journeyId).then(data => {
+  return db.Journey.findById(req.params.journeyId).then(data => {
     if (data) {
       res.json(data);
     } else {
@@ -136,7 +136,7 @@ app.get('/api/getvideos/:journeyId', (req, res) => {
 
 
 app.get('/api/gettasks/:journeyId', isAuthenticated, (req, res) => {
-  db.Journey.findById(req.params.journeyId).then(data => {
+  return db.Journey.findById(req.params.journeyId).then(data => {
     if (data) {
       res.json(data);
     } else {
@@ -150,7 +150,7 @@ app.get('/api/gettasks/:journeyId', isAuthenticated, (req, res) => {
 
 
 app.get('/api/journeyCards/:id', (req, res) => {
-  db.Task.find({
+  return db.Task.find({
     journeyId: req.params.id
   }).then(dbTasks => {
     res.json(dbTasks);
@@ -158,7 +158,7 @@ app.get('/api/journeyCards/:id', (req, res) => {
 });
 
 app.get('/api/videos/:id', (req, res) => {
-  db.Video.find({
+  return db.Video.find({
     journeyId: req.params.id
   }).then(dbVideos => {
     res.json(dbVideos);
