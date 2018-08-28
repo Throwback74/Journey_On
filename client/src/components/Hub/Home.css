@@ -69,7 +69,16 @@
 .landingLogoutBtn {
   float: left;
   margin-top: 8px;
-  
+}
+
+button.add {
+  border-radius: 0.3em;
+}
+
+button.col-md-2.add {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  border-radius: 0.3em;
 }
 
 .journeyOn{
