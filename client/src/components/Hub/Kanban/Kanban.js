@@ -116,17 +116,7 @@ class Kanban extends Component {
                 resolve(updatedData);
             });
         };
-        // API.getJourneyName(this.props.user.id).then(res => {
-        //     console.log("getJourneyName", res);
-        // });
 
-
-        // API.getCards().then(function (res) {
-        //     res.data.map(card => {
-        //         return lanes[0].cards.push(card)
-        //     })
-        //     this.setState({ boardData: lanes })
-        // })
 
     
 
@@ -147,32 +137,7 @@ class Kanban extends Component {
             alert(err)
         });
     }
-//         card: { id: 'Milk', title: 'Buy Milk', label: '15 mins', description: 'Use Headspace app' }
 
-    // populateTasks (journeyArray) {
-    //     API.populateTasks(journeyID).then(res => {
-    //         console.log("getTasksres", res);
-    //     })
-    // }
-
-
-    // componentDidMount () {
-    //     API.getTasks(this.props.journeyArray[0]._id).then(res => {
-    //         console.log("getTasksres", res);
-    //     })
-    //     // this.populateTasks(this.state.journeyArray[0].id);
-    // }
-
-
-
-    // completeCard = () => {
-    //     this.state.eventBus.publish({
-    //         type: 'ADD_CARD',
-    //         laneId: 'COMPLETED',
-    //         card: { id: 'Milk', title: 'Buy Milk', label: '15 mins', description: 'Use Headspace app' }
-    //     })
-    //     this.state.eventBus.publish({ type: 'REMOVE_CARD', laneId: 'PLANNED', cardId: 'Milk' })
-    // }
 
     addCard = () => {
         this.state.eventBus.publish({
@@ -191,25 +156,7 @@ class Kanban extends Component {
         console.log(card.id)
     };
 
-    // handleCardAdd = (card, laneId) => {
-    //     console.log(`New card added to lane ${laneId}`);
-    //     card.id = laneId;
-    //     console.dir(card);
-    //     console.log(this.props.journey.id);
-    //     // When new card is added on trello board, add card to database
-    //     console.log("addtask card info ", card, card.title, card.description);
-        
-    //     // API.addTask(card.title, card.description, journeyID)
-    //     //     .then(res => {
-    //     //         console.log("Whats the journeyID?", this.props.journeyArray[0].id);
-    //     //         console.log(res.data); // delete this later?
-    //     //         alert("Task Added!"); // delete alert later?
-
-    //     //     }).catch(err => {
-    //     //         console.log(err.response);
-    //     //         alert(err.response.data.message)
-    //     //     });
-    // };
+    
 
 	handleCardAdd = (card, laneId) => {
         console.log(`New card added to lane ${laneId}`)
@@ -229,7 +176,7 @@ class Kanban extends Component {
             alert(err, err.response.data.message);
         });
 	};
-//{title: "zxcv", description: "vzcx", label: "vcx", id: "708bfde0-aa6d-11e8-a0c0-2b8d5aaba783"}
+
     render() {
         return (
             <div className="full-container">

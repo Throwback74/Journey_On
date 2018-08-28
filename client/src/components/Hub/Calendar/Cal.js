@@ -14,7 +14,15 @@ const newArr = [];
 var journeyID;
 var eventsArr = [];
 const eventsObj = {};
+var tasksRes;
 
+const eventsData = {events: [
+                {
+                  start: new Date(),
+                  end: new Date(moment().add(1, "days")),
+                  title: "Some title"
+                }
+              ]};
 
 Calendar.setLocalizer(Calendar.momentLocalizer(moment));
 
@@ -33,6 +41,8 @@ class Cal extends Component {
     journeyIds: []
   };
 
+
+
   onEventResize = (type, { event, start, end, allDay }) => {
     this.setState(state => {
       state.events[0].start = start;
@@ -44,6 +54,34 @@ class Cal extends Component {
   onEventDrop = ({ event, start, end, allDay }) => {
     console.log(start);
   };
+
+  componentWillMount = () => {
+    API.populateAll(this.props.user.id).then(res => {
+        console.log(res.data.journeys[0].tasks);
+        tasksRes = res.data.journeys[0].tasks;
+        console.log(tasksRes)
+        this.updateEvents(tasksRes);
+        for(let i = 0; i < tasksRes.length; i++){
+        var endDate = new Date(tasksRes[i].taskDate + 869272388)
+        eventsObj.start = tasksRes[i].taskDate;
+        eventsObj.end = endDate;
+        eventsObj.title = tasksRes[i].taskTitle;
+        eventsArr = [...this.state.eventsArr, eventsObj];
+        eventsData.events.push({ start: tasksRes[i].taskDate, end: endDate, title: tasksRes[i].taskTitle})
+        
+        }
+        console.log(eventsData);
+      console.log(eventsArr);
+      this.setState({
+        events: eventsArr,
+        tasksArr: tasksRes
+      })
+      return tasksRes;
+    }).catch(err => {
+        console.log(err.response);
+        console.log("Populate Error Cal.js ", err);
+    });
+  }
 
   componentDidMount() {
     API.getUser(this.props.user.id).then(res => {
@@ -63,37 +101,31 @@ class Cal extends Component {
         return journeyID
     }).then(data => {
     console.log(data);
+    console.log(this.state.eventsArr);
+    console.log(tasksRes);
       // this.loadTask(data);
-  })
+  }).catch(err => {
+    console.log(err.response);
+    console.log("Get user and find Journey err, Cal.js", err);
+});
   console.log(this.state.eventsArr);
+  console.log(tasksRes);
+  // this.updateEvents(tasksRes);
   }
   // data.completeBy
 
   
   
-    componentWillMount = () => {
-      API.populateAll(this.props.user.id).then(res => {
-          console.log(res.data.journeys[0].tasks);
-          var tasksRes = res.data.journeys[0].tasks;
-          console.log(tasksRes)
-          for(let i = 0; i < tasksRes.length; i++){
-          var endDate = new Date(tasksRes[i].taskDate + 869272388)
-          eventsObj.start = tasksRes[i].taskDate;
-          eventsObj.end = endDate;
-          eventsObj.title = tasksRes[i].taskTitle;
-          eventsArr = [...this.state.eventsArr, eventsObj];
-          // eventsArr.push({ start: tasksRes[i].taskDate, end: endDate, title: tasksRes[i].taskTitle})
-          }
-          
-        console.log(eventsArr);
-        this.setState({
-          events: eventsArr,
-          tasksArr: tasksRes
-        })
-      }).catch(err => {
-          console.log(err.response);
-          alert(err)
-      });
+    
+
+  updateEvents(tasksRes) {
+    if(tasksRes){
+      this.setState({
+        tasksArr: tasksRes
+      })
+    }else {
+      console.log(tasksRes);
+    }
   }
   
 
@@ -112,7 +144,9 @@ class Cal extends Component {
           // toolbar={false}
           defaultDate={new Date()}
           defaultView="month"
-          events={this.state.events}
+          events={this.state.tasksArr}
+          startAccessor={(event) => { return moment(event.taskDate.date) }}
+          endAccessor={(event) => { return moment(event.taskDate.date) }}
           onEventDrop={this.onEventDrop}
           onEventResize={this.onEventResize}
           resizable
