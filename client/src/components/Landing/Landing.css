@@ -68,6 +68,27 @@ svg {
 }
 
 .foot {
+    margin: 0;
+    padding: 10px;
+    /* text-align: center;
+    background-image: linear-gradient(55deg,#488192 25%,#b3d2d8);
+    font-display: bolder;
+    height: 100%;
+    width: 100%;
+    padding-top: 30px;
+    margin-top: 30px; */
+}
+
+.footerTitle {
+    display:none;
+    /* font-family: 'Indie Flower', cursive;
+    position: relative;
+    bottom: 75px;
+    right: 50px;
+    color: white; */
+}
+
+/* .foot {
     text-align: center;
     background-image: linear-gradient(55deg,#488192 25%,#b3d2d8);
     font-display: bolder;
@@ -83,7 +104,7 @@ svg {
     bottom: 75px;
     right: 50px;
     color: white;
-}
+} */
 
 .white-text {
     color: white;

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import AuthService from '../Auth/AuthService';
 import API from '../../utils/API';
 import withAuth from '../Auth/withAuth';
-import Footer from '../Footer/Footer';
+// import Footer from '../Footer/Footer';
 import "./newJourney.css";
 
 
@@ -55,7 +55,9 @@ class Journey extends Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="bodyContainer">
+            <div className="form-group row justify-content-center">
+                <div className="col-md-6">
                 <h1>Add a Journey!</h1>
                 <form onSubmit={this.handleFormSubmit} ref='form'>
                     <div className="form-group">
@@ -88,7 +90,9 @@ class Journey extends Component {
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
                 <button className="btn btn-primary" onClick={this.handleGoToProfile}>Go to profile</button>
-                <Footer />
+                {/* <Footer /> */}
+                </div>
+                </div>
             </div>
         )
     }

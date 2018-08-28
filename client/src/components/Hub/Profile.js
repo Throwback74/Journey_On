@@ -150,7 +150,12 @@ class Profile extends Component {
     return (
       <div className="body">
         <div className="nav">
-          <div className="col-md-10">
+        <div className="col-md-2">
+          <Link to="/logout">
+            <button type="button" className="btn btn-danger landingLogoutBtn">Logout</button>
+          </Link>
+          </div>
+          <div className="col-md-8">
           </div>
           <div className="col-md-2">
             <h1 className="journeyOn">Journey On!</h1>
@@ -163,8 +168,8 @@ class Profile extends Component {
         </div>
         <div className="Profile">
           <div className="welcome container">
-            <h1>Welcome... {this.state.username}</h1>
-            <p>Time to get shit done!</p>
+            <h1 className="welcomeHeader">Welcome... {this.state.username}</h1>
+            <p className="timeP">Time to get shit done!</p>
             <Link to={`/profile/${this.props.user.id}`}><button type="button" className="add">Hub</button></Link>
           </div>
           <div className="container">

@@ -2,17 +2,24 @@
     font-size: 32px;
 } */
 
-.ffoot {
+/* .ffoot {
     text-align: center;
     background-image: linear-gradient(55deg,#488192 25%,#b3d2d8);
     font-display: bolder;
     height: 100%;
     width: 100%;
     padding-top: 30px;
-    /* margin-top: 30px; */
-}
+    margin-top: 30px;//removed
+} */
 
-.ffooterTitle {
+.ffoot {
+    text-align: center;
+    background-image: linear-gradient(55deg,#488192 25%,#b3d2d8);
+    height: 100%;
+    padding: 20px;   
+} 
+
+/* .ffooterTitle {
     font-family: 'Indie Flower', cursive;
     position: relative;
     bottom: 75px;
@@ -47,4 +54,47 @@
 .fcopywrite {
     color: white;
     margin-right: 50px;
+} */
+
+
+.ffooterTitle {
+    display: none; 
+}
+
+.fgrey-text {
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: white;
+}
+
+.fdotts {
+    list-style-type: none;
+
+}
+
+.fabout {
+    display: none;
+    padding-right: 40px;
+    margin-right: 40px;
+}
+
+.fillerList {
+    width: 72px;
+}
+
+.fsignupEmail {
+    margin-right: 40px;
+    color: white;
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.fcopywrite {
+    color: white;
+    margin-right: 50px;
+    padding: 10px;
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
+li {
+    display: inline-block;
+    margin-left: 10px; 
 }
