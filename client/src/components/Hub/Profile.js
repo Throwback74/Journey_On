@@ -16,6 +16,7 @@ const newArr = [];
 // const taskArr = [];
 // const taskIds = [];
 var journeyID;
+// const location = this.props.history.location;
 
 class Profile extends Component {
 
@@ -75,6 +76,7 @@ class Profile extends Component {
   // this.loadTasks();
   this.populateAll();
   this.loadVideos(journeyID);
+  this.checkLocation(this.props.history.location.pathname);
   })
   }
 
@@ -135,6 +137,7 @@ class Profile extends Component {
   };
 
   checkLocation = (location) => {
+    console.log(location);
     if(location === `/profile/${this.props.user.id}/item/calendar`) {
       this.setState({
         locationTrigger: "Calendar"
@@ -204,38 +207,8 @@ class Profile extends Component {
             })}
           </div>
         </div>
-        {/* <div className="filler">
-
-        </div> */}
         <Footer locationTrigger={this.state.locationTrigger}/>
-        {/* <footer>
-          <div className="foot2">
-            <div className="container">
-              <div className="row">
-                <div className="col l6 s12 about">
-                  <p className="grey-text">Press</p>
-                  <p className="grey-text">Contact</p>
-                  <p className="grey-text">Folow us</p>
-                </div>
-                <div className="col l4 offset-l2 s12">
-                  <h5 className="white-text">Newsletter</h5>
-                  <p className="signupEmail">Sign up to our newsletter and stay up to date.</p>
-                  <ul className="dotts">
-                    <li><a className="grey-text text-lighten-3" href="https://www.facebook.com">Facebook</a></li>
-                    <li><a className="grey-text text-lighten-3" href="https://www.twitter.com">Twitter</a></li>
-                    <li><a className="grey-text text-lighten-3" href="https://www.instagram.com">Instagram</a></li>
-                    <li><a className="grey-text text-lighten-3" href="https://www.snapchat.com">Snapchat</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="footer-copyright">
-              <div className="container">
-                © 2018 Copyright Journey
-            </div>
-            </div>
-          </div>
-        </footer> */}
+        
       </div>
     )
   }

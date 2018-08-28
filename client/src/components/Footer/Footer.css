@@ -12,6 +12,10 @@
     margin-top: 30px;//removed
 } */
 
+.filler2{
+    display: none;
+}
+
 .ffoot {
     text-align: center;
     background-image: linear-gradient(55deg,#488192 25%,#b3d2d8);
