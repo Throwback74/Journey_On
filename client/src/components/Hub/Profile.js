@@ -154,7 +154,7 @@ class Profile extends Component {
             <Link to="/buildjourney"> Add a Journey</Link>
           </div>
           <div className="listdiv">
-              <List/>
+              <List mouseEvent={this.mouseEvent()}/>
           </div>
         </div>
         <div className="Profile">

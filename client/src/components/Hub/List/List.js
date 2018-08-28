@@ -30,11 +30,9 @@ class List extends Component {
     render() {
         return (
             <div className="container list">
-                <div className="container listItems">
-                    <ul>
-                        {this.state.journeyArray.map(journey => <li>{journey}</li>)}
-                    </ul>
-                </div>
+                <ul>
+                    {this.state.journeyArray.map(journey => <li onClick={this.props.mouseEvent}>{journey}</li>)}
+                </ul>
             </div>
         )
     }
