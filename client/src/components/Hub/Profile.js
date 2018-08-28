@@ -8,12 +8,15 @@ import Resources from "./Resources/Resources";
 import Progress from "./Progress/Progress";
 import Kanban from "./Kanban/Kanban";
 import List from "./List/List";
+import Calendar from "./Calendar/Cal";
+import Footer from "../Footer/Footer";
 
 const idArr = [];
 const newArr = [];
 // const taskArr = [];
 // const taskIds = [];
 var journeyID;
+
 class Profile extends Component {
 
   state = {
@@ -29,7 +32,8 @@ class Profile extends Component {
     journeyIds: [],
     taskIds: [],
     taskArray: [],
-    videoArr: []
+    videoArr: [],
+    locationTrigger: ""
   };
 
   componentWillMount() {
@@ -130,6 +134,18 @@ class Profile extends Component {
     })
   };
 
+  checkLocation = (location) => {
+    if(location === `/profile/${this.props.user.id}/item/calendar`) {
+      this.setState({
+        locationTrigger: "Calendar"
+      })
+    }else {
+      this.setState({
+        locationTrigger: ""
+      })
+    }
+  }
+
   render() {
     return (
       <div className="body">
@@ -169,7 +185,7 @@ class Profile extends Component {
             }
             <Route exact path={`/profile/${this.props.user.id}/item/resources`} render={(props) => (<Resources handleChange={this.handleChange} videoUrl={this.state.videoUrl} addVideo={this.addVideo} videoArr={this.state.videoArr} />)} />
             {/* <Route exact  component={Resources} handleChange={this.handleChange} newVideoUrl={this.state.videoUrl}/> */}
-            {/* <Route exact path={`/profile/${this.props.user.id}/item/calendar`} component={Calendar} /> */}
+            <Route exact path={`/profile/${this.props.user.id}/item/calendar`} component={Calendar} />
             <Route exact path={`/profile/${this.props.user.id}/item/board`} component={Kanban} />
 
           </div>
@@ -183,11 +199,11 @@ class Profile extends Component {
             })}
           </div>
         </div>
-        <div className="filler">
+        {/* <div className="filler">
 
-        </div>
-
-        <footer>
+        </div> */}
+        <Footer locationTrigger={this.state.locationTrigger}/>
+        {/* <footer>
           <div className="foot2">
             <div className="container">
               <div className="row">
@@ -214,7 +230,7 @@ class Profile extends Component {
             </div>
             </div>
           </div>
-        </footer>
+        </footer> */}
       </div>
     )
   }

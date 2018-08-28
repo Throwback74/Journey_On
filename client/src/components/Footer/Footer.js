@@ -1,9 +1,14 @@
 import React from "react";
 import "./Footer.css";
 
+
 const Footer = (props) => (
+    <div className='wrapper'>
+    <div className={`${props.locationTrigger ? 'filler2' : 'filler'}`}>
+
+    </div>
     <footer>
-        <div className="ffoot">
+        <div className={`${props.locationTrigger ? 'ffoot2' : 'ffoot'}`}>
             <div className="container">
                 <div className="row">
                     <div className="col l6 s12 fabout">
@@ -31,6 +36,7 @@ const Footer = (props) => (
             </div>
         </div>
     </footer>
+    </div>
 );
 
 export default Footer;
