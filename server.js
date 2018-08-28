@@ -356,27 +356,6 @@ var transporter = nodemailer.createTransport({
   }
 });
 
-<<<<<<< HEAD
-// cron.schedule('* * * * *', function (req, res) {
-//   console.log("----------------------");
-//   console.log("Running Cron Job");
-//   var mailOptions = {
-//     from: 'no_reply@journey_on-admin.com',
-//     to: 'corey.slade@gmail.com',
-//     subject: 'Sending Email using Node.js',
-//     html: `<h1>TESTING EMAIL SCHEDULER</h1>`
-//   };
-//   transporter.sendMail(mailOptions, function (error, info) {
-//     if (error) {
-//       res.send(error);
-//       console.log(error);
-//     } else {
-//       res.send('Email sent: ' + info.response);
-//       console.log("success!");
-//     }
-//   });
-// });
-=======
 app.get("/api/users", function (req, res) {
   // Using our User model, "find" every User in our db
   db.User.find()
@@ -389,7 +368,6 @@ app.get("/api/users", function (req, res) {
       res.json(err);
     });
 });
->>>>>>> 9e4e9eb1ef6ce7867c15c87657ec035cf185c1bd
 
 var email = "corey.slade@gmail.com";
 var username = "Throwback74";

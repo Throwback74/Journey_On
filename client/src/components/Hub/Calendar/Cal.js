@@ -150,7 +150,7 @@ class Cal extends Component {
           onEventDrop={this.onEventDrop}
           onEventResize={this.onEventResize}
           resizable
-          style={{ height: "100vh" }}
+          style={{ height: "600px" }}
         />
       </div>
     );

@@ -19,7 +19,7 @@ class Resources extends Component {
                 </div>
                 <div className="Vlinks">
                     <ul>
-                        {this.props.videoArr.map(video => <li><a href={video.videoUrl}>{video.videoUrl}</a></li>)}
+                        {this.props.videoArr.map(video => <li><a href={'https://'+video.videoUrl}>{video.videoUrl}</a></li>)}
                         <br/>
                     </ul>
                 </div>

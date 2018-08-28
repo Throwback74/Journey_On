@@ -170,17 +170,13 @@ class Profile extends Component {
             <Link to="/buildjourney"> Add a Journey</Link>
           </div>
           <div className="listdiv">
-<<<<<<< HEAD
-              <List mouseEvent={this.mouseEvent()}/>
-=======
             <List />
->>>>>>> 9e4e9eb1ef6ce7867c15c87657ec035cf185c1bd
           </div>
         </div>
         <div className="Profile">
           <div className="welcome container">
             <h1 className="welcomeHeader">Welcome... {this.state.username}</h1>
-            <p className="timeP">Time to get shit done!</p>
+            <p className="timeP">Time to get things done!</p>
             <Link to={`/profile/${this.props.user.id}`}><button type="button" className="add">Hub</button></Link>
           </div>
           <div className="container">
@@ -215,7 +211,7 @@ class Profile extends Component {
             })}
           </div>
         </div>
-        <Footer locationTrigger={this.state.locationTrigger}/>
+        {/* <Footer locationTrigger={this.state.locationTrigger}/> */}
         
       </div>
     )
