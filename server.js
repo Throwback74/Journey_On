@@ -38,7 +38,7 @@ app.use(bodyParser.urlencoded({
 
 // Init the express-jwt middleware
 const isAuthenticated = exjwt({
-  secret: 'all sorts of code up in here'
+  secret: process.env.SECRET || 'all sorts of code up in here'
 });
 
 
@@ -175,7 +175,7 @@ app.post('/api/login', (req, res) => {
         let token = jwt.sign({
           id: user._id,
           email: user.email
-        }, 'all sorts of code up in here', {
+        }, process.env.secret || 'all sorts of code up in here', {
           expiresIn: 129600
         }); // Sigining the token
         res.json({
