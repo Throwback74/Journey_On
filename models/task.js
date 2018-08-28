@@ -13,7 +13,12 @@ let Task = new Schema({
         trim: true
     },
     taskLabel: {
-        default: "TODO",
+        // default: "TODO",
+        type: String,
+        required: true,
+        trim: true
+    },
+    cardId: {
         type: String,
         required: true,
         trim: true

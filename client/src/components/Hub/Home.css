@@ -62,10 +62,43 @@
   height:200px;
   position: relative;
   font-size: 20px;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-weight: 700;
+}
+
+.landingLogoutBtn {
+  float: left;
+  margin-top: 8px;
+}
+
+button.add {
+  border-radius: 0.3em;
+}
+
+button.col-md-2.add {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  border-radius: 0.3em;
 }
 
 .journeyOn{
   font-size:40px;
+  font-weight: 700;
+}
+
+.welcomeHeader {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+}
+
+.timeP {
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-weight: 700;
+}
+
+.listDiv {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 400;
 }
 
 .middle{
@@ -114,5 +147,5 @@
 }
 
 .filler{
-  height:20px;
+  height:600px;
 }

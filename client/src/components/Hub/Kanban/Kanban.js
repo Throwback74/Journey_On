@@ -6,12 +6,47 @@ import PromptModal from './PromptModal';
 import API from '../../../utils/API';
 import AuthService from '../../Auth/AuthService';
 import withAuth from '../../Auth/withAuth';
-
-const data = require('./kanban_demo2.json') // require DB collection instead
+//const db = require('../../../../../models');
+// const data = require('./kanban_demo2.json') // require DB collection instead
 const newArr = []
 const idArr = []
 var journeyID;
-// const data = require(db.userTasks.), then populate using userTasks data?
+const cardsArr = [];
+var tasksRes;
+//const data = require(db.Task) //, then populate using userTasks data?
+const data = {lanes: [
+    {
+        id: '1',
+        title: "Todo - Later",
+        label: "0/0",
+        cards: []
+    },
+    {
+        id: '2',
+        title: "Todo - Next",
+        label: "0/0",
+        cards: []
+    },
+    {
+        id: '3',
+        title: "Todo - Soon",
+        label: "0/0",
+        cards: []
+    },
+    {
+        id: '4',
+        title: "In Progress",
+        label: "0/0",
+        cards: []
+    },
+    {
+        id: '5',
+        title: "Done",
+        label: "0/0",
+        cards: []
+    }
+] }
+
 
 const handleDragStart = (cardId, laneId) => {
     console.log('drag started');
@@ -30,6 +65,8 @@ const handleDragEnd = (cardId, sourceLaneId, targetLaneId) => {
 
 class Kanban extends Component {
 
+
+    //TODO IF TIME CHOOSE LANE TO ADD TASK TO WITH DROP DOWN IN MODAL
     constructor() {
         super();
         this.state = { 
@@ -46,9 +83,6 @@ class Kanban extends Component {
 
     async componentWillMount() {
         // console.log(this.props.journey.id);
-
-        
-
         const response = await this.getBoard();
         this.setState({ boardData: response });
 
@@ -69,59 +103,50 @@ class Kanban extends Component {
             console.log("data", data);
             // this.populateTasks(data);
         })
+    };
 
+        getBoard() {
+            return new Promise(resolve => {
+                resolve(data);
+            });
+        };
                 
-
-        // API.getJourneyName(this.props.user.id).then(res => {
-        //     console.log("getJourneyName", res);
-        // });
-
-
-        // API.getCards().then(function (res) {
-        //     res.data.map(card => {
-        //         return lanes[0].cards.push(card)
-        //     })
-        //     this.setState({ boardData: lanes })
-        // })
-
-    };
-
-    // populateTasks (journeyArray) {
-    //     API.populateTasks(journeyID).then(res => {
-    //         console.log("getTasksres", res);
-    //     })
-    // }
+        updateBoard(updatedData) {
+            return new Promise(resolve => {
+                resolve(updatedData);
+            });
+        };
 
 
-    // componentDidMount () {
-    //     API.getTasks(this.props.journeyArray[0]._id).then(res => {
-    //         console.log("getTasksres", res);
-    //     })
-    //     // this.populateTasks(this.state.journeyArray[0].id);
-    // }
+    
 
-    getBoard() {
-        return new Promise(resolve => {
-            resolve(data);
+    componentDidMount() {
+        API.populateAll(this.props.user.id).then(res => {
+            console.log(res.data.journeys[0].tasks);
+            tasksRes = res.data.journeys[0].tasks;
+            cardsArr.push({
+                id: toString(tasksRes.cardId), title: tasksRes.taskTitle, label: tasksRes.taskLabel, description: tasksRes.taskDescription
+            })
+            console.log(cardsArr);
+            this.setState({
+                boardData: this.state.boardData.lanes[0].cards.push(cardsArr)
+            })
+            
+        }).catch(err => {
+            console.log(err.response);
+            alert(err)
         });
-    };
+    }
 
-    // completeCard = () => {
-    //     this.state.eventBus.publish({
-    //         type: 'ADD_CARD',
-    //         laneId: 'COMPLETED',
-    //         card: { id: 'Milk', title: 'Buy Milk', label: '15 mins', description: 'Use Headspace app' }
-    //     })
-    //     this.state.eventBus.publish({ type: 'REMOVE_CARD', laneId: 'PLANNED', cardId: 'Milk' })
-    // }
 
-    // addCard = () => {
-    //     this.state.eventBus.publish({
-    //         type: 'ADD_CARD',
-    //         laneId: 'BLOCKED',
-    //         card: { id: 'Ec2Error', title: 'EC2 Instance Down', label: '30 mins', description: 'Main EC2 instance down' }
-    //     })
-    // }
+    addCard = () => {
+        this.state.eventBus.publish({
+            type: 'ADD_CARD',
+            laneId: '1',
+            card: cardsArr[0]
+        })
+        
+    }
 
 
 
@@ -131,27 +156,26 @@ class Kanban extends Component {
         console.log(card.id)
     };
 
-    handleCardAdd = (card, laneId) => {
-        console.log(`New card added to lane ${laneId}`);
-        card.id = laneId;
+    
+
+	handleCardAdd = (card, laneId) => {
+        console.log(`New card added to lane ${laneId}`)
+        console.log(card);
         console.dir(card);
-        console.log(this.props.journey.id);
-        // When new card is added on trello board, add card to database
-        console.log("addtask card info ", card, card.title, card.description);
-        
-        // API.addTask(card.title, card.description, journeyID)
-        //     .then(res => {
-        //         console.log("Whats the journeyID?", this.props.journeyArray[0].id);
-        //         console.log(res.data); // delete this later?
-        //         alert("Task Added!"); // delete alert later?
-
-        //     }).catch(err => {
-        //         console.log(err.response);
-        //         alert(err.response.data.message)
-        //     });
-    };
-
-
+        console.log(this.state.boardData);
+        API.addTask(card.title, card.description, card.label, card.id, journeyID).then(res => {
+            console.log(res.data);
+            data.lanes[0].cards.push(card);
+            this.setState({
+                boardData: data
+            });
+            this.updateBoard(this.state.boardData);
+            alert("Task Added!");
+        }).catch(err => {
+            console.log(err, err.response);
+            alert(err, err.response.data.message);
+        });
+	};
 
     render() {
         return (
@@ -166,7 +190,7 @@ class Kanban extends Component {
                         <Board className="Kanban-taskboard"
                             editable
                             onCardAdd={this.handleCardAdd}
-                            data={this.state.boardData}
+                            data={data}
                             draggable
                             onDataChange={this.shouldReceiveNewData}
                             eventBusHandle={this.setEventBus}

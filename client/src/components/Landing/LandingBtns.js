@@ -16,7 +16,7 @@ const LandingBtns = (props) => {
         <button type="button" className="btn btn-danger logoutBtn">Logout</button>
       </Link>
       <Link to={profileURL}>
-        <button type="button" className="btn btn-primary homeBtn">Home</button>
+        <button type="button" className="btn btn-primary homeBtn">Profile</button>
       </Link>
     </div>
   )

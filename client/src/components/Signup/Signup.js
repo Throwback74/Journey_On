@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import AuthService from '../Auth/AuthService';
 import API from '../../utils/API';
-import Footer from '../Footer/Footer';
+// import Footer from '../Footer/Footer';
 import "./Signup.css";
 
 class Signup extends Component {
@@ -49,7 +49,9 @@ class Signup extends Component {
 
   render() {
     return (
-      <div className="container signupContainer">
+      <div className="signupContainer">
+      <div className="form-group row justify-content-center">
+        <div className="col-md-6">
 
         <h1>Signup</h1>
         <form onSubmit={this.handleFormSubmit}>
@@ -83,7 +85,9 @@ class Signup extends Component {
           <button type="submit" className="btn btn-primary">Submit</button>
         </form>
         <p className="link"><Link to="/login">Go to Login</Link></p>
-        <Footer />
+        {/* <Footer /> */}
+      </div>
+      </div>
       </div>
     );
   }

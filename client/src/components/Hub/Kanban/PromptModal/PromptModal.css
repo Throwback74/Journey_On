@@ -1,3 +1,7 @@
 #submit-task-btn {
     margin: 5px;
 }
+
+.modalBtn {
+    border-radius: 0.3em;
+}
