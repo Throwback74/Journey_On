@@ -1,98 +1,59 @@
-# Create React Express App
+# Journey On
 
-## About This Boilerplate
+## Creating a Habit-building/Goal-tracking website using the full MERN stack and yarn
 
-This setup allows for a Node/Express/React/JWT app which can be easily deployed to Heroku.
+### Journey On is a site that allows you to set up a Journey towards an ultimate goal which you want to reach. Utilizing skills in both Front and back end technologies, the app allows the user to create multiple journeys, multiple tasks within those journeys to reach their end goal, and to save resources for themselves to reference along the way to aid in reaching the end of their journey. 
 
-The front-end React app will auto-reload as it's updated via webpack dev server, and the backend Express app will auto-reload independently with nodemon.
+### In order to help each user along the way they are provided with a personal Kanban board, where they set their tasks for each Journey, and can move each task along to different steps of completion. As tasks are created and deadlines set, they also automatically populate a calendar component built with React-big-calendar. Eventually this calendar will also have the ability to add tasks as well as have styling to help enforce Jerry Seinfeld's famous "Don't Break the Chain" advice for habit building. The user also always has access to a list of resources that they will build along the way to help them achieve their goals.
 
-An article on how the server is setup with JWT can be found [here](https://hptechblogs.com/using-json-web-token-for-authentication/). This has been modified to use a mongo database instead of hardcoded array of users.
+#### If a user has been away from the site beyond a certain time period (currently set at 5 days), or (coming soon) if they have passed a task deadline without updating their board, a node-cron scheduler uses node-mailer to send an email to them with a link to encourage them to continue on their journey.
 
-The front end has been setup to use JWT as a way of authenticating users and routes. To understand it's structure better please refer to the following article [here](https://hptechblogs.com/using-json-web-token-react/)
+#### This Project was built using the following technologies
 
-Please feel free to modify this code in anyway you see fit for your project. It is a boilerplate setup that tries to make sure you can get something up and running without having to worry about setting up user authentication from scratch.
-I highly suggest you read the articles before jumping in so you can have an better understanding of how everything works in the code. 
+	* React.js
+	* Node.js
+	* MongoDB
+	* Mongoose
+	* Express
+	* Axios
+	* Bootstrap (Reactstrap) 
+	* JWT (JSON Web Token)
+	* EXJWT (Express JWT)
+	* Nodemailer
+	* React Router
+	* Bcrypt
+	* moment.js
+	* dotenv
+	* morgan
+	* node-cron
+	* React-Big-Calendar
+	* React-trello
+	* Proptypes
 
-Server-side article and using JWT: https://hptechblogs.com/using-json-web-token-for-authentication/
+#### Future Development Plans
 
-Front End article on using the JWT on a react application: https://hptechblogs.com/using-json-web-token-react/
+	* More easily transition between multiple journeys
+	* Ability to add tasks directly from the calendar
+	* Create a full user profile with bio and photo
+	* Add photos of journey itself
+	* Connections between users
+	* Reflection stage - allow the user to write a personal journal entry or public blog post to reflect on the journey after its completion
+	* Progress Bar/Timeline across the bottom of all pages tracking your percentage complete based on how many of your total tasks are done
+	* Ability to personalize email and text message notifications to send yourself future encouragement or opt in to default encouraging messages.
+	* And more to come!
 
-## Starting the app locally
 
-First off make sure you have a local version of MongoDB running on your machine. This project will make a local database for you called `appDB`.
+#### To use the application either visit the deployed site on [Heroku](https://journeyon.herokuapp.com/) Or follow the download and install instruction below to run your own version on a local server!
 
-```
-mongod
-```
+* Either download and unzip or git clone this repo, open in your IDE of choice to look at the code, in one terminal start an instance of mongodb by running "mongod" and in another the terminal cd into the "Journey_On" directory and run the following commands
+	
+	* "yarn install"
 
-Start by installing front and backend dependencies. While in the root directory, run the following command:
+	* "yarn start"
 
-```
-yarn install
-```
+* That's it! After it runs through its processes a browser page should automatically open to <http://localhost:3000> with the Express server grabbing any AJAX calls from the client 
 
-After all installations complete, run the following command in your terminal:
+* If you choose to make changes to this repo, the front-end React app will auto-reload as it's updated via webpack dev server, and the backend Express app will auto-reload independently with nodemon. Also, you may wish to look at the second README.md file available within the client folder for instruction on how to deploy your own version of this site to Heroku.
 
-```
-yarn start
-```
+### The Journey On team is made up of Corey Slade, James Etchells, Nick Woodward, Kaseem Jones, and Miguel Damian
 
-That's it, your app should be running on <http://localhost:3000>. The Express server should intercept any AJAX requests from the client.
-
-## Deployment (Heroku)
-
-### Create a Git Repo
-
-Once you're ready to deploy, start by making sure your project is a git repository. If so, proceed to the next section, otherwise run the following commands in your terminal:
-
-```
-git init
-git add .
-git commit -m "Initial commit"
-```
-
-### Heroku
-
-Make sure that you have a Heroku app created for this project. If so, proceed to the next section, otherwise run the following command in your terminal:
-
-```
-heroku create
-```
-
-Optionally add an argument for your application's name after `create`, e.g.
-
-```
-heroku myAwesomeApp
-```
-
-### Deploying
-
-#### Option 1
-
-Use the deploy script inside of the outer `package.json`
-
-After confirming that you have an up to date git repository and a Heroku app created, run the following command to deploy:
-
-```
-yarn deploy
-```
-
-If all previous steps were followed correctly, your application should be deployed to Heroku!
-
-#### Option 2
-
-Manually deploy 
-
-After confirming that you have an up to date git repository and a Heroku app created, complete the following:
-
-1. Build the React app for production by running the following command:
-
-```
-yarn build
-```
-
-2. Add and commit all changes to git
-
-3. Push to Heroku
-
-If all previous steps were followed correctly, your application should be deployed to Heroku!
