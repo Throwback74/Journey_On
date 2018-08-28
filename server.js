@@ -123,26 +123,20 @@ app.post('/api/videos', (req, res) => {
     });
 });
 
+app.get('/api/getvideos/:journeyId', (req, res) => {
+  db.Journey.findById(req.params.journeyId).then(data => {
+    if (data) {
+      res.json(data);
+    } else {
+      res.status(404).send({
+        success: false,
+        message: 'No Journey found'
+      });
+    }
+  }).catch(err => res.status(400).send(err));
+});
 
 
-// app.get('/api/test/:id', isAuthenticated, (req, res) => {
-//   db.User.findById(req.params.id).populate("journeys").exec((err, journeys) => {
-//     if(journeys){
-//     console.log("Populated User ", journeys)
-//   }else if(err) {
-//     res.status(500).send({
-//       success: false,
-//       message: err
-//     })
-//   }
-//   else{
-//     res.status(404).send({
-//       success: false,
-//       message: 'No user found'
-//     });
-//   }
-//   }).catch(err => res.status(400).send(err));
-// });
 
 app.get('/api/gettasks/:journeyId', isAuthenticated, (req, res) => {
   db.Journey.findById(req.params.journeyId).then(data => {
@@ -298,8 +292,18 @@ app.get('/api/populate/:id', (req, res) => {
         path: "tasks videos"
       }
     }).then(dbUser => {
+      if(dbUser){
       res.json(dbUser)
-    }).catch(err => res.status(400).send(err));
+      }else {
+        res.status(404).send({
+          success: false,
+          message: 'No user found'
+        });
+      }
+    }).catch(err => res.status(400).send({
+      success: false,
+      message: err
+    }));
 });
 
 // app.get('/api/all/:id', (req, res) => {
@@ -339,11 +343,6 @@ app.get('/api/video/:taskId', (req, res) => {
     }
   }).catch(err => res.status(400).send(err));
 });
-
-//   }).then(dbVideos => {
-//     res.json(dbVideos);
-//   })
-// });
 
 app.get('/api/test/:id', isAuthenticated, (req, res) => {
   db.User.findById(req.params.id)

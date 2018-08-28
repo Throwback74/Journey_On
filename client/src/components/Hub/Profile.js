@@ -11,8 +11,8 @@ import List from "./List/List";
 
 const idArr = []; 
 const newArr = [];
-const taskArr = [];
-const taskIds = [];
+// const taskArr = [];
+// const taskIds = [];
 var journeyID;
 class Profile extends Component {
 
@@ -28,7 +28,8 @@ class Profile extends Component {
     journeyArray: [],
     journeyIds: [],
     taskIds: [],
-    taskArray: []
+    taskArray: [],
+    videoArr: []
   };
 
   componentWillMount() {
@@ -64,34 +65,37 @@ class Profile extends Component {
   }).then(data => {
   console.log(data);
 
-  this.loadTasks();
+  // this.loadTasks();
   this.populateAll();
+  this.loadVideos(journeyID);
   })
   }
 
-  loadTasks = (journeyID) => {
-    API.loadTasks(journeyID).then(res => {
-      console.log("loadtasksRes", res);
-      for (let i = 0; i < res.data.tasks.length; i++) {
-        taskArr.push(res.data.tasks[i]);
-        taskIds.push(res.data.tasks[i]._id);
-      }
-        this.setState({
-          taskArray: taskArr,
-          taskIds: taskIds
-        })
-        return taskIds
-      }).then(data => {
-        console.log('task data, ', data)
-        API.populateAll(this.props.user.id).then(res => {
-          console.log('populated All', res);
-        })
-      })
-  }
+  // loadTasks = (journeyID) => {
+  //   API.loadTasks(journeyID).then(res => {
+  //     console.log("loadtasksRes", res);
+  //     for (let i = 0; i < res.data.tasks.length; i++) {
+  //       taskArr.push(res.data.tasks[i]);
+  //       taskIds.push(res.data.tasks[i]._id);
+  //     }
+  //       this.setState({
+  //         taskArray: taskArr,
+  //         taskIds: taskIds
+  //       })
+  //       return taskIds
+  //     }).then(data => {
+  //       console.log('task data, ', data)
+  //       API.populateAll(this.props.user.id).then(res => {
+  //         console.log('populated All', res);
+  //       })
+  //     })
+  // }
 
   populateAll = () => {
     API.populateAll(this.props.user.id).then(res => {
       console.log('populated All', res);
+      console.log(res.data.journeys[0].videos);
+      
     })
   }
 
@@ -106,11 +110,27 @@ class Profile extends Component {
   //     console.log(err.response);
   //     alert(err.response.data.message)
   // });
-
+  loadVideos = (journeyID) => {
+    API.loadVideos(journeyID).then(function(res){
+      console.log(res);
+      console.log(res.data.videos);
+    }).catch(err => {
+      console.log(err.response);
+      alert(err.response.data.message)
+  }).catch(err => {
+    alert(err)
+  });
+  }
 
   addVideo = () => {
     API.addVideo(this.state.videoUrl, journeyID).then(function(res){
       console.log(res);
+      // let videoData = res.data;
+      // let videoArr = [...this.state.videoArr, videoData];
+      // this.setState({
+      //   videoArr: videoArr
+      // })
+      
       alert("Video Added!");
     }).catch(err => {
           console.log(err.response);
@@ -129,6 +149,8 @@ class Profile extends Component {
       [name]: value
     });
   };
+
+
 
   renderButton = (newComponent) => {
     this.setState({
