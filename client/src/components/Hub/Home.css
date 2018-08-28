@@ -26,7 +26,7 @@
 .body{
   background-image: url("../../images/bailey-zindel-396398-unsplash.jpg");
   background-size:cover;
-  height: 1200px;
+  height: 1230px;
   width: 100%;
   background-repeat: no-repeat;
   font-family: cursive;
@@ -57,6 +57,16 @@
   position: relative;
   top:-75px;
 }
+
+.Profile {
+  margin-bottom: 20px;
+      /* background-image: linear-gradient(55deg,#488192 25%,#b3d2d8); */
+}
+
+/* .fillerDiv {
+  background-image: linear-gradient(55deg,#488192 25%,#b3d2d8);
+  height: 20px;
+} */
 
 .nav{
   height:200px;
