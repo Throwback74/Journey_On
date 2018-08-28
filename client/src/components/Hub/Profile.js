@@ -9,6 +9,7 @@ import Progress from "./Progress/Progress";
 import Kanban from "./Kanban/Kanban";
 import List from "./List/List";
 import Calendar from "./Calendar/Cal";
+// eslint-disable-next-line
 import Footer from "../Footer/Footer";
 
 const idArr = [];
@@ -195,7 +196,7 @@ class Profile extends Component {
             {/* <Route exact  component={Resources} handleChange={this.handleChange} newVideoUrl={this.state.videoUrl}/> */}
             <Route exact path={`/profile/${this.props.user.id}/item/calendar`} component={Calendar} />
             <Route exact path={`/profile/${this.props.user.id}/item/board`} component={Kanban} />
-
+            <div className="fillerDiv"></div>
           </div>
           <div className="container">
             {(() => {
@@ -207,7 +208,7 @@ class Profile extends Component {
             })}
           </div>
         </div>
-        <Footer locationTrigger={this.state.locationTrigger}/>
+        {/* <Footer locationTrigger={this.state.locationTrigger}/> */}
         
       </div>
     )
