@@ -43,7 +43,7 @@
 	* And more to come!
 
 
-#### To use the application either visit the deployed site on [Heroku](https://journeyon.herokuapp.com/) Or follow the download and install instruction below to run your own version on a local server!
+#### To use the application either visit the deployed site on [Heroku](https://journeyonandon.herokuapp.com/) Or follow the download and install instruction below to run your own version on a local server!
 
 * Either download and unzip or git clone this repo, open in your IDE of choice to look at the code, in one terminal start an instance of mongodb by running "mongod" and in another the terminal cd into the "Journey_On" directory and run the following commands
 	
