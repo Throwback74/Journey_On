@@ -7,6 +7,10 @@
 
 }
 
+.videoList{
+    display: block;
+}
+
 .Olinks{
     height: 400px;
     width: 730px;

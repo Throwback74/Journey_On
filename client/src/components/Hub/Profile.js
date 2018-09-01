@@ -10,7 +10,7 @@ import Kanban from "./Kanban/Kanban";
 import List from "./List/List";
 import Calendar from "./Calendar/Cal";
 // eslint-disable-next-line
-import Footer from "../Footer/Footer";
+// import Footer from "../Footer/Footer";
 
 const idArr = [];
 const newArr = [];
@@ -208,8 +208,6 @@ class Profile extends Component {
             })}
           </div>
         </div>
-        {/* <Footer locationTrigger={this.state.locationTrigger}/> */}
-        
       </div>
     )
   }

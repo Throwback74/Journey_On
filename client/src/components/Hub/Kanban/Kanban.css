@@ -28,6 +28,7 @@
   height:400px !important;
   top:100%;
   flex:1;
+  overflow-y: scroll;
 }
 
 @keyframes Kanban-logo-spin {

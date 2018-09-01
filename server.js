@@ -377,10 +377,6 @@ cron.schedule('00 5 * * *', function () {
   var today = Date.now();
   db.User.find()
     .then(function (dbUser) {
-      // dbUser.map(users => (
-      //   console.log(users.updatedAt)
-      //   var Users = users;
-      // ))
       for(let i = 0; i < dbUser.length; i++) {
         var users = dbUser[i];
         console.log(users.updatedAt - today);
@@ -416,13 +412,10 @@ cron.schedule('00 5 * * *', function () {
         }else {
           console.log("no users to email")
         }
-
   }})
   .catch(function (err) {
     console.log(err);
   });
-
-
 });
 
 

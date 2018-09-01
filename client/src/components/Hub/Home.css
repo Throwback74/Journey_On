@@ -159,3 +159,87 @@ button.col-md-2.add {
 .filler{
   height:600px;
 }
+
+
+@media screen and (min-width: 1300px) {
+  .body{
+    background-image: url("../../images/bailey-zindel-396398-unsplash.jpg");
+    background-size:cover;
+    height: 1400px;
+    width: 100%;
+    background-repeat: no-repeat;
+    font-family: cursive;
+  }
+
+  .rbc-calendar {
+    height: 78vh !important;
+  }
+
+}
+
+
+@media screen and (min-width: 1440px) {
+  .body{
+    background-image: url("../../images/bailey-zindel-396398-unsplash.jpg");
+    background-size:cover;
+    height: 1450px;
+    width: 100%;
+    background-repeat: no-repeat;
+    font-family: cursive;
+  }
+
+  .rbc-calendar {
+    height: 85vh !important;
+  }
+
+}
+
+/* and (max-width: 995px) , screen and (max-height: 700px) */
+@media screen and (min-width: 1600px) , screen and (min-height: 1160px){
+  .body{
+    background-image: url("../../images/bailey-zindel-396398-unsplash.jpg");
+    background-size:cover;
+    height: 1400px;
+    width: 100%;
+    background-repeat: no-repeat;
+    font-family: cursive;
+  }
+
+  .rbc-calendar {
+    height: 65vh !important;
+  }
+
+}
+
+@media screen and (min-width: 1800px) , screen and (min-height: 1400px){
+  .body{
+    background-image: url("../../images/bailey-zindel-396398-unsplash.jpg");
+    background-size:cover;
+    height: 1700px;
+    width: 100%;
+    background-repeat: no-repeat;
+    font-family: cursive;
+  }
+
+  .rbc-calendar {
+    height: 55vh !important;
+  }
+
+}
+
+
+@media screen and (min-width: 2200px) , screen and (min-height: 1700px){
+  .body{
+    background-image: url("../../images/bailey-zindel-396398-unsplash.jpg");
+    background-size:cover;
+    height: 2000px;
+    width: 100%;
+    background-repeat: no-repeat;
+    font-family: cursive;
+  }
+
+  .rbc-calendar {
+    height: 55vh !important;
+  }
+
+}

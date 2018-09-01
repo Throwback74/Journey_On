@@ -4,11 +4,11 @@
 
 ### Journey On is a site that allows you to set up a Journey towards an ultimate goal which you want to reach. Utilizing skills in both Front and back end technologies, the app allows the user to create multiple journeys, multiple tasks within those journeys to reach their end goal, and to save resources for themselves to reference along the way to aid in reaching the end of their journey. 
 
-### In order to help each user along the way they are provided with a personal Kanban board, where they set their tasks for each Journey, and can move each task along to different steps of completion. As tasks are created and deadlines set, they also automatically populate a calendar component built with React-big-calendar. Eventually this calendar will also have the ability to add tasks as well as have styling to help enforce Jerry Seinfeld's famous "Don't Break the Chain" advice for habit building. The user also always has access to a list of resources that they will build along the way to help them achieve their goals.
+#### In order to help each user along the way they are provided with a personal Kanban board, where they set their tasks for each Journey, and can move each task along to different steps of completion. As tasks are created and deadlines set, they also automatically populate a calendar component built with React-big-calendar. Eventually this calendar will also have the ability to add tasks as well as have styling to help enforce Jerry Seinfeld's famous "Don't Break the Chain" advice for habit building. The user also always has access to a list of resources that they will build along the way to help them achieve their goals.
 
-#### If a user has been away from the site beyond a certain time period (currently set at 5 days), or (coming soon) if they have passed a task deadline without updating their board, a node-cron scheduler uses node-mailer to send an email to them with a link to encourage them to continue on their journey.
+##### If a user has been away from the site beyond a certain time period (currently set at 5 days), or (coming soon) if they have passed a task deadline without updating their board, a node-cron scheduler uses node-mailer to send an email to them with a link to encourage them to continue on their journey.
 
-#### This Project was built using the following technologies
+##### This Project was built using the following technologies
 
 	* React.js
 	* Node.js
@@ -30,7 +30,7 @@
 	* React-trello
 	* Proptypes
 
-#### Future Development Plans
+##### Future Development Plans
 
 	* More easily transition between multiple journeys
 	* Ability to add tasks directly from the calendar
@@ -43,7 +43,7 @@
 	* And more to come!
 
 
-#### To use the application either visit the deployed site on [Heroku](https://journeyon.herokuapp.com/) Or follow the download and install instruction below to run your own version on a local server!
+#### To use the application either visit the deployed site on [Heroku](https://journeyonandon.herokuapp.com/) Or follow the download and install instruction below to run your own version on a local server!
 
 * Either download and unzip or git clone this repo, open in your IDE of choice to look at the code, in one terminal start an instance of mongodb by running "mongod" and in another the terminal cd into the "Journey_On" directory and run the following commands
 	
