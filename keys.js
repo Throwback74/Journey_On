@@ -6,4 +6,6 @@ let creds = {
   PASS: process.env.PASS
 };
 
-console.log(creds);
+const secret = {
+  SECRET: process.env.SECRET
+}

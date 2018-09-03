@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import './Landing.css';
 import './Animate.css';
+// import '../Footer/Footer.css';
 // eslint-disable-next-line
 import { Link } from "react-router-dom";
+
 import LandingBtns from "./LandingBtns";
-import Footer from "../Footer";
+// import Footer from "../Footer";
 
 
 class Landing extends Component {
@@ -87,7 +89,32 @@ class Landing extends Component {
               </div>
             </div>
           </div>
-          <Footer />
+          <footer className="landingFooter">
+    <div className="ffoot">
+        <div className="ffoot">
+            <div className="fcontainer">
+                <div className="row">
+                    <div className="col l4 offset-l2 s12">
+                        <p className="fsignupEmail">Sign up to our newsletter and stay up to date.</p>
+                        <ul className="fdotts">
+                            <li><a className="fgrey-text text-lighten-3" href="https://www.facebook.com">Facebook</a></li>
+                            <li><a className="fgrey-text text-lighten-3" href="https://www.twitter.com">Twitter</a></li>
+                            <li><a className="fgrey-text text-lighten-3" href="https://www.instagram.com">Instagram</a></li>
+                            <li><a className="fgrey-text text-lighten-3" href="https://www.snapchat.com">Snapchat</a></li>
+                            <li className="fillerList"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div className="ffooter-copyright">
+                <div className="container">
+                    <p className="fcopywrite">© 2018 Copyright Journey On</p>
+                </div>
+                </div>
+            </div>
+        </div>
+        </footer>
+          {/* <Footer /> */}
         </section>
 
       </div>

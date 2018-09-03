@@ -49,7 +49,10 @@ class Signup extends Component {
 
   render() {
     return (
-      <div className="container signupContainer">
+      <div className="signupContainer">
+      <div className="form-group row justify-content-center">
+        <div className="col-md-6">
+
         <h1>Signup</h1>
         <form onSubmit={this.handleFormSubmit}>
           <div className="form-group">
@@ -81,8 +84,10 @@ class Signup extends Component {
           </div>
           <button type="submit" className="btn btn-primary">Submit</button>
         </form>
-        <p className="link"><Link class="linkThis"to="/login">Go to Login</Link></p>
+        <p className="link"><Link to="/login">Go to Login</Link></p>
         {/* <Footer /> */}
+      </div>
+      </div>
       </div>
     );
   }

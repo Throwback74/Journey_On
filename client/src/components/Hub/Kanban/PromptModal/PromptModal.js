@@ -5,6 +5,10 @@ import API from '../../../../utils/API';
 import withAuth from '../../../Auth/withAuth';
 import './PromptModal.css'
 
+const idArr = []; 
+const newArr = [];
+var journeyID;
+
 const customStyles = {
   content: {
     top: '50%',
@@ -33,6 +37,27 @@ class PromptModal extends React.Component {
     this.Auth = new AuthService();
   }
 
+  componentDidMount() {
+    API.getUser(this.props.user.id).then(res => {
+      console.log("res data", res.data.tasks);
+      
+      for (let i = 0; i < res.data.journeys.length; i++) {
+          newArr.push(res.data.journeys[i].journeyName)
+          idArr.push(res.data.journeys[i]._id)
+      }
+      journeyID = res.data.journeys[0]._id;
+      this.setState({ 
+          journeyArray: newArr,
+          journeyIds: idArr
+      })
+      return journeyID
+  }).then(data => {
+      console.log("data", data);
+      // this.populateTasks(data);
+  })
+  };
+
+
   handleChange = event => {
     const { name, value } = event.target;
     this.setState({
@@ -57,21 +82,23 @@ class PromptModal extends React.Component {
   handleFormSubmit = event => {
     event.preventDefault();
     console.log("Helloo");
-    API.addTask(this.state.taskTitle, this.state.taskDescription, this.state.taskLabel, this.props.user.email)
+    API.addTask(this.state.taskTitle, this.state.taskDescription,  journeyID)
       .then(res => {
         console.log(res.data);
         // once the user has signed up
         // send them to the login page
         alert("Task Added!");
         // this.refs.form.reset();
-      })
-      .catch(err => alert(err));
+      }).catch(err => {
+        console.log(err.response);
+        alert(err.response.data.message)
+    });
   };
 
   render() {
     return (
       <div>
-        <button onClick={this.openModal}>Open Modal</button>
+        <button className="modalBtn" onClick={this.openModal}>Open Modal</button>
         <Modal
           ariaHideApp={false}
           isOpen={this.state.modalIsOpen}
@@ -108,7 +135,7 @@ class PromptModal extends React.Component {
               </textarea><br></br>
               <input type="submit" value="Submit" id="submit-task-btn"></input>
             </form>
-            <button onClick={this.closeModal}>close</button>
+            <button className="modalBtn" onClick={this.closeModal}>close</button>
           </div>
         </Modal>
       </div>

@@ -1,34 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react';
 // import withAuth from '../../Auth/withAuth';
 // import { Link } from 'react-router-dom';
 import "../Resources/Resources.css";
 
-const Resources = props => {
-    return (
-        <div className="middle row">
-            <div className="Articles col-md-4">
-                <input type="text" class="form-control"></input>
-                <button type="button" class="btn-primary add">Submit</button>
+
+class Resources extends Component {
+    render() {
+        return (
+            <div className="middle row">
+                <div className="Articles container">
+                    <input type="text"
+                        name="videoUrl"
+                        onChange={this.props.handleChange}
+                        value={this.props.videoUrl}
+                        className="form-control"
+                    />
+                    <button className="col-md-2 add" onClick={() => this.props.addVideo()}>Submit</button>
+                </div>
                 <div className="Vlinks">
-                    My Vidoes
+                    <ul>
+                        {this.props.videoArr.map(video => <li className="videoList"><a href={"https://"+ video.videoUrl}>{video.videoUrl}</a></li>)}
+                        <br/>
+                    </ul>
                 </div>
             </div>
-            <div className="Videos col-md-4">
-                <input type="text" class="form-control"></input>
-                <button type="button" class="btn-primary add">Submit</button>
-                <div className="Alinks">
-                    My Articles
-                </div>
-            </div>
-            <div className="Notes col-md-4">
-                <input type="text" class="form-control"></input>
-                <button type="button" class="btn-primary add">Submit</button>
-                <div className="Olinks">
-                    Other Shit
-                </div>
-            </div>
-        </div>
-    )
+        )
+    }
 };
 
 export default Resources;
