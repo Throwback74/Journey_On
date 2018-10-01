@@ -22,6 +22,11 @@ let UserSchema = new Schema({
     type: String,
     required: true
   },
+  reminders: {
+    type: Boolean,
+    required: true,
+    default: false
+  },
   journeys: [
     {
       type: Schema.Types.ObjectId,

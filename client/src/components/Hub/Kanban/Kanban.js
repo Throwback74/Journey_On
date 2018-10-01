@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './Kanban.css';
-import './PromptModal'
+import './PromptModal';
 import { Board } from 'react-trello';
 import PromptModal from './PromptModal';
+import CustomCard from './CustomCard';
 import API from '../../../utils/API';
 import AuthService from '../../Auth/AuthService';
 import withAuth from '../../Auth/withAuth';
@@ -196,7 +197,10 @@ class Kanban extends Component {
                             eventBusHandle={this.setEventBus}
                             handleDragStart={handleDragStart}
                             handleDragEnd={handleDragEnd}
-                        />
+                            customCardLayout={true}
+                        >
+                            <CustomCard />
+                        </Board>
                     </div>
                 </div>
             </div>
