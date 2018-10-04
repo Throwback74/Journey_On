@@ -33,6 +33,21 @@ class Journey extends Component {
         })
     }
 
+    setGender = event => {
+        console.log(event.target.value);
+        var bool = event.target.value;
+        console.log(bool);
+        if(bool === 'True') {
+        API.updateReminder(this.state.id, bool)
+        .then(res => {
+            console.log(res.data);
+        })
+        .catch(err => alert(err));
+    }else {
+        console.log(false);
+    }
+    };
+
     handleGoToProfile = event => {
         event.preventDefault()
         this.props.history.replace(`/profile/${this.props.user.id}`);
@@ -86,6 +101,21 @@ class Journey extends Component {
                             type="text"
                             id="journeySummary"
                             onChange={this.handleChange} />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="reminder">Would You Like to Receive Email Reminders?:</label>
+                        {/* <input className="form-control" type="radio" name="gender" value="male" /> Male<br></br>
+                        <input className="form-control" type="radio" name="gender" value="female" checked /> Female<br/> */}
+                        <div onChange={this.setGender.bind(this)}>
+                            <input className="trueRadio" type="radio" value="True" name="reminder"/> Yes
+                            <input className="falseRadio" type="radio" value="False" name="reminder"/> No
+                        </div>
+                        {/* <input className="form-control"
+                            
+                            name="completeBy"
+                            type="date"
+                            id="completeBy"
+                            onChange={this.handleChange} /> */}
                     </div>
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>

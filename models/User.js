@@ -22,7 +22,7 @@ let UserSchema = new Schema({
     type: String,
     required: true
   },
-  reminders: {
+  reminder: {
     type: Boolean,
     required: true,
     default: false

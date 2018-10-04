@@ -157,7 +157,7 @@ app.get('/api/journeyCards/:id', (req, res) => {
     journeyId: req.params.id
   }).then(dbTasks => {
     res.json(dbTasks);
-  })
+  });
 });
 
 app.get('/api/videos/:id', (req, res) => {
@@ -165,7 +165,7 @@ app.get('/api/videos/:id', (req, res) => {
     journeyId: req.params.id
   }).then(dbVideos => {
     res.json(dbVideos);
-  })
+  });
 });
 
 // LOGIN ROUTE
@@ -212,6 +212,51 @@ app.post('/api/signup', (req, res) => {
     }));
 });
 
+// app.post('/api/update', isAuthenticated, (req, res) => {
+//   id = req.body._id
+//   updatedAt = req.body.updatedAt
+//   console.log(updatedAt, "updatedAt");
+//   foo = new Date("2018-08-20T07:21:54+01:00")
+//   var altDate = `2019-08-27 00:00:00.000Z`;
+//   var test = foo - updatedAt;
+//   console.log(test);
+//   console.log("id", id);
+//   db.User.findByIdAndUpdate(id, {
+//     $set: {
+//       updatedAt: req.body.updatedAt
+//     }
+//   }, {
+//     new: true
+//   }, function (err, data) {
+//     if (err) return handleError(err);
+//     res.send(data);
+//   }).catch(err => res.status(400).json(err));
+// });
+  //console.log("edit post: " + req.body.title);
+  // Track.findByIdAndUpdate(req.params.id, { 
+  //   $set: { text: req.body.text, title: req.body.title }}, {upsert:true}, function (err, user) {
+  //     return res.json(true);
+  //   }
+  // );
+
+app.post('/api/reminder', (req, res) => {
+  console.log(req.body);
+  if(req.body.bool == 'True') {
+    var reminderBool = true;
+  } else {
+    var reminderBool = false;
+  };
+  db.User.findByIdAndUpdate(req.body.id, {
+        $set: {
+          reminder: reminderBool
+        }
+      },{
+        new: true
+  }).then(dbUser => {
+    console.log(dbUser);
+    res.json(dbUser);
+  }).catch(err => res.status(400).send(err))
+});
 
 app.post('/api/deletejourney', isAuthenticated, (req, res) => {
   db.User.update({
@@ -381,7 +426,7 @@ cron.schedule('00 5 * * *', function () {
         var users = dbUser[i];
         console.log(users.updatedAt - today);
         console.log(users.email, users.username);
-        if(users.updatedAt - today > 434636190) {
+        if(users.updatedAt - today > 434636190 && users.reminder === true) {
           var mailOptions = {
             from: 'no_reply@journey_on-admin.com',
             to: `${users.email}`,

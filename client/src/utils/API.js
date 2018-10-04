@@ -29,7 +29,6 @@ export default {
   populateAll: (id) => {
     return axios.get(`/api/populate/${id}`)
   },
-//Todo Pass in Task ID instead of User ID for populate videos on profile page
   populateVideos: (taskId) => {
     return axios.get(`/api/video/${taskId}`)
   },
@@ -38,7 +37,9 @@ export default {
   signUpUser: (username, email, password) => {
     return axios.post('/api/signup', {username: username, email: email, password: password});
   },
-  
+  updateReminder: (id, bool) => {
+    return axios.post(`/api/reminder`, { _id: id, reminder: bool });
+  },
   updateLogin: (id) => {
     return axios.post(`/api/update`, {_id: id, updatedAt: Date.now()});
   },
