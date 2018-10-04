@@ -384,7 +384,7 @@ cron.schedule('00 5 * * *', function () {
         if(users.updatedAt - today > 434636190) {
           var mailOptions = {
             from: 'no_reply@journey_on-admin.com',
-            to: `${users.email}`,
+            to: 'corey.slade@gmail.com', //Placeholder replacing `${users.email}` until unsubscribe is added
             subject: 'Sending Email using Node.js',
             html: `<h2 style="text-align: center">Journey On <span> Journey Reminder Email</span></h2> 
             <br><br>
